@@ -1,0 +1,22 @@
+{
+  "name": "osd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeyDelahoussaye/osd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoeyDelahoussaye/osd/issues"
+  },
+  "homepage": "https://github.com/JoeyDelahoussaye/osd#readme",
+  "dependencies": {
+    "eslint-config-airbnb": "^17.1.0"
+  }
+}
