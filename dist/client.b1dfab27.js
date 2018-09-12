@@ -20943,7 +20943,16 @@ function addNewUser(email, password) {
   }
 }
 
+function signUserIn(email, password) {
+  if (email === undefined && password === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    console.log(email, password);
+  }
+}
+
 module.exports.addNewUser = addNewUser;
+module.exports.signUserIn = signUserIn;
 },{}],"components/App.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -21162,7 +21171,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54732' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50715' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
