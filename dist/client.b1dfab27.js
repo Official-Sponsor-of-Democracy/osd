@@ -20935,104 +20935,139 @@ if ('development' === 'production') {
   module.exports = require('./cjs/react-dom.development.js');
 }
 },{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"components/App.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var React = require('react');
 
-function App() {
-  return React.createElement(
-    "div",
-    { className: "container-fluid" },
-    React.createElement(
-      "div",
-      { className: "row" },
-      React.createElement(
-        "div",
-        { className: "col-md-6" },
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App(props) {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      value: ''
+    };
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: 'handleChange',
+    value: function handleChange(event) {
+      this.setState({ value: event.target.value });
+      // console.log(event.target.value);
+      // console.log(this.state.value);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'container-fluid' },
         React.createElement(
-          "h3",
-          null,
-          "Official Sponsors of Democracy"
-        ),
-        React.createElement(
-          "dl",
-          null,
+          'div',
+          { className: 'row' },
           React.createElement(
-            "dt",
-            null,
-            "Support Your Employees"
-          ),
-          React.createElement(
-            "dd",
-            null,
-            "Bolster employee morale by letting them know that you support their right to vote"
-          ),
-          React.createElement(
-            "dt",
-            null,
-            "Logistics Made Easy"
-          ),
-          React.createElement(
-            "dd",
-            null,
-            "We create a logistical gameplan custom-tailored to each employee voter"
-          ),
-          React.createElement(
-            "dt",
-            null,
-            "No Surprises"
-          ),
-          React.createElement(
-            "dd",
-            null,
-            "Get ahead of election-day scheduling so business goes smoothly"
-          )
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "col-md-6" },
-        React.createElement(
-          "div",
-          { role: "form" },
-          React.createElement(
-            "div",
-            { className: "form-group" },
+            'div',
+            { className: 'col-md-6' },
             React.createElement(
-              "label",
-              { htmlFor: "exampleInputEmail1" },
-              "Email address",
-              React.createElement("input", { type: "email", className: "form-control", id: "exampleInputEmail1" })
+              'h3',
+              null,
+              'Official Sponsors of Democracy'
+            ),
+            React.createElement(
+              'dl',
+              null,
+              React.createElement(
+                'dt',
+                null,
+                'Support Your Employees'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'Bolster employee morale by letting them know that you support their right to vote'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'Logistics Made Easy'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'We create a logistical gameplan custom-tailored to each employee voter'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'No Surprises'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'Get ahead of election-day scheduling so business goes smoothly'
+              )
             )
           ),
           React.createElement(
-            "div",
-            { className: "form-group" },
+            'div',
+            { className: 'col-md-6' },
             React.createElement(
-              "label",
-              { htmlFor: "exampleInputPassword1" },
-              "Password",
-              React.createElement("input", { type: "password", className: "form-control", id: "exampleInputPassword1" })
+              'div',
+              { role: 'form' },
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputEmail1' },
+                  'Email address',
+                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', value: this.value, onChange: this.handleChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputPassword1' },
+                  'Password',
+                  React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1' })
+                )
+              ),
+              React.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary' },
+                'Submit'
+              )
+            ),
+            React.createElement(
+              'div',
+              null,
+              'Already a member?',
+              React.createElement(
+                'button',
+                { type: 'button', id: 'existingMember', className: 'btn btn-background' },
+                'Sign In Here'
+              )
             )
-          ),
-          React.createElement(
-            "button",
-            { type: "submit", className: "btn btn-primary" },
-            "Submit"
-          )
-        ),
-        React.createElement(
-          "div",
-          null,
-          "Already a member?",
-          React.createElement(
-            "button",
-            { type: "button", id: "existingMember", className: "btn btn-background" },
-            "Sign In Here"
           )
         )
-      )
-    )
-  );
-}
+      );
+    }
+  }]);
+
+  return App;
+}(React.Component);
 
 module.exports = App;
 },{"react":"../node_modules/react/index.js"}],"index.jsx":[function(require,module,exports) {
@@ -21105,7 +21140,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52850' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53770' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
