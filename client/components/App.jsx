@@ -5,14 +5,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      email: '',
+      password: '',
     };
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ email: event.target.value });
+    this.setState({ password: event.target.value });
     // console.log(event.target.value);
-    // console.log(this.state.value);
+    console.log(this.state.email);
+    console.log(this.state.password)
   }
 
   render() {
@@ -50,13 +53,13 @@ class App extends React.Component {
 
                 <label htmlFor="exampleInputEmail1">
                       Email address
-                  <input type="email" className="form-control" id="exampleInputEmail1" value={this.value} onChange={this.handleChange.bind(this)} />
+                  <input type="email" className="form-control" id="exampleInputEmail1" email={this.value} onChange={this.handleChange.bind(this)} />
                 </label>
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">
                       Password
-                  <input type="password" className="form-control" id="exampleInputPassword1" />
+                  <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handleChange.bind(this)} />
                 </label>
               </div>
               <button type="submit" className="btn btn-primary">

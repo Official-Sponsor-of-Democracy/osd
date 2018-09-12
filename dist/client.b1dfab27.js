@@ -20954,7 +20954,8 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      value: ''
+      email: '',
+      password: ''
     };
     return _this;
   }
@@ -20962,9 +20963,11 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'handleChange',
     value: function handleChange(event) {
-      this.setState({ value: event.target.value });
+      this.setState({ email: event.target.value });
+      this.setState({ password: event.target.value });
       // console.log(event.target.value);
-      // console.log(this.state.value);
+      console.log(this.state.email);
+      console.log(this.state.password);
     }
   }, {
     key: 'render',
@@ -21031,7 +21034,7 @@ var App = function (_React$Component) {
                   'label',
                   { htmlFor: 'exampleInputEmail1' },
                   'Email address',
-                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', value: this.value, onChange: this.handleChange.bind(this) })
+                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', email: this.value, onChange: this.handleChange.bind(this) })
                 )
               ),
               React.createElement(
@@ -21041,7 +21044,7 @@ var App = function (_React$Component) {
                   'label',
                   { htmlFor: 'exampleInputPassword1' },
                   'Password',
-                  React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1' })
+                  React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1', password: this.value, onChange: this.handleChange.bind(this) })
                 )
               ),
               React.createElement(
