@@ -20939,9 +20939,98 @@ var React = require('react');
 
 function App() {
   return React.createElement(
-    'div',
-    null,
-    'Hello World'
+    "div",
+    { className: "container-fluid" },
+    React.createElement(
+      "div",
+      { className: "row" },
+      React.createElement(
+        "div",
+        { className: "col-md-6" },
+        React.createElement(
+          "h3",
+          null,
+          "Official Sponsors of Democracy"
+        ),
+        React.createElement(
+          "dl",
+          null,
+          React.createElement(
+            "dt",
+            null,
+            "Support Your Employees"
+          ),
+          React.createElement(
+            "dd",
+            null,
+            "Bolster employee morale by letting them know that you support their right to vote"
+          ),
+          React.createElement(
+            "dt",
+            null,
+            "Logistics Made Easy"
+          ),
+          React.createElement(
+            "dd",
+            null,
+            "We create a logistical gameplan custom-tailored to each employee voter"
+          ),
+          React.createElement(
+            "dt",
+            null,
+            "No Surprises"
+          ),
+          React.createElement(
+            "dd",
+            null,
+            "Get ahead of election-day scheduling so business goes smoothly"
+          )
+        )
+      ),
+      React.createElement(
+        "div",
+        { className: "col-md-6" },
+        React.createElement(
+          "div",
+          { role: "form" },
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "exampleInputEmail1" },
+              "Email address",
+              React.createElement("input", { type: "email", className: "form-control", id: "exampleInputEmail1" })
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "exampleInputPassword1" },
+              "Password",
+              React.createElement("input", { type: "password", className: "form-control", id: "exampleInputPassword1" })
+            )
+          ),
+          React.createElement(
+            "button",
+            { type: "submit", className: "btn btn-primary" },
+            "Submit"
+          )
+        ),
+        React.createElement(
+          "div",
+          null,
+          "Already a member?",
+          React.createElement(
+            "button",
+            { type: "button", id: "existingMember", className: "btn btn-background" },
+            "Sign In Here"
+          )
+        )
+      )
+    )
   );
 }
 
@@ -21016,7 +21105,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51487' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52850' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

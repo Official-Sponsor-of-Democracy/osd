@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/RogerJLeeJ18/osd#readme",
   "dependencies": {
+    "bootstrap": "^4.1.3",
     "react": "^16.5.0",
     "react-dom": "^16.5.0"
   },
