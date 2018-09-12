@@ -1962,7 +1962,26 @@ if ('development' === 'production') {
 } else {
   module.exports = require('./cjs/react.development.js');
 }
-},{"./cjs/react.development.js":"../node_modules/react/cjs/react.development.js"}],"components/NewUser.jsx":[function(require,module,exports) {
+},{"./cjs/react.development.js":"../node_modules/react/cjs/react.development.js"}],"utilities.js":[function(require,module,exports) {
+function addNewUser(email, password) {
+  if (email === undefined && password === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    console.log(email, password);
+  }
+}
+
+function signUserIn(email, password) {
+  if (email === undefined && password === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    console.log(email, password);
+  }
+}
+
+module.exports.addNewUser = addNewUser;
+module.exports.signUserIn = signUserIn;
+},{}],"components/NewUser.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1972,6 +1991,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('react');
+var Utilities = require('../utilities');
 
 var NewUser = function (_React$Component) {
   _inherits(NewUser, _React$Component);
@@ -1981,17 +2001,117 @@ var NewUser = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (NewUser.__proto__ || Object.getPrototypeOf(NewUser)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      email: '',
+      password: ''
+    };
     return _this;
   }
 
   _createClass(NewUser, [{
+    key: 'handleEmailChange',
+    value: function handleEmailChange(event) {
+      this.setState({ email: event.target.value });
+    }
+  }, {
+    key: 'handlePasswordChange',
+    value: function handlePasswordChange(event) {
+      this.setState({ password: event.target.value });
+    }
+  }, {
+    key: 'signUser',
+    value: function signUser() {
+      var email = this.state.email;
+      var password = this.state.password;
+
+      Utilities.signUserIn(email, password);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
-        null,
-        'Hello'
+        { className: 'container-fluid' },
+        React.createElement(
+          'div',
+          { className: 'row' },
+          React.createElement(
+            'div',
+            { className: 'col-md-6' },
+            React.createElement(
+              'h3',
+              null,
+              'Official Sponsors of Democracy'
+            ),
+            React.createElement(
+              'dl',
+              null,
+              React.createElement(
+                'dt',
+                null,
+                'Support Your Employees'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'Bolster employee morale by letting them know that you support their right to vote'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'Logistics Made Easy'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'We create a logistical gameplan custom-tailored to each employee voter'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'No Surprises'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'Get ahead of election-day scheduling so business goes smoothly'
+              )
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-md-6' },
+            React.createElement(
+              'div',
+              { role: 'form' },
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputEmail1' },
+                  'Email address',
+                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', email: this.value, onChange: this.handleEmailChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputPassword1' },
+                  'Password',
+                  React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1', password: this.value, onChange: this.handlePasswordChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary', onClick: this.signUser.bind(this) },
+                'Log In'
+              )
+            )
+          )
+        )
       );
     }
   }]);
@@ -2000,7 +2120,7 @@ var NewUser = function (_React$Component) {
 }(React.Component);
 
 module.exports = NewUser;
-},{"react":"../node_modules/react/index.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -2029,7 +2149,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54732' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63683' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
