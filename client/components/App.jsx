@@ -1,5 +1,5 @@
 const React = require('react');
-
+const Utilities = require('../utilities');
 
 class App extends React.Component {
   constructor(props) {
@@ -10,12 +10,18 @@ class App extends React.Component {
     };
   }
 
-  handleChange(event) {
+  handleEmailChange(event) {
     this.setState({ email: event.target.value });
+  }
+
+  handlePasswordChange(event) {
     this.setState({ password: event.target.value });
-    // console.log(event.target.value);
-    console.log(this.state.email);
-    console.log(this.state.password)
+  }
+
+  addUser() {
+    const { email } = this.state;
+    const { password } = this.state;
+    Utilities.addNewUser(email, password);
   }
 
   render() {
@@ -53,16 +59,16 @@ class App extends React.Component {
 
                 <label htmlFor="exampleInputEmail1">
                       Email address
-                  <input type="email" className="form-control" id="exampleInputEmail1" email={this.value} onChange={this.handleChange.bind(this)} />
+                  <input type="email" className="form-control" id="exampleInputEmail1" email={this.value} onChange={this.handleEmailChange.bind(this)} />
                 </label>
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">
                       Password
-                  <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handleChange.bind(this)} />
+                  <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handlePasswordChange.bind(this)} />
                 </label>
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" onClick={this.addUser.bind(this)}>
                     Submit
               </button>
             </div>
