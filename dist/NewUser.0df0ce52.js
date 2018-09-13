@@ -3591,7 +3591,7 @@ function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/3/').then(function (resolve) {
+    axios.get('/home').then(function (resolve) {
       console.log(resolve);
     });
     console.log(email, password);
@@ -3602,7 +3602,7 @@ function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/2/').then(function (resolve) {
+    axios.get('/home').then(function (resolve) {
       console.log(resolve);
     });
     console.log(name, email, phonenumber, address, cityzip, businessid);
@@ -3883,7 +3883,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62363' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55608' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
