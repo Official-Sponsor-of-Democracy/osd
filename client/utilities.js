@@ -33,6 +33,18 @@ function addNewBusiness(businessName, employerContact, address, numEmployees) {
   }
 }
 
+function findVotingLocations(address, cityzip) {
+  if (address === undefined && cityzip === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    axios.get('https://swapi.co/api/people/5/').then((resolve) => {
+      console.log(resolve);
+    });
+    console.log(address, cityzip);
+  }
+}
+
 module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
+module.exports.findVotingLocations = findVotingLocations;
