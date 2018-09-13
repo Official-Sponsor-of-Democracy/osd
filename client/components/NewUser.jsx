@@ -5,8 +5,12 @@ class NewUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       email: '',
-      password: '',
+      phonenumber: null,
+      address: '',
+      cityzip: '',
+      businessid: null,
     };
   }
 
@@ -14,14 +18,40 @@ class NewUser extends React.Component {
     this.setState({ email: event.target.value });
   }
 
-  handlePasswordChange(event) {
-    this.setState({ password: event.target.value });
+  handleNameChange(event) {
+    this.setState({ name: event.target.value });
+  }
+
+  handleBusinessIdChange(event) {
+    this.setState({ businessid: event.target.value });
+  }
+
+  handlePhoneNumberChange(event) {
+    this.setState({ phonenumber: event.target.value });
+  }
+
+  handleStreetAddressChange(event) {
+    this.setState({ address: event.target.value });
+  }
+
+  handleCityZipChange(event) {
+    this.setState({ cityzip: event.target.value });
+  }
+
+  findLocations() {
+    const { address } = this.state;
+    const { cityzip } = this.state;
+    Utilities.findVotingLocations(address, cityzip);
   }
 
   signUser() {
     const { email } = this.state;
-    const { password } = this.state;
-    Utilities.signUserIn(email, password);
+    const { name } = this.state;
+    const { address } = this.state;
+    const { cityzip } = this.state;
+    const { businessid } = this.state;
+    const { phonenumber } = this.state;
+    Utilities.signUserIn(name, email, phonenumber, address, cityzip, businessid);
   }
 
   render() {
@@ -56,20 +86,45 @@ class NewUser extends React.Component {
           <div className="col-md-6">
             <div role="form">
               <div className="form-group">
-
+                <label htmlFor="InputName">
+                  Name
+                  <input type="name" className="form-control" id="InputName" name={this.value} onChange={this.handleNameChange.bind(this)} />
+                </label>
+              </div>
+              <div className="form-group">
                 <label htmlFor="exampleInputEmail1">
-                  Email address
+                  Email Address
                   <input type="email" className="form-control" id="exampleInputEmail1" email={this.value} onChange={this.handleEmailChange.bind(this)} />
                 </label>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">
-                  Password
-                  <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handlePasswordChange.bind(this)} />
+                <label htmlFor="InputPhoneNumber">
+                  Phone Number
+                  <input type="phonenumber" className="form-control" id="InputPhoneNumber" phonenumber={this.value} onChange={this.handlePhoneNumberChange.bind(this)} />
+                </label>
+              </div>
+            </div>
+            <div role="form">
+              <div className="form-group">
+                <label htmlFor="InputAddress">
+                  Street Address
+                  <input type="address" className="form-control" id="InputAddress" address={this.value} onChange={this.handleStreetAddressChange.bind(this)} />
+                </label>
+              </div>
+              <div className="form-group">
+                <label htmlFor="InputCityZip">
+                  City, State and Zip Code
+                  <input type="cityzip" className="form-control" id="InputCityZip" cityzip={this.value} onChange={this.handleCityZipChange.bind(this)} />
+                </label>
+              </div>
+              <div className="form-group">
+                <label htmlFor="InputBusinessID">
+                  Business ID
+                  <input type="businessid" className="form-control" id="InputBusinessID" businessid={this.value} onChange={this.handleBusinessIdChange.bind(this)} />
                 </label>
               </div>
               <button type="submit" className="btn btn-primary" onClick={this.signUser.bind(this)}>
-                Log In
+                Submit
               </button>
             </div>
           </div>

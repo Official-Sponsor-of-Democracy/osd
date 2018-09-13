@@ -11,14 +11,14 @@ function addNewUser(email, password) {
   }
 }
 
-function signUserIn(email, password) {
-  if (email === undefined && password === undefined) {
+function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
+  if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
   } else {
     axios.get('https://swapi.co/api/people/2/').then((resolve) => {
       console.log(resolve);
     });
-    console.log(email, password);
+    console.log(name, email, phonenumber, address, cityzip, businessid);
   }
 }
 
