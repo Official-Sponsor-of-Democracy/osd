@@ -7,6 +7,3 @@ app.get('/home', (req, res) => {
 });
 
 module.exports = app;
-// app.listen(3000, () => {
-//   console.log('Example app listening on port 3000!');
-// });
