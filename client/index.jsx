@@ -28,5 +28,4 @@ const App = require('./components/App');
 // }
 
 const index = document.getElementById('app');
-
 ReactDOM.render(<App name="Yomi" />, index);
