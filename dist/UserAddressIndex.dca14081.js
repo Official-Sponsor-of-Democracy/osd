@@ -22570,14 +22570,14 @@ function addNewUser(email, password) {
   }
 }
 
-function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
-  if (email === undefined && name === undefined) {
+function signUserIn(email, password) {
+  if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
     axios.get('https://swapi.co/api/people/2/').then(function (resolve) {
       console.log(resolve);
     });
-    console.log(name, email, phonenumber, address, cityzip, businessid);
+    console.log(email, password);
   }
 }
 
@@ -22607,7 +22607,7 @@ module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
-},{"axios":"../node_modules/axios/index.js"}],"components/App.jsx":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js"}],"components/UserAddressForm.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22619,38 +22619,38 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 var Utilities = require('../utilities');
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+var UserAddressForm = function (_React$Component) {
+  _inherits(UserAddressForm, _React$Component);
 
-  function App(props) {
-    _classCallCheck(this, App);
+  function UserAddressForm(props) {
+    _classCallCheck(this, UserAddressForm);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (UserAddressForm.__proto__ || Object.getPrototypeOf(UserAddressForm)).call(this, props));
 
     _this.state = {
-      email: '',
-      password: ''
+      address: '',
+      cityzip: ''
     };
     return _this;
   }
 
-  _createClass(App, [{
-    key: 'handleEmailChange',
-    value: function handleEmailChange(event) {
-      this.setState({ email: event.target.value });
+  _createClass(UserAddressForm, [{
+    key: 'handleStreetAddressChange',
+    value: function handleStreetAddressChange(event) {
+      this.setState({ address: event.target.value });
     }
   }, {
-    key: 'handlePasswordChange',
-    value: function handlePasswordChange(event) {
-      this.setState({ password: event.target.value });
+    key: 'handleCityZipChange',
+    value: function handleCityZipChange(event) {
+      this.setState({ cityzip: event.target.value });
     }
   }, {
-    key: 'addUser',
-    value: function addUser() {
-      var email = this.state.email;
-      var password = this.state.password;
+    key: 'findLocations',
+    value: function findLocations() {
+      var address = this.state.address;
+      var cityzip = this.state.cityzip;
 
-      Utilities.addNewUser(email, password);
+      Utilities.findVotingLocations(address, cityzip);
     }
   }, {
     key: 'render',
@@ -22661,52 +22661,10 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'row' },
+          React.createElement('div', { className: 'col-md-4' }),
           React.createElement(
             'div',
-            { className: 'col-md-6' },
-            React.createElement(
-              'h3',
-              null,
-              'Official Sponsors of Democracy'
-            ),
-            React.createElement(
-              'dl',
-              null,
-              React.createElement(
-                'dt',
-                null,
-                'Support Your Employees'
-              ),
-              React.createElement(
-                'dd',
-                null,
-                'Bolster employee morale by letting them know that you support their right to vote'
-              ),
-              React.createElement(
-                'dt',
-                null,
-                'Logistics Made Easy'
-              ),
-              React.createElement(
-                'dd',
-                null,
-                'We create a logistical gameplan custom-tailored to each employee voter'
-              ),
-              React.createElement(
-                'dt',
-                null,
-                'No Surprises'
-              ),
-              React.createElement(
-                'dd',
-                null,
-                'Get ahead of election-day scheduling so business goes smoothly'
-              )
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'col-md-6' },
+            { className: 'col-md-4' },
             React.createElement(
               'div',
               { role: 'form' },
@@ -22715,9 +22673,9 @@ var App = function (_React$Component) {
                 { className: 'form-group' },
                 React.createElement(
                   'label',
-                  { htmlFor: 'exampleInputEmail1' },
-                  'Email address',
-                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', email: this.value, onChange: this.handleEmailChange.bind(this) })
+                  { htmlFor: 'InputAddress' },
+                  'Street Address',
+                  React.createElement('input', { type: 'address', className: 'form-control', id: 'InputAddress', address: this.value, onChange: this.handleStreetAddressChange.bind(this) })
                 )
               ),
               React.createElement(
@@ -22725,42 +22683,29 @@ var App = function (_React$Component) {
                 { className: 'form-group' },
                 React.createElement(
                   'label',
-                  { htmlFor: 'exampleInputPassword1' },
-                  'Password',
-                  React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1', password: this.value, onChange: this.handlePasswordChange.bind(this) })
+                  { htmlFor: 'InputCityZip' },
+                  'City, State and Zip Code',
+                  React.createElement('input', { type: 'cityzip', className: 'form-control', id: 'InputCityZip', cityzip: this.value, onChange: this.handleCityZipChange.bind(this) })
                 )
               ),
               React.createElement(
-                'a',
-                { href: '../BusinessFormIndex.html' },
-                React.createElement(
-                  'button',
-                  { type: 'submit', className: 'btn btn-primary', onClick: this.addUser.bind(this) },
-                  'Submit'
-                )
-              )
-            ),
-            React.createElement(
-              'div',
-              null,
-              'Already a member?',
-              React.createElement(
                 'button',
-                { type: 'button', id: 'existingMember', className: 'btn btn-background' },
-                'Sign In Here'
+                { type: 'submit', className: 'btn btn-primary', onClick: this.findLocations.bind(this) },
+                'Submit'
               )
             )
-          )
+          ),
+          React.createElement('div', { className: 'col-md-4' })
         )
       );
     }
   }]);
 
-  return App;
+  return UserAddressForm;
 }(React.Component);
 
-module.exports = App;
-},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"index.jsx":[function(require,module,exports) {
+module.exports = UserAddressForm;
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"UserAddressIndex.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
@@ -22773,34 +22718,11 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const React = require('react');
-// const ReactDOM = require('react-dom');
-var App = require('./components/App');
+var UserAddressForm = require('./components/UserAddressForm');
 
-// ReactDOM.render(
-//   <App />, document.getElementById('app'),
-// );
-
-// import Header from './components/Header'
-
-// class HelloMessage extends React.Component {
-//   render() {
-//     return (
-//     <div >
-
-//       <div className = "container" >
-//       <h1> Hello {
-//         this.props.name
-//       } </h1>
-//       </div>
-//     </div>
-//     )
-//   }
-// }
-
-var index = document.getElementById('app');
-_reactDom2.default.render(_react2.default.createElement(App, { name: 'Yomi' }), index);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/App":"components/App.jsx"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var index = document.getElementById('useraddress');
+_reactDom2.default.render(_react2.default.createElement(UserAddressForm, { name: 'useraddress' }), index);
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/UserAddressForm":"components/UserAddressForm.jsx"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -22829,7 +22751,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53736' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60959' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -22970,5 +22892,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
-//# sourceMappingURL=/client.b1dfab27.map
+},{}]},{},["../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","UserAddressIndex.jsx"], null)
+//# sourceMappingURL=/UserAddressIndex.dca14081.map

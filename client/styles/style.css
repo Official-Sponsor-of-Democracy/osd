@@ -1,0 +1,11 @@
+
+body {
+  background: whitesmoke;
+}
+
+.osd-icon {
+    display: relative;
+    margin: 0 auto;
+    border: 2px solid grey; 
+    border-radius: 50%; 
+}
