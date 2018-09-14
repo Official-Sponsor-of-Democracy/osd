@@ -1,6 +1,13 @@
 const React = require('react');
+<<<<<<< HEAD
 const Welcome = require('./Welcome.jsx');
 const BusinessForm = require('./BusinessForm.jsx');
+=======
+const Welcome = require('./Welcome');
+const BusinessForm = require('./BusinessForm');
+const BusinessLogin = require('./BusinessLogIn');
+const Profile = require('./Profile');
+>>>>>>> 6b240ae3d2ccd3d8df0dc75ab79f4679a4ff58e5
 
 class App extends React.Component {
   constructor(props) {
@@ -23,10 +30,25 @@ class App extends React.Component {
           <Welcome changePage={this.changePage.bind(this)} />
         </div>
       );
-    } else if (this.state.renderThis === 'businessForm') {
+    }  
+    if (this.state.renderThis === 'businessForm') {
       return (
         <div className="container-fluid">
-          <BusinessForm />
+          <BusinessForm changePage={this.changePage.bind(this)} />
+        </div>
+      );
+    }
+    if (this.state.renderThis === 'login') {
+      return (
+        <div className="container-fluid">
+          <BusinessLogin changePage={this.changePage.bind(this)} />
+        </div>
+      );
+    }
+    if (this.state.renderThis === 'profile') {
+      return (
+        <div className="container-fluid">
+          <Profile changePage={this.changePage.bind(this)} />
         </div>
       );
     }
