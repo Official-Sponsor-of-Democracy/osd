@@ -19,7 +19,7 @@ app.post('/createBusiness', (req, res) => {
 
 app.get('/loginBusiness', (req, res) => {
   // should take user info passed to the req body
-  
+
   // if the user info passed in is a valid user from
   // the database respond with a session for the user
 });
