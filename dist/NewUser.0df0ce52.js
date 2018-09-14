@@ -3614,6 +3614,32 @@ function getCoordinates(address) {
   }
 }
 
+// var settings = {
+//   "async": true,
+//   "crossDomain": true,
+//   "url": "https://maps.googleapis.com/maps/api/directions/json?origin=4707+eilers+avenue+austin+texas&destination=Universal+Studios+Hollywood&key=AIzaSyDyOcw4O6ZqUChULjprwYUoa33GHO5I7AE",
+//   "method": "GET",
+//   "headers": {
+//     "Content-Type": "application/json",
+//     "Cache-Control": "no-cache",
+//     "Postman-Token": "a2cf149f-fe37-495d-ad31-69ec24747bf0"
+//   }
+// }
+
+function getDriveTime(address1, address2) {
+  if (address1 === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    var formattedAddress1 = address1.replace(/" "/g, "+");
+    var formattedAddress2 = address2.replace(/" "/g, "+");
+    return axios.get('https://maps.googleapis.com/maps/api/directions/json?origin=4707+eilers+avenue+austin+texas&destination=Universal+Studios+Hollywood&key=' + googleApi, {
+      "headers": {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache"
+      } });
+  }
+}
+
 function signUserIn(name, email, phonenumber, address, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
@@ -3650,6 +3676,7 @@ module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
 module.exports.getCoordinates = getCoordinates;
+module.exports.getDriveTime = getDriveTime;
 },{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/NewUser.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -3728,7 +3755,13 @@ var NewUser = function (_React$Component) {
       var phonenumber = this.state.phonenumber;
 
       Utilities.signUserIn(name, email, phonenumber, address, businessid);
+      // const printout = Utilities.getDriveTime(address, "1808 elysian fields avenue new orleans louisiana");
+
+      // printout.then((resolve) => {
+      //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results });
+      // });
       var printout = Utilities.getCoordinates(address);
+
       printout.then(function (resolve) {
         _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location });
       });
