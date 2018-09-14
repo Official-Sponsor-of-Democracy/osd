@@ -23092,6 +23092,196 @@ var BusinessLogin = function (_React$Component) {
 }(React.Component);
 
 module.exports = BusinessLogin;
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/Profile.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Utilities = require('../utilities');
+
+var Profile = function (_React$Component) {
+  _inherits(Profile, _React$Component);
+
+  function Profile(props) {
+    _classCallCheck(this, Profile);
+
+    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Profile, [{
+    key: 'changePage',
+    value: function changePage(pageId, info) {
+      this.setState(function () {
+        return { renderThis: pageId, employeeInfo: info };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { 'class': 'container-fluid' },
+        React.createElement(
+          'div',
+          { 'class': 'row' },
+          React.createElement(
+            'div',
+            { 'class': 'col-md-8' },
+            React.createElement(
+              'h3',
+              null,
+              'h3. Lorem ipsum dolor sit amet.'
+            ),
+            React.createElement(
+              'table',
+              { 'class': 'table' },
+              React.createElement(
+                'thead',
+                null,
+                React.createElement(
+                  'tr',
+                  null,
+                  React.createElement(
+                    'th',
+                    null,
+                    '#'
+                  ),
+                  React.createElement(
+                    'th',
+                    null,
+                    'Product'
+                  ),
+                  React.createElement(
+                    'th',
+                    null,
+                    'Payment Taken'
+                  ),
+                  React.createElement(
+                    'th',
+                    null,
+                    'Status'
+                  )
+                )
+              ),
+              React.createElement(
+                'tbody',
+                null,
+                React.createElement(
+                  'tr',
+                  null,
+                  React.createElement(
+                    'td',
+                    null,
+                    '1'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'TB - Monthly'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    '01/04/2012'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'Default'
+                  )
+                ),
+                React.createElement(
+                  'tr',
+                  { 'class': 'table-active' },
+                  React.createElement(
+                    'td',
+                    null,
+                    '1'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'TB - Monthly'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    '01/04/2012'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'Approved'
+                  )
+                ),
+                React.createElement(
+                  'tr',
+                  { 'class': 'table-success' },
+                  React.createElement(
+                    'td',
+                    null,
+                    '2'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'TB - Monthly'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    '02/04/2012'
+                  )
+                )
+              )
+            )
+          ),
+          React.createElement(
+            'div',
+            { 'class': 'col-md-4' },
+            React.createElement(
+              'h3',
+              null,
+              'h3. Lorem ipsum dolor sit amet.'
+            ),
+            React.createElement('img', { alt: 'Bootstrap Image Preview', src: 'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg' }),
+            React.createElement(
+              'ol',
+              null,
+              React.createElement(
+                'li',
+                { 'class': 'list-item' },
+                'Lorem ipsum dolor sit amet'
+              ),
+              React.createElement(
+                'li',
+                { 'class': 'list-item' },
+                'Consectetur adipiscing elit'
+              ),
+              React.createElement(
+                'li',
+                { 'class': 'list-item' },
+                'Integer molestie lorem at massa'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Profile;
+}(React.Component);
+
+module.exports = Profile;
 },{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/App.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -23105,6 +23295,7 @@ var React = require('react');
 var Welcome = require('./Welcome');
 var BusinessForm = require('./BusinessForm');
 var BusinessLogin = require('./BusinessLogIn');
+var Profile = require('./Profile');
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -23151,6 +23342,13 @@ var App = function (_React$Component) {
           React.createElement(BusinessLogin, { changePage: this.changePage.bind(this) })
         );
       }
+      if (this.state.renderThis === 'profile') {
+        return React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(Profile, { changePage: this.changePage.bind(this) })
+        );
+      }
     }
   }]);
 
@@ -23158,7 +23356,7 @@ var App = function (_React$Component) {
 }(React.Component);
 
 module.exports = App;
-},{"react":"../node_modules/react/index.js","./Welcome":"components/Welcome.jsx","./BusinessForm":"components/BusinessForm.jsx","./BusinessLogIn":"components/BusinessLogIn.jsx"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Welcome":"components/Welcome.jsx","./BusinessForm":"components/BusinessForm.jsx","./BusinessLogIn":"components/BusinessLogIn.jsx","./Profile":"components/Profile.jsx"}],"index.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
