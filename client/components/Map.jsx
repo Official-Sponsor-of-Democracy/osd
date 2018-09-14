@@ -1,15 +1,34 @@
-
-const { Map, InfoWindow, Marker, GoogleApiWrapper } = require('google-maps-react');
-
 const React = require('react');
+const {
+  Map, InfoWindow, Marker, GoogleApiWrapper,
+} = require('google-maps-react');
+const {
+  googleApi,
+} = require('../config');
 
 class MapPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: { lat: 42.3601, lng: -71.0589 },
+    };
+  }
+
   render() {
+    const { google } = this.props;
+    const { center } = this.state;
     return (
       <div>
-        <Map google={this.props.google} zoom={14}>
-          <Marker onClick={this.onMarkerClick}
-            name={'Current location'} />
+        <Map
+          google={google}
+          initialCenter={center}
+          zoom={15}
+          onClick={this.onMapClicked}
+        >
+          <Marker
+            onClick={this.onMarkerClick}
+            name="hello"
+          />
           <InfoWindow onClose={this.onInfoWindowClose} />
         </Map>
       </div>
@@ -18,5 +37,5 @@ class MapPage extends React.Component {
 }
 
 module.exports = GoogleApiWrapper({
-  apiKey: ('AIzaSyDazc4gDBhc9rJDprY4q_w3lFrlaL8V_Ss'),
+  apiKey: (googleApi),
 })(MapPage);

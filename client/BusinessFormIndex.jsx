@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 
-const BusinessForm = require('./components/BusinessForm');
+// const BusinessForm = require('./components/BusinessForm');
 
-const index = document.getElementById('businessform');
-ReactDOM.render(<BusinessForm name="test" />, index);
+// const bizForm = document.getElementById('app');
+// ReactDOM.render(<BusinessForm name="test" />, bizForm);
