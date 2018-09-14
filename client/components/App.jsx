@@ -1,7 +1,6 @@
 const React = require('react');
 const Welcome = require('./Welcome');
 const BusinessForm = require('./BusinessForm');
-const ReactDOM = require('react-dom');
 
 class App extends React.Component {
   constructor(props) {
@@ -13,11 +12,9 @@ class App extends React.Component {
 
   changePage(pageId) {
     this.setState(() => {
-      return { renderThis: pageId};
+      return { renderThis: pageId };
     });
-    console.log(this.state.renderThis, "in change page")
   }
-  
 
   render() {
     if (this.state.renderThis === 'welcome') {

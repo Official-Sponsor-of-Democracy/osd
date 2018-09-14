@@ -11,6 +11,7 @@ class NewUser extends React.Component {
       address: '',
       cityzip: '',
       businessid: null,
+      clicked: 0,
     };
   }
 
@@ -42,6 +43,7 @@ class NewUser extends React.Component {
     const { address } = this.state;
     const { cityzip } = this.state;
     Utilities.findVotingLocations(address, cityzip);
+    this.renderPage('map');
   }
 
   signUser() {
@@ -52,6 +54,14 @@ class NewUser extends React.Component {
     const { businessid } = this.state;
     const { phonenumber } = this.state;
     Utilities.signUserIn(name, email, phonenumber, address, cityzip, businessid);
+    this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, cityzip: cityzip, businessid: businessid});
+  }
+
+  renderPage(page, info) {
+    this.state.clicked++;
+    if (this.state.clicked > 0) {
+      this.props.changePage(page, info);
+    }
   }
 
   render() {
