@@ -2,6 +2,7 @@ const React = require('react');
 const Welcome = require('./Welcome');
 const BusinessForm = require('./BusinessForm');
 const BusinessLogin = require('./BusinessLogIn');
+const Profile = require('./Profile');
 
 class App extends React.Component {
   constructor(props) {
@@ -36,6 +37,13 @@ class App extends React.Component {
       return (
         <div className="container-fluid">
           <BusinessLogin changePage={this.changePage.bind(this)} />
+        </div>
+      );
+    }
+    if (this.state.renderThis === 'profile') {
+      return (
+        <div className="container-fluid">
+          <Profile changePage={this.changePage.bind(this)} />
         </div>
       );
     }
