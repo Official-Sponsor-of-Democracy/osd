@@ -22817,7 +22817,8 @@ var BusinessForm = function (_React$Component) {
       businessName: '',
       employerContact: '',
       address: '',
-      numEmployees: ''
+      numEmployees: '',
+      clicked: 0
     };
     return _this;
   }
@@ -22851,6 +22852,15 @@ var BusinessForm = function (_React$Component) {
       var numEmployees = this.state.numEmployees;
 
       Utilities.addNewBusiness(businessName, employerContact, address, numEmployees);
+      this.renderPage('signupcomplete');
+    }
+  }, {
+    key: 'renderPage',
+    value: function renderPage(page) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        this.props.changePage(page);
+      }
     }
   }, {
     key: 'render',
@@ -23282,6 +23292,86 @@ var Profile = function (_React$Component) {
 }(React.Component);
 
 module.exports = Profile;
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/SignupComplete.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Utilities = require('../utilities');
+
+var SignupComplete = function (_React$Component) {
+  _inherits(SignupComplete, _React$Component);
+
+  function SignupComplete(props) {
+    _classCallCheck(this, SignupComplete);
+
+    var _this = _possibleConstructorReturn(this, (SignupComplete.__proto__ || Object.getPrototypeOf(SignupComplete)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(SignupComplete, [{
+    key: 'changePage',
+    value: function changePage(pageId, info) {
+      this.setState(function () {
+        return { renderThis: pageId, employeeInfo: info };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { 'class': 'container-fluid' },
+        React.createElement(
+          'div',
+          { 'class': 'row' },
+          React.createElement(
+            'div',
+            { 'class': 'col-md-12' },
+            React.createElement(
+              'h3',
+              null,
+              'h3. Lorem ipsum dolor sit amet.'
+            ),
+            React.createElement(
+              'p',
+              null,
+              'Lorem ipsum dolor sit amet, ',
+              React.createElement(
+                'strong',
+                null,
+                'consectetur adipiscing elit'
+              ),
+              '. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. ',
+              React.createElement(
+                'em',
+                null,
+                'Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.'
+              ),
+              ' Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. ',
+              React.createElement(
+                'small',
+                null,
+                'Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return SignupComplete;
+}(React.Component);
+
+module.exports = SignupComplete;
 },{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/App.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -23296,6 +23386,7 @@ var Welcome = require('./Welcome');
 var BusinessForm = require('./BusinessForm');
 var BusinessLogin = require('./BusinessLogIn');
 var Profile = require('./Profile');
+var SignupComplete = require('./SignupComplete');
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -23349,6 +23440,13 @@ var App = function (_React$Component) {
           React.createElement(Profile, { changePage: this.changePage.bind(this) })
         );
       }
+      if (this.state.renderThis === 'signupcomplete') {
+        return React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(SignupComplete, { changePage: this.changePage.bind(this) })
+        );
+      }
     }
   }]);
 
@@ -23356,7 +23454,7 @@ var App = function (_React$Component) {
 }(React.Component);
 
 module.exports = App;
-},{"react":"../node_modules/react/index.js","./Welcome":"components/Welcome.jsx","./BusinessForm":"components/BusinessForm.jsx","./BusinessLogIn":"components/BusinessLogIn.jsx","./Profile":"components/Profile.jsx"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Welcome":"components/Welcome.jsx","./BusinessForm":"components/BusinessForm.jsx","./BusinessLogIn":"components/BusinessLogIn.jsx","./Profile":"components/Profile.jsx","./SignupComplete":"components/SignupComplete.jsx"}],"index.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');

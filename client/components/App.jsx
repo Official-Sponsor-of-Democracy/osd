@@ -3,6 +3,7 @@ const Welcome = require('./Welcome');
 const BusinessForm = require('./BusinessForm');
 const BusinessLogin = require('./BusinessLogIn');
 const Profile = require('./Profile');
+const SignupComplete = require('./SignupComplete');
 
 class App extends React.Component {
   constructor(props) {
@@ -44,6 +45,13 @@ class App extends React.Component {
       return (
         <div className="container-fluid">
           <Profile changePage={this.changePage.bind(this)} />
+        </div>
+      );
+    }
+    if (this.state.renderThis === 'signupcomplete') {
+      return (
+        <div className="container-fluid">
+          <SignupComplete changePage={this.changePage.bind(this)} />
         </div>
       );
     }
