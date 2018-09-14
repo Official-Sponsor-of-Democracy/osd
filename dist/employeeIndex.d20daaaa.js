@@ -28910,7 +28910,9 @@ var Gameplan = function (_React$Component) {
             React.createElement(
               "p",
               { className: "text-center text-muted" },
-              "Based on our calculations it should take [employee name] [number] hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
+              "Based on our calculations it should take ",
+              this.props.employeeInfo.name.toString(),
+              " [number] hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
             )
           )
         )
