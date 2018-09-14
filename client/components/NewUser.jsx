@@ -9,8 +9,9 @@ class NewUser extends React.Component {
       email: '',
       phonenumber: null,
       address: '',
-      cityzip: '',
       businessid: null,
+      coordinates: null,
+      clicked: 0,
     };
   }
 
@@ -34,24 +35,38 @@ class NewUser extends React.Component {
     this.setState({ address: event.target.value });
   }
 
-  handleCityZipChange(event) {
-    this.setState({ cityzip: event.target.value });
-  }
-
   findLocations() {
     const { address } = this.state;
     const { cityzip } = this.state;
     Utilities.findVotingLocations(address, cityzip);
+    this.renderPage('map');
   }
 
   signUser() {
     const { email } = this.state;
     const { name } = this.state;
     const { address } = this.state;
-    const { cityzip } = this.state;
     const { businessid } = this.state;
     const { phonenumber } = this.state;
-    Utilities.signUserIn(name, email, phonenumber, address, cityzip, businessid);
+    Utilities.signUserIn(name, email, phonenumber, address, businessid);
+    // const printout = Utilities.getDriveTime(address, "1808 elysian fields avenue new orleans louisiana");
+
+    // printout.then((resolve) => {
+    //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results });
+    // });
+    const printout = Utilities.getCoordinates(address);
+    
+    printout.then((resolve) => {
+      this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location});
+    });
+  }
+
+  renderPage(page, info) {
+    this.state.clicked++;
+    if (this.state.clicked > 0) {
+      console.log(this.state, "in render")
+      this.props.changePage(page, info);
+    }
   }
 
   render() {
@@ -107,20 +122,14 @@ class NewUser extends React.Component {
             <div role="form">
               <div className="form-group">
                 <label htmlFor="InputAddress">
-                  Street Address
+                  Address
                   <input type="address" className="form-control" id="InputAddress" address={this.value} onChange={this.handleStreetAddressChange.bind(this)} />
-                </label>
-              </div>
-              <div className="form-group">
-                <label htmlFor="InputCityZip">
-                  City, State and Zip Code
-                  <input type="cityzip" className="form-control" id="InputCityZip" cityzip={this.value} onChange={this.handleCityZipChange.bind(this)} />
                 </label>
               </div>
               <div className="form-group">
                 <label htmlFor="InputBusinessID">
                   Business ID
-                  <input type="businessid" className="form-control" id="InputBusinessID" businessid={this.value} onChange={this.handleBusinessIdChange.bind(this)} />
+                  <input type="text" className="form-control" id="InputBusinessID" businessid={this.value} onChange={this.handleBusinessIdChange.bind(this)} />
                 </label>
               </div>
               <button type="submit" className="btn btn-primary" onClick={this.signUser.bind(this)}>

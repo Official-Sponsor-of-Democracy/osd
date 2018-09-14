@@ -6,7 +6,9 @@ class Gameplan extends React.Component {
     this.state = {
     };
   }
-
+  printStuff(stuff) {
+    console.log(stuff)
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -45,7 +47,7 @@ class Gameplan extends React.Component {
                 polling location, vote, and get to work
               </dd>
             </dl>
-            <img alt="Bootstrap Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+            <img alt="Bootstrap Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" onClick={this.printStuff.bind(this, this.props)}/>
             <h3 className="text-center text-success">
               Looping in your boss
             </h3>
@@ -57,7 +59,7 @@ class Gameplan extends React.Component {
               can finalize your plan
             </dd>
             <p className="text-center text-muted">
-              Based on our calculations it should take [employee name] [number] hours
+              Based on our calculations it should take {this.props.employeeInfo.name.toString()} [number] hours
               to exercise their right to vote on [date]. Talk to each other to sort
               out the specifics so everything goes smoothly on election day. Thank
               you for supporting democracy one vote at a time!
