@@ -3591,21 +3591,21 @@ function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/3/').then(function (resolve) {
+    axios.get('/home').then(function (resolve) {
       console.log(resolve);
     });
     console.log(email, password);
   }
 }
 
-function signUserIn(email, password) {
-  if (email === undefined && password === undefined) {
+function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
+  if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/2/').then(function (resolve) {
+    axios.get('/home').then(function (resolve) {
       console.log(resolve);
     });
-    console.log(email, password);
+    console.log(name, email, phonenumber, address, cityzip, businessid);
   }
 }
 
@@ -3620,9 +3620,21 @@ function addNewBusiness(businessName, employerContact, address, numEmployees) {
   }
 }
 
+function findVotingLocations(address, cityzip) {
+  if (address === undefined && cityzip === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    axios.get('https://swapi.co/api/people/5/').then(function (resolve) {
+      console.log(resolve);
+    });
+    console.log(address, cityzip);
+  }
+}
+
 module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
+module.exports.findVotingLocations = findVotingLocations;
 },{"axios":"../node_modules/axios/index.js"}],"components/BusinessForm.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -3797,7 +3809,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56803' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58500' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

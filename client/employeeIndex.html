@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>OSD Employee</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    <style>
+      input {
+        height: 30px;
+        padding-left: 10px;
+        border-radius: 4px;
+        border: 1px solid rgb(186, 178, 178);
+        box-shadow: 0px 0px 12px #EFEFEF;
+      }
+    </style>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyOcw4O6ZqUChULjprwYUoa33GHO5I7AE&libraries=places&language=en"></script> -->
+</head>
+
+<body>
+  <div class="icon">
+    <img class="osd-icon" src="./osd-seal.png">
+  </div>
+  <div id="employeeapp" ></div>
+  <!-- <input type="text" id="autocomplete" />
+  <script>
+    var input = document.getElementById('autocomplete');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+  </script> -->
+  <script src="./employeeIndex.jsx"></script>
+  <script src="./components/EmployeeApp.jsx"></script>
+  <script src="./components/NewUser.jsx"></script>
+  <script src="./styles/style.css"></script>
+  
+</body>
+
+</html>
