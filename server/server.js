@@ -19,12 +19,16 @@ app.post('/createBusiness', (req, res) => {
 
 app.get('/loginBusiness', (req, res) => {
   // should take user info passed to the req body
-  // if the user info passed in is a valid user from the database respond with a session for the user
+  
+  // if the user info passed in is a valid user from
+  // the database respond with a session for the user
 });
 
 app.post('/sendEmail', (req, res) => {
-  // make a file that exports a stock message with personalized information
-  // call a handler function that sends a get request to the sendjet api and takes the message as the argument
+  // make a file that exports a stock message with personalized information.
+
+  // Call a handler function that sends a get request to the
+  // sendjet api and takes the message as the argument.
 });
 
 module.exports = app;
