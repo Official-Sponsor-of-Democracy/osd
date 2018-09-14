@@ -22556,8 +22556,15 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"utilities.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"config.js":[function(require,module,exports) {
+var googleApi = 'AIzaSyDyOcw4O6ZqUChULjprwYUoa33GHO5I7AE';
+
+module.exports.googleApi = googleApi;
+},{}],"utilities.js":[function(require,module,exports) {
 var axios = require('axios');
+
+var _require = require('./config'),
+    googleApi = _require.googleApi;
 
 function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
@@ -22570,14 +22577,32 @@ function addNewUser(email, password) {
   }
 }
 
-function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
-  if (email === undefined && name === undefined) {
+function checkUser(email, password) {
+  if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
     axios.get('/home').then(function (resolve) {
       console.log(resolve);
     });
-    console.log(name, email, phonenumber, address, cityzip, businessid);
+    console.log(email, password);
+  }
+}
+
+function getCoordinates(address) {
+  if (address === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    var formattedAddress = address.replace(/" "/g, "+");
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + formattedAddress + '&key=' + googleApi);
+  }
+}
+
+function signUserIn(name, email, phonenumber, address, businessid) {
+  if (email === undefined && name === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    axios.get('/home').then(function (resolve) {});
+    console.log(name, email, phonenumber, address, businessid);
   }
 }
 
@@ -22607,7 +22632,9 @@ module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
-},{"axios":"../node_modules/axios/index.js"}],"components/Welcome.jsx":[function(require,module,exports) {
+module.exports.getCoordinates = getCoordinates;
+module.exports.checkUser = checkUser;
+},{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/Welcome.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22911,6 +22938,160 @@ var BusinessForm = function (_React$Component) {
 }(React.Component);
 
 module.exports = BusinessForm;
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/BusinessLogIn.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Utilities = require('../utilities');
+
+var BusinessLogin = function (_React$Component) {
+  _inherits(BusinessLogin, _React$Component);
+
+  function BusinessLogin(props) {
+    _classCallCheck(this, BusinessLogin);
+
+    var _this = _possibleConstructorReturn(this, (BusinessLogin.__proto__ || Object.getPrototypeOf(BusinessLogin)).call(this, props));
+
+    _this.state = {
+      email: '',
+      password: '',
+      clicked: 0
+    };
+    return _this;
+  }
+
+  _createClass(BusinessLogin, [{
+    key: 'handleEmailChange',
+    value: function handleEmailChange(event) {
+      this.setState({ email: event.target.value });
+    }
+  }, {
+    key: 'handlePasswordChange',
+    value: function handlePasswordChange(event) {
+      this.setState({ password: event.target.value });
+    }
+  }, {
+    key: 'checkUser',
+    value: function checkUser() {
+      var email = this.state.email;
+      var password = this.state.password;
+
+      Utilities.checkUser(email, password);
+      if (true) {
+        this.renderPage('profile');
+      } else {
+        alert('User Not Recognized');
+        this.renderPage('welcome');
+      }
+    }
+  }, {
+    key: 'renderPage',
+    value: function renderPage(page) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        this.props.changePage(page);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'container-fluid' },
+        React.createElement(
+          'div',
+          { className: 'row' },
+          React.createElement(
+            'div',
+            { className: 'col-md-6' },
+            React.createElement(
+              'h3',
+              null,
+              'Official Sponsors of Democracy'
+            ),
+            React.createElement(
+              'dl',
+              null,
+              React.createElement(
+                'dt',
+                null,
+                'Support Your Employees'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'Bolster employee morale by letting them know that you support their right to vote'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'Logistics Made Easy'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'We create a logistical gameplan custom-tailored to each employee voter'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'No Surprises'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'Get ahead of election-day scheduling so business goes smoothly'
+              )
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-md-6' },
+            React.createElement(
+              'div',
+              { role: 'form' },
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputEmail1' },
+                  'Email address',
+                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', email: this.value, onChange: this.handleEmailChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputPassword1' },
+                  'Password',
+                  React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1', password: this.value, onChange: this.handlePasswordChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary', onClick: this.checkUser.bind(this) },
+                'Log In'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return BusinessLogin;
+}(React.Component);
+
+module.exports = BusinessLogin;
 },{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/App.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -22923,6 +23104,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 var Welcome = require('./Welcome');
 var BusinessForm = require('./BusinessForm');
+var BusinessLogin = require('./BusinessLogIn');
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -22954,11 +23136,19 @@ var App = function (_React$Component) {
           { className: 'container-fluid' },
           React.createElement(Welcome, { changePage: this.changePage.bind(this) })
         );
-      } else if (this.state.renderThis === 'businessForm') {
+      }
+      if (this.state.renderThis === 'businessForm') {
         return React.createElement(
           'div',
           { className: 'container-fluid' },
-          React.createElement(BusinessForm, null)
+          React.createElement(BusinessForm, { changePage: this.changePage.bind(this) })
+        );
+      }
+      if (this.state.renderThis === 'login') {
+        return React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(BusinessLogin, { changePage: this.changePage.bind(this) })
         );
       }
     }
@@ -22968,7 +23158,7 @@ var App = function (_React$Component) {
 }(React.Component);
 
 module.exports = App;
-},{"react":"../node_modules/react/index.js","./Welcome":"components/Welcome.jsx","./BusinessForm":"components/BusinessForm.jsx"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Welcome":"components/Welcome.jsx","./BusinessForm":"components/BusinessForm.jsx","./BusinessLogIn":"components/BusinessLogIn.jsx"}],"index.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
@@ -23037,7 +23227,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64289' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57287' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
