@@ -68,7 +68,7 @@ class App extends React.Component {
                   <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handlePasswordChange.bind(this)} />
                 </label>
               </div>
-              <a href="../BusinessFormIndex.html">
+              <a href="../BusinessFormIndex.html" target="_blank">
                 <button type="submit" className="btn btn-primary" onClick={this.addUser.bind(this)}>
                     Submit
                 </button>

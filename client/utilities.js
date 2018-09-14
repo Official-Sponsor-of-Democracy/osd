@@ -4,10 +4,12 @@ function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/3/').then((resolve) => {
-      console.log(resolve);
-    });
-    console.log(email, password);
+    axios.post('/home', { email, password })
+      .then((resolve) => {
+        console.log(resolve);
+      })
+      .catch(err => (console.log(err)));
+    // console.log(email, password);
   }
 }
 
