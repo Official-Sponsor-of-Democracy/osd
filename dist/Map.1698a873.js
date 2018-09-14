@@ -26807,7 +26807,11 @@ var global = arguments[3];
 
   exports.default = Map;
 });
-},{"./GoogleApiComponent":"../node_modules/google-maps-react/dist/GoogleApiComponent.js","./components/Marker":"../node_modules/google-maps-react/dist/components/Marker.js","./components/InfoWindow":"../node_modules/google-maps-react/dist/components/InfoWindow.js","./components/HeatMap":"../node_modules/google-maps-react/dist/components/HeatMap.js","./components/Polygon":"../node_modules/google-maps-react/dist/components/Polygon.js","./components/Polyline":"../node_modules/google-maps-react/dist/components/Polyline.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-dom":"../node_modules/react-dom/index.js","./lib/String":"../node_modules/google-maps-react/dist/lib/String.js","./lib/cancelablePromise":"../node_modules/google-maps-react/dist/lib/cancelablePromise.js"}],"components/Map.jsx":[function(require,module,exports) {
+},{"./GoogleApiComponent":"../node_modules/google-maps-react/dist/GoogleApiComponent.js","./components/Marker":"../node_modules/google-maps-react/dist/components/Marker.js","./components/InfoWindow":"../node_modules/google-maps-react/dist/components/InfoWindow.js","./components/HeatMap":"../node_modules/google-maps-react/dist/components/HeatMap.js","./components/Polygon":"../node_modules/google-maps-react/dist/components/Polygon.js","./components/Polyline":"../node_modules/google-maps-react/dist/components/Polyline.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-dom":"../node_modules/react-dom/index.js","./lib/String":"../node_modules/google-maps-react/dist/lib/String.js","./lib/cancelablePromise":"../node_modules/google-maps-react/dist/lib/cancelablePromise.js"}],"config.js":[function(require,module,exports) {
+var googleApi = 'AIzaSyDyOcw4O6ZqUChULjprwYUoa33GHO5I7AE';
+
+module.exports.googleApi = googleApi;
+},{}],"components/Map.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26816,34 +26820,52 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var React = require('react');
+
 var _require = require('google-maps-react'),
     Map = _require.Map,
     InfoWindow = _require.InfoWindow,
     Marker = _require.Marker,
     GoogleApiWrapper = _require.GoogleApiWrapper;
 
-var React = require('react');
+var _require2 = require('../config'),
+    googleApi = _require2.googleApi;
 
 var MapPage = function (_React$Component) {
   _inherits(MapPage, _React$Component);
 
-  function MapPage() {
+  function MapPage(props) {
     _classCallCheck(this, MapPage);
 
-    return _possibleConstructorReturn(this, (MapPage.__proto__ || Object.getPrototypeOf(MapPage)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (MapPage.__proto__ || Object.getPrototypeOf(MapPage)).call(this, props));
+
+    _this.state = {
+      center: { lat: 42.3601, lng: -71.0589 }
+    };
+    return _this;
   }
 
   _createClass(MapPage, [{
     key: 'render',
     value: function render() {
+      var google = this.props.google;
+      var center = this.state.center;
+
       return React.createElement(
         'div',
         null,
         React.createElement(
           Map,
-          { google: this.props.google, zoom: 14 },
-          React.createElement(Marker, { onClick: this.onMarkerClick,
-            name: 'Current location' }),
+          {
+            google: google,
+            initialCenter: center,
+            zoom: 15,
+            onClick: this.onMapClicked
+          },
+          React.createElement(Marker, {
+            onClick: this.onMarkerClick,
+            name: 'hello'
+          }),
           React.createElement(InfoWindow, { onClose: this.onInfoWindowClose })
         )
       );
@@ -26854,9 +26876,9 @@ var MapPage = function (_React$Component) {
 }(React.Component);
 
 module.exports = GoogleApiWrapper({
-  apiKey: 'AIzaSyDazc4gDBhc9rJDprY4q_w3lFrlaL8V_Ss'
+  apiKey: googleApi
 })(MapPage);
-},{"google-maps-react":"../node_modules/google-maps-react/dist/index.js","react":"../node_modules/react/index.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","google-maps-react":"../node_modules/google-maps-react/dist/index.js","../config":"config.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 

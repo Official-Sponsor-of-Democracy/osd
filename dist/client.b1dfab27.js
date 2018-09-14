@@ -22563,7 +22563,7 @@ function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/3/').then(function (resolve) {
+    axios.get('/home').then(function (resolve) {
       console.log(resolve);
     });
     console.log(email, password);
@@ -22574,7 +22574,7 @@ function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/2/').then(function (resolve) {
+    axios.get('/home').then(function (resolve) {
       console.log(resolve);
     });
     console.log(name, email, phonenumber, address, cityzip, businessid);
@@ -22607,7 +22607,7 @@ module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
-},{"axios":"../node_modules/axios/index.js"}],"components/App.jsx":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js"}],"components/Welcome.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22619,22 +22619,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 var Utilities = require('../utilities');
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+var Welcome = function (_React$Component) {
+  _inherits(Welcome, _React$Component);
 
-  function App(props) {
-    _classCallCheck(this, App);
+  function Welcome(props) {
+    _classCallCheck(this, Welcome);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Welcome.__proto__ || Object.getPrototypeOf(Welcome)).call(this, props));
 
     _this.state = {
       email: '',
-      password: ''
+      password: '',
+      clicked: 0
     };
     return _this;
   }
 
-  _createClass(App, [{
+  _createClass(Welcome, [{
+    key: 'renderPage',
+    value: function renderPage(page) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        this.props.changePage(page);
+      }
+    }
+  }, {
     key: 'handleEmailChange',
     value: function handleEmailChange(event) {
       this.setState({ email: event.target.value });
@@ -22651,6 +22660,8 @@ var App = function (_React$Component) {
       var password = this.state.password;
 
       Utilities.addNewUser(email, password);
+
+      this.renderPage("businessForm");
     }
   }, {
     key: 'render',
@@ -22731,13 +22742,9 @@ var App = function (_React$Component) {
                 )
               ),
               React.createElement(
-                'a',
-                { href: '../BusinessFormIndex.html' },
-                React.createElement(
-                  'button',
-                  { type: 'submit', className: 'btn btn-primary', onClick: this.addUser.bind(this) },
-                  'Submit'
-                )
+                'button',
+                { type: 'submit', className: 'btn btn-primary', onClick: this.addUser.bind(this) },
+                'Submit'
               )
             ),
             React.createElement(
@@ -22746,7 +22753,7 @@ var App = function (_React$Component) {
               'Already a member?',
               React.createElement(
                 'button',
-                { type: 'button', id: 'existingMember', className: 'btn btn-background' },
+                { type: 'button', id: 'existingMember', className: 'btn btn-background', onClick: this.renderPage.bind(this, "login") },
                 'Sign In Here'
               )
             )
@@ -22756,11 +22763,215 @@ var App = function (_React$Component) {
     }
   }]);
 
+  return Welcome;
+}(React.Component);
+
+module.exports = Welcome;
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/BusinessForm.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Utilities = require('../utilities');
+
+var BusinessForm = function (_React$Component) {
+  _inherits(BusinessForm, _React$Component);
+
+  function BusinessForm(props) {
+    _classCallCheck(this, BusinessForm);
+
+    var _this = _possibleConstructorReturn(this, (BusinessForm.__proto__ || Object.getPrototypeOf(BusinessForm)).call(this, props));
+
+    _this.state = {
+      businessName: '',
+      employerContact: '',
+      address: '',
+      numEmployees: ''
+    };
+    return _this;
+  }
+
+  _createClass(BusinessForm, [{
+    key: 'handleNameChange',
+    value: function handleNameChange(event) {
+      this.setState({ businessName: event.target.value });
+    }
+  }, {
+    key: 'handleAddressChange',
+    value: function handleAddressChange(event) {
+      this.setState({ address: event.target.value });
+    }
+  }, {
+    key: 'handleNumEmployeesChange',
+    value: function handleNumEmployeesChange(event) {
+      this.setState({ numEmployees: event.target.value });
+    }
+  }, {
+    key: 'handleEmployerContactChange',
+    value: function handleEmployerContactChange(event) {
+      this.setState({ employerContact: event.target.value });
+    }
+  }, {
+    key: 'addBusiness',
+    value: function addBusiness() {
+      var businessName = this.state.businessName;
+      var employerContact = this.state.employerContact;
+      var address = this.state.address;
+      var numEmployees = this.state.numEmployees;
+
+      Utilities.addNewBusiness(businessName, employerContact, address, numEmployees);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'container-fluid' },
+        React.createElement(
+          'div',
+          { className: 'row' },
+          React.createElement(
+            'div',
+            { className: 'col-md-12' },
+            React.createElement(
+              'h3',
+              null,
+              'Becoming a Sponsor'
+            ),
+            React.createElement(
+              'p',
+              null,
+              'Support democracy, create a happier workplace, and simplify election day scheduling'
+            ),
+            React.createElement(
+              'p',
+              null,
+              'After the election we will send you information about your employee-voter turnout, along with an Offical Sponsor of Democracy seal which you can proudly display at the office'
+            ),
+            React.createElement(
+              'div',
+              { role: 'form' },
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'businessNameInput' },
+                  'Business Name',
+                  React.createElement('input', { type: 'businessname', className: 'form-control', id: 'businessNameInput', businessname: this.value, onChange: this.handleNameChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'employerContactInput' },
+                  'Employer Contact',
+                  React.createElement('input', { type: 'employercontact', className: 'form-control', id: 'employerContactInput', employercontact: this.value, onChange: this.handleEmployerContactChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'addressInput' },
+                  'Business Address',
+                  React.createElement('input', { type: 'address', className: 'form-control', id: 'addressInput', address: this.value, onChange: this.handleAddressChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'numEmployeesInput' },
+                  'Number of Employees',
+                  React.createElement('input', { type: 'numemployees', className: 'form-control', id: 'numEmployeesInput', numemployees: this.value, onChange: this.handleNumEmployeesChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary', onClick: this.addBusiness.bind(this) },
+                'Submit'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return BusinessForm;
+}(React.Component);
+
+module.exports = BusinessForm;
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/App.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Welcome = require('./Welcome');
+var BusinessForm = require('./BusinessForm');
+var ReactDOM = require('react-dom');
+
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App(props) {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      renderThis: 'welcome'
+    };
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: 'changePage',
+    value: function changePage(pageId) {
+      this.setState(function () {
+        return { renderThis: pageId };
+      });
+      console.log(this.state.renderThis, "in change page");
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.state.renderThis === 'welcome') {
+        return React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(Welcome, { changePage: this.changePage.bind(this) })
+        );
+      } else if (this.state.renderThis === 'businessForm') {
+        return React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(BusinessForm, null)
+        );
+      }
+    }
+  }]);
+
   return App;
 }(React.Component);
 
 module.exports = App;
-},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Welcome":"components/Welcome.jsx","./BusinessForm":"components/BusinessForm.jsx","react-dom":"../node_modules/react-dom/index.js"}],"index.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
@@ -22829,7 +23040,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53736' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64289' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
