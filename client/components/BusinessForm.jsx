@@ -9,6 +9,7 @@ class BusinessForm extends React.Component {
       employerContact: '',
       address: '',
       numEmployees: '',
+      clicked: 0,
     };
   }
 
@@ -27,13 +28,21 @@ class BusinessForm extends React.Component {
   handleEmployerContactChange(event) {
     this.setState({ employerContact: event.target.value });
   }
-
+  
   addBusiness() {
     const { businessName } = this.state;
     const { employerContact } = this.state;
     const { address } = this.state;
     const { numEmployees } = this.state;
     Utilities.addNewBusiness(businessName, employerContact, address, numEmployees);
+    this.renderPage('signupcomplete')
+  }
+
+  renderPage(page) {
+    this.state.clicked++;
+    if (this.state.clicked > 0) {
+      this.props.changePage(page);
+    }
   }
 
   render() {
