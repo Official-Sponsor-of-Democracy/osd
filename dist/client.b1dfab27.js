@@ -23317,10 +23317,18 @@ var SignupComplete = function (_React$Component) {
   }
 
   _createClass(SignupComplete, [{
+    key: 'renderPage',
+    value: function renderPage(page) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        this.props.changePage(page);
+      }
+    }
+  }, {
     key: 'changePage',
-    value: function changePage(pageId, info) {
+    value: function changePage(pageId) {
       this.setState(function () {
-        return { renderThis: pageId, employeeInfo: info };
+        return { renderThis: pageId };
       });
     }
   }, {
@@ -23523,7 +23531,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57287' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54681' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

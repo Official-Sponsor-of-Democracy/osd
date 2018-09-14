@@ -26841,6 +26841,7 @@ var MapPage = function (_React$Component) {
 
     _this.state = {
       center: { lat: 42.3601, lng: -71.0589 },
+      locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: null },
       clicked: 0
     };
     return _this;
@@ -26874,12 +26875,22 @@ var MapPage = function (_React$Component) {
           Map,
           {
             google: google,
-            initialCenter: center,
+            initialCenter: this.props.employeeInfo.coordinates,
             zoom: 15
           },
           React.createElement(Marker, {
             onClick: this.onMarkerClick.bind(this, google.maps.event),
             name: 'hello'
+          }),
+          React.createElement(Marker, {
+            title: 'The marker`s title will appear as a tooltip.',
+            name: 'SOMA',
+            position: { lat: 37.778519, lng: -122.405640 }
+          }),
+          React.createElement(Marker, {
+            title: 'The marker`s title will appear as a tooltip.',
+            name: 'SOMA',
+            position: this.state.locations.two
           }),
           React.createElement(InfoWindow, { onClose: this.onInfoWindowClose })
         )
@@ -29032,7 +29043,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53107' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55638' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
