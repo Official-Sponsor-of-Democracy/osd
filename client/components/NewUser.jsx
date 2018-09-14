@@ -49,7 +49,13 @@ class NewUser extends React.Component {
     const { businessid } = this.state;
     const { phonenumber } = this.state;
     Utilities.signUserIn(name, email, phonenumber, address, businessid);
+    // const printout = Utilities.getDriveTime(address, "1808 elysian fields avenue new orleans louisiana");
+
+    // printout.then((resolve) => {
+    //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results });
+    // });
     const printout = Utilities.getCoordinates(address);
+    
     printout.then((resolve) => {
       this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location});
     });
