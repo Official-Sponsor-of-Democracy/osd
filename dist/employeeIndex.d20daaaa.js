@@ -26841,6 +26841,7 @@ var MapPage = function (_React$Component) {
 
     _this.state = {
       center: { lat: 42.3601, lng: -71.0589 },
+      locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: null },
       clicked: 0
     };
     return _this;
@@ -26874,12 +26875,22 @@ var MapPage = function (_React$Component) {
           Map,
           {
             google: google,
-            initialCenter: center,
+            initialCenter: this.props.employeeInfo.coordinates,
             zoom: 15
           },
           React.createElement(Marker, {
             onClick: this.onMarkerClick.bind(this, google.maps.event),
             name: 'hello'
+          }),
+          React.createElement(Marker, {
+            title: 'The marker`s title will appear as a tooltip.',
+            name: 'SOMA',
+            position: { lat: 37.778519, lng: -122.405640 }
+          }),
+          React.createElement(Marker, {
+            title: 'The marker`s title will appear as a tooltip.',
+            name: 'SOMA',
+            position: this.state.locations.two
           }),
           React.createElement(InfoWindow, { onClose: this.onInfoWindowClose })
         )
@@ -28576,10 +28587,9 @@ function findVotingLocations(address, cityzip) {
   if (address === undefined && cityzip === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/5/').then(function (resolve) {
+    axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.05,-90.03&radius=8046&type=library&keyword=public&key=' + googleApi).then(function (resolve) {
       console.log(resolve);
     });
-    console.log(address, cityzip);
   }
 }
 
