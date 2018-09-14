@@ -1,6 +1,7 @@
 const React = require('react');
 const Map = require('./Map');
 const NewUser = require('./NewUser');
+const Gameplan = require('./Gameplan');
 
 class EmployeeApp extends React.Component {
   constructor(props) {
@@ -20,14 +21,22 @@ class EmployeeApp extends React.Component {
   render() {
     if (this.state.renderThis === 'welcome') {
       return (
-        <div className="container-fluid">
+        <div id="autocomplete" className="container-fluid">
           <NewUser changePage={this.changePage.bind(this)} />
         </div>
       );
-    } else if (this.state.renderThis === 'map') {
+    }
+    if (this.state.renderThis === 'map') {
       return (
         <div className="container-fluid">
           <Map changePage={this.changePage.bind(this)} employeeInfo={this.state.employeeInfo}/>
+        </div>
+      );
+    }
+    if (this.state.renderThis === 'gameplan') {
+      return (
+        <div className="container-fluid">
+          <Gameplan changePage={this.changePage.bind(this)} employeeInfo={this.state.employeeInfo} />
         </div>
       );
     }

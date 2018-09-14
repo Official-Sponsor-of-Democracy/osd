@@ -11,7 +11,21 @@ class MapPage extends React.Component {
     super(props);
     this.state = {
       center: { lat: 42.3601, lng: -71.0589 },
+      clicked: 0,
     };
+  }
+
+  onMarkerClick(event) {
+
+    this.renderPage('gameplan', this.props.employeeInfo);
+    console.log(this, "this in marker")
+  }
+
+  renderPage(page, info) {
+    this.state.clicked++;
+    if (this.state.clicked > 0) {
+      this.props.changePage(page, info);
+    }
   }
 
   render() {
@@ -23,10 +37,9 @@ class MapPage extends React.Component {
           google={google}
           initialCenter={center}
           zoom={15}
-          onClick={this.onMapClicked}
         >
           <Marker
-            onClick={this.onMarkerClick}
+            onClick={this.onMarkerClick.bind(this, google.maps.event)}
             name="hello"
           />
           <InfoWindow onClose={this.onInfoWindowClose} />
