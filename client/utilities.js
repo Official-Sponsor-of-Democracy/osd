@@ -60,10 +60,9 @@ function findVotingLocations(address, cityzip) {
   if (address === undefined && cityzip === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/5/').then((resolve) => {
+    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.05,-90.03&radius=8046&type=library&keyword=public&key=${googleApi}`).then((resolve) => {
       console.log(resolve);
     });
-    console.log(address, cityzip);
   }
 }
 
