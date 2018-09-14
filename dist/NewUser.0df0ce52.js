@@ -3584,8 +3584,15 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"utilities.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"config.js":[function(require,module,exports) {
+var googleApi = 'AIzaSyDyOcw4O6ZqUChULjprwYUoa33GHO5I7AE';
+
+module.exports.googleApi = googleApi;
+},{}],"utilities.js":[function(require,module,exports) {
 var axios = require('axios');
+
+var _require = require('./config'),
+    googleApi = _require.googleApi;
 
 function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
@@ -3598,14 +3605,21 @@ function addNewUser(email, password) {
   }
 }
 
-function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
+function getCoordinates(address) {
+  if (address === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    var formattedAddress = address.replace(/" "/g, "+");
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + formattedAddress + '&key=' + googleApi);
+  }
+}
+
+function signUserIn(name, email, phonenumber, address, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('/home').then(function (resolve) {
-      console.log(resolve);
-    });
-    console.log(name, email, phonenumber, address, cityzip, businessid);
+    axios.get('/home').then(function (resolve) {});
+    console.log(name, email, phonenumber, address, businessid);
   }
 }
 
@@ -3635,7 +3649,8 @@ module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
-},{"axios":"../node_modules/axios/index.js"}],"components/NewUser.jsx":[function(require,module,exports) {
+module.exports.getCoordinates = getCoordinates;
+},{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/NewUser.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3660,8 +3675,9 @@ var NewUser = function (_React$Component) {
       email: '',
       phonenumber: null,
       address: '',
-      cityzip: '',
-      businessid: null
+      businessid: null,
+      coordinates: null,
+      clicked: 0
     };
     return _this;
   }
@@ -3692,29 +3708,39 @@ var NewUser = function (_React$Component) {
       this.setState({ address: event.target.value });
     }
   }, {
-    key: 'handleCityZipChange',
-    value: function handleCityZipChange(event) {
-      this.setState({ cityzip: event.target.value });
-    }
-  }, {
     key: 'findLocations',
     value: function findLocations() {
       var address = this.state.address;
       var cityzip = this.state.cityzip;
 
       Utilities.findVotingLocations(address, cityzip);
+      this.renderPage('map');
     }
   }, {
     key: 'signUser',
     value: function signUser() {
+      var _this2 = this;
+
       var email = this.state.email;
       var name = this.state.name;
       var address = this.state.address;
-      var cityzip = this.state.cityzip;
       var businessid = this.state.businessid;
       var phonenumber = this.state.phonenumber;
 
-      Utilities.signUserIn(name, email, phonenumber, address, cityzip, businessid);
+      Utilities.signUserIn(name, email, phonenumber, address, businessid);
+      var printout = Utilities.getCoordinates(address);
+      printout.then(function (resolve) {
+        _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location });
+      });
+    }
+  }, {
+    key: 'renderPage',
+    value: function renderPage(page, info) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        console.log(this.state, "in render");
+        this.props.changePage(page, info);
+      }
     }
   }, {
     key: 'render',
@@ -3814,18 +3840,8 @@ var NewUser = function (_React$Component) {
                 React.createElement(
                   'label',
                   { htmlFor: 'InputAddress' },
-                  'Street Address',
+                  'Address',
                   React.createElement('input', { type: 'address', className: 'form-control', id: 'InputAddress', address: this.value, onChange: this.handleStreetAddressChange.bind(this) })
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'form-group' },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'InputCityZip' },
-                  'City, State and Zip Code',
-                  React.createElement('input', { type: 'cityzip', className: 'form-control', id: 'InputCityZip', cityzip: this.value, onChange: this.handleCityZipChange.bind(this) })
                 )
               ),
               React.createElement(
@@ -3835,7 +3851,7 @@ var NewUser = function (_React$Component) {
                   'label',
                   { htmlFor: 'InputBusinessID' },
                   'Business ID',
-                  React.createElement('input', { type: 'businessid', className: 'form-control', id: 'InputBusinessID', businessid: this.value, onChange: this.handleBusinessIdChange.bind(this) })
+                  React.createElement('input', { type: 'text', className: 'form-control', id: 'InputBusinessID', businessid: this.value, onChange: this.handleBusinessIdChange.bind(this) })
                 )
               ),
               React.createElement(
@@ -3883,7 +3899,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58500' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64157' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

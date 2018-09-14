@@ -26840,12 +26840,28 @@ var MapPage = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MapPage.__proto__ || Object.getPrototypeOf(MapPage)).call(this, props));
 
     _this.state = {
-      center: { lat: 42.3601, lng: -71.0589 }
+      center: { lat: 42.3601, lng: -71.0589 },
+      clicked: 0
     };
     return _this;
   }
 
   _createClass(MapPage, [{
+    key: 'onMarkerClick',
+    value: function onMarkerClick(event) {
+
+      this.renderPage('gameplan', this.props.employeeInfo);
+      console.log(this, "this in marker");
+    }
+  }, {
+    key: 'renderPage',
+    value: function renderPage(page, info) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        this.props.changePage(page, info);
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var google = this.props.google;
@@ -26859,11 +26875,10 @@ var MapPage = function (_React$Component) {
           {
             google: google,
             initialCenter: center,
-            zoom: 15,
-            onClick: this.onMapClicked
+            zoom: 15
           },
           React.createElement(Marker, {
-            onClick: this.onMarkerClick,
+            onClick: this.onMarkerClick.bind(this, google.maps.event),
             name: 'hello'
           }),
           React.createElement(InfoWindow, { onClose: this.onInfoWindowClose })
@@ -28503,6 +28518,9 @@ module.exports = require('./lib/axios');
 },{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"utilities.js":[function(require,module,exports) {
 var axios = require('axios');
 
+var _require = require('./config'),
+    googleApi = _require.googleApi;
+
 function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
@@ -28514,14 +28532,21 @@ function addNewUser(email, password) {
   }
 }
 
-function signUserIn(name, email, phonenumber, address, cityzip, businessid) {
+function getCoordinates(address) {
+  if (address === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    var formattedAddress = address.replace(/" "/g, "+");
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + formattedAddress + '&key=' + googleApi);
+  }
+}
+
+function signUserIn(name, email, phonenumber, address, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('/home').then(function (resolve) {
-      console.log(resolve);
-    });
-    console.log(name, email, phonenumber, address, cityzip, businessid);
+    axios.get('/home').then(function (resolve) {});
+    console.log(name, email, phonenumber, address, businessid);
   }
 }
 
@@ -28551,7 +28576,8 @@ module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
-},{"axios":"../node_modules/axios/index.js"}],"components/NewUser.jsx":[function(require,module,exports) {
+module.exports.getCoordinates = getCoordinates;
+},{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/NewUser.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28576,8 +28602,8 @@ var NewUser = function (_React$Component) {
       email: '',
       phonenumber: null,
       address: '',
-      cityzip: '',
       businessid: null,
+      coordinates: null,
       clicked: 0
     };
     return _this;
@@ -28609,11 +28635,6 @@ var NewUser = function (_React$Component) {
       this.setState({ address: event.target.value });
     }
   }, {
-    key: 'handleCityZipChange',
-    value: function handleCityZipChange(event) {
-      this.setState({ cityzip: event.target.value });
-    }
-  }, {
     key: 'findLocations',
     value: function findLocations() {
       var address = this.state.address;
@@ -28625,21 +28646,26 @@ var NewUser = function (_React$Component) {
   }, {
     key: 'signUser',
     value: function signUser() {
+      var _this2 = this;
+
       var email = this.state.email;
       var name = this.state.name;
       var address = this.state.address;
-      var cityzip = this.state.cityzip;
       var businessid = this.state.businessid;
       var phonenumber = this.state.phonenumber;
 
-      Utilities.signUserIn(name, email, phonenumber, address, cityzip, businessid);
-      this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, cityzip: cityzip, businessid: businessid });
+      Utilities.signUserIn(name, email, phonenumber, address, businessid);
+      var printout = Utilities.getCoordinates(address);
+      printout.then(function (resolve) {
+        _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location });
+      });
     }
   }, {
     key: 'renderPage',
     value: function renderPage(page, info) {
       this.state.clicked++;
       if (this.state.clicked > 0) {
+        console.log(this.state, "in render");
         this.props.changePage(page, info);
       }
     }
@@ -28741,18 +28767,8 @@ var NewUser = function (_React$Component) {
                 React.createElement(
                   'label',
                   { htmlFor: 'InputAddress' },
-                  'Street Address',
+                  'Address',
                   React.createElement('input', { type: 'address', className: 'form-control', id: 'InputAddress', address: this.value, onChange: this.handleStreetAddressChange.bind(this) })
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'form-group' },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'InputCityZip' },
-                  'City, State and Zip Code',
-                  React.createElement('input', { type: 'cityzip', className: 'form-control', id: 'InputCityZip', cityzip: this.value, onChange: this.handleCityZipChange.bind(this) })
                 )
               ),
               React.createElement(
@@ -28762,7 +28778,7 @@ var NewUser = function (_React$Component) {
                   'label',
                   { htmlFor: 'InputBusinessID' },
                   'Business ID',
-                  React.createElement('input', { type: 'businessid', className: 'form-control', id: 'InputBusinessID', businessid: this.value, onChange: this.handleBusinessIdChange.bind(this) })
+                  React.createElement('input', { type: 'text', className: 'form-control', id: 'InputBusinessID', businessid: this.value, onChange: this.handleBusinessIdChange.bind(this) })
                 )
               ),
               React.createElement(
@@ -28781,7 +28797,132 @@ var NewUser = function (_React$Component) {
 }(React.Component);
 
 module.exports = NewUser;
-},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/EmployeeApp.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"components/Gameplan.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+var Gameplan = function (_React$Component) {
+  _inherits(Gameplan, _React$Component);
+
+  function Gameplan(props) {
+    _classCallCheck(this, Gameplan);
+
+    var _this = _possibleConstructorReturn(this, (Gameplan.__proto__ || Object.getPrototypeOf(Gameplan)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Gameplan, [{
+    key: "printStuff",
+    value: function printStuff(stuff) {
+      console.log(stuff);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        { className: "container-fluid" },
+        React.createElement(
+          "div",
+          { className: "row" },
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "h3",
+              { className: "text-center" },
+              "The Gameplan"
+            ),
+            React.createElement(
+              "dl",
+              null,
+              React.createElement(
+                "dt",
+                null,
+                "Election"
+              ),
+              React.createElement(
+                "dd",
+                null,
+                "U.S. Midterms"
+              ),
+              React.createElement(
+                "dt",
+                null,
+                "Election Date"
+              ),
+              React.createElement(
+                "dd",
+                null,
+                "11/6/2018"
+              ),
+              React.createElement(
+                "dt",
+                null,
+                "Voting Location"
+              ),
+              React.createElement(
+                "dd",
+                null,
+                "1808 Elysian Fields Ave"
+              ),
+              React.createElement(
+                "dd",
+                null,
+                "New Orleans, LA 70117"
+              ),
+              React.createElement(
+                "dt",
+                null,
+                "Plan Ahead"
+              ),
+              React.createElement(
+                "dd",
+                null,
+                "It should take you about two hours to drive to your polling location, vote, and get to work"
+              )
+            ),
+            React.createElement("img", { alt: "Bootstrap Preview", src: "https://www.layoutit.com/img/sports-q-c-140-140-3.jpg", onClick: this.printStuff.bind(this, this.props) }),
+            React.createElement(
+              "h3",
+              { className: "text-center text-success" },
+              "Looping in your boss"
+            ),
+            React.createElement(
+              "dt",
+              null,
+              "Your boss supports you as a voter"
+            ),
+            React.createElement(
+              "dd",
+              null,
+              "We will email this gameplan to you and your boss so you two can finalize your plan"
+            ),
+            React.createElement(
+              "p",
+              { className: "text-center text-muted" },
+              "Based on our calculations it should take [employee name] [number] hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Gameplan;
+}(React.Component);
+
+module.exports = Gameplan;
+},{"react":"../node_modules/react/index.js"}],"components/EmployeeApp.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28793,6 +28934,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 var Map = require('./Map');
 var NewUser = require('./NewUser');
+var Gameplan = require('./Gameplan');
 
 var EmployeeApp = function (_React$Component) {
   _inherits(EmployeeApp, _React$Component);
@@ -28822,14 +28964,22 @@ var EmployeeApp = function (_React$Component) {
       if (this.state.renderThis === 'welcome') {
         return React.createElement(
           'div',
-          { className: 'container-fluid' },
+          { id: 'autocomplete', className: 'container-fluid' },
           React.createElement(NewUser, { changePage: this.changePage.bind(this) })
         );
-      } else if (this.state.renderThis === 'map') {
+      }
+      if (this.state.renderThis === 'map') {
         return React.createElement(
           'div',
           { className: 'container-fluid' },
           React.createElement(Map, { changePage: this.changePage.bind(this), employeeInfo: this.state.employeeInfo })
+        );
+      }
+      if (this.state.renderThis === 'gameplan') {
+        return React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(Gameplan, { changePage: this.changePage.bind(this), employeeInfo: this.state.employeeInfo })
         );
       }
     }
@@ -28839,7 +28989,7 @@ var EmployeeApp = function (_React$Component) {
 }(React.Component);
 
 module.exports = EmployeeApp;
-},{"react":"../node_modules/react/index.js","./Map":"components/Map.jsx","./NewUser":"components/NewUser.jsx"}],"employeeIndex.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Map":"components/Map.jsx","./NewUser":"components/NewUser.jsx","./Gameplan":"components/Gameplan.jsx"}],"employeeIndex.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
@@ -28885,7 +29035,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57349' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64157' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
