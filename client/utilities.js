@@ -8,12 +8,12 @@ function addNewUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('/home').then((resolve) => {
-      console.log(resolve);
+    axios.post('/createBusiness', { email, password }).then((resolve) => {
+      // console.log(resolve);
     });
     console.log(email, password);
   }
-} 
+}
 
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
@@ -24,13 +24,13 @@ function checkUser(email, password) {
     });
     console.log(email, password);
   }
-} 
+}
 
 function getCoordinates(address) {
   if (address === undefined) {
     console.log('made call to server which added to database');
   } else {
-    const formattedAddress = address.replace(/" "/g, "+");
+    const formattedAddress = address.replace(/" "/g, '+');
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${formattedAddress}&key=${googleApi}`)
   }
 }
