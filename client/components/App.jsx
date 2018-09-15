@@ -17,13 +17,13 @@ class App extends React.Component {
 
 
 
-  changePage(pageId, id) {
-    console.log(id, "in change page")
+  changePage(pageId, info) {
+ 
     if (pageId === 'profile') {
-      Utilities.getBusinessInfo(id).then(this.setState(() => {
-        return { businessInfo: "hello", renderThis: pageId };
-      }));
-      
+      this.setState(() => {
+        console.log("in change page")
+        return { businessInfo: info, renderThis: pageId };
+      });
     } else {
       this.setState(() => {
         return { renderThis: pageId };

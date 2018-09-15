@@ -25,8 +25,18 @@ class BusinessLogin extends React.Component {
     const userCheck = Utilities.checkUser(email, password);
     userCheck.then((resolve) => {
       if (resolve) {
+        const fromResolve = {
+          name: "AAA Plumbing",
+          email: "jldela@Gmail.com",
+          employeeCount: 20,
+          referenceNum: 2,
+          password: "hello",
+          employerContact: "Roger",
+          address: "1808 Elysian Fields Ave New Orleans, La ",
+          coordinates: {lat: 2020, lng: 2999},
+        }
         // get id from resolve and put where 20 is
-        this.renderPage('profile', 20);
+        this.renderPage('profile', fromResolve);
       } else {
         alert('User Not Recognized')
         this.renderPage('welcome');
@@ -34,11 +44,11 @@ class BusinessLogin extends React.Component {
     });  
   }
 
-  renderPage(page, id) {
+  renderPage(page, info) {
     // console.log(id, " in render page")
     this.state.clicked++;
     if (this.state.clicked > 0) {
-      this.props.changePage(page, id);
+      this.props.changePage(page, info);
     }
   }
 

@@ -15,7 +15,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this, "in profile")
       return (
         <div className="container-fluid">
           <div className="row">
