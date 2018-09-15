@@ -19,11 +19,11 @@ class Welcome extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  addUser() {
+  checkUser() {
     const { email } = this.state;
     const { password } = this.state;
-    Utilities.addNewUser(email, password);
-    this.renderPage('businessForm');
+    Utilities.checkUser(email, password);
+    this.renderPage('profile');
   }
 
   renderPage(page) {
@@ -77,14 +77,14 @@ class Welcome extends React.Component {
                   <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handlePasswordChange.bind(this)} />
                 </label>
               </div>
-              <button type="submit" className="btn btn-primary" onClick={this.addUser.bind(this)}>
-                  Submit
+              <button type="submit" className="btn btn-primary" onClick={this.checkUser.bind(this)} >
+                  Sign In
               </button>
             </div>
             <div>
-              Already a member?
-              <button type="button" id="existingMember" className="btn btn-background" onClick={this.renderPage.bind(this, "login")}>
-                Sign In Here
+              Not a member?
+              <button type="button" id="notexistingMember" className="btn btn-background" onClick={this.renderPage.bind(this, "businessForm")} >
+                Sign Up Here
               </button>
             </div>
           </div>

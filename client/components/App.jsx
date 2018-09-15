@@ -3,6 +3,7 @@ const Welcome = require('./Welcome.jsx');
 const BusinessForm = require('./BusinessForm.jsx');
 const BusinessLogin = require('./BusinessLogIn.jsx');
 const Profile = require('./Profile.jsx');
+const SignupComplete = require('./SignupComplete.jsx');
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends React.Component {
   }
 
   changePage(pageId) {
+    console.log(pageId, " in change page")
     this.setState(() => {
       return { renderThis: pageId };
     });
