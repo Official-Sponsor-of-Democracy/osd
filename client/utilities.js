@@ -35,6 +35,14 @@ function getCoordinates(address) {
   }
 }
 
+function getWorkCoordinates(id) {
+  if (id === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get(`https://swapi.co/api/people/1/`)
+  }
+}
+
 function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
   if (homeCoordinates === undefined) {
     console.log('made call to server which added to database');
@@ -79,3 +87,4 @@ module.exports.findVotingLocations = findVotingLocations;
 module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
+module.exports.getWorkCoordinates = getWorkCoordinates;
