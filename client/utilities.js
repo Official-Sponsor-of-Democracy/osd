@@ -58,14 +58,14 @@ function signUserIn(name, email, phonenumber, address, businessid) {
   }
 }
 
-function addNewBusiness(businessName, employerContact, address, numEmployees) {
+function addNewBusiness(businessName, email, password, employerContact, address, numEmployees) {
   if (businessName === undefined && address === undefined) {
     console.log('made call to server which added to database');
   } else {
     axios.get('https://swapi.co/api/people/1/').then((resolve) => {
       console.log(resolve);
     });
-    console.log(businessName, employerContact, address, numEmployees);
+    console.log(businessName, email, password, employerContact, address, numEmployees);
   }
 }
 
