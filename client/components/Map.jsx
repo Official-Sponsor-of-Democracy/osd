@@ -5,35 +5,55 @@ const {
 const {
   googleApi,
 } = require('../config');
+const Utilities = require('../utilities');
 
 class MapPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: { lat: 42.3601, lng: -71.0589 },
-      locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: { lat: 45.3601, lng: -74.0589 }},
+      // center: { lat: 42.3601, lng: -71.0589 },
+      // locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: { lat: 45.3601, lng: -74.0589 }},
       clicked: 0,
     };
   }
 
   onMarkerClick(event) {
+    
     this.renderPage('gameplan', this.props.employeeInfo);
     console.log(this, "this in marker")
   }
 
   onMarkerOneClick(event) {
-    this.renderPage('gameplan', this.props.employeeInfo);
-    console.log(this.state.locations.one, "clicked one")
+    this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationone;
+    const drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationone, this.props.employeeInfo.locationtwo);
+    drivetime.then((resolve) => {
+      console.log(resolve, " find locations resolve")
+      this.props.employeeInfo.drivetime = 130;
+      this.renderPage('gameplan', this.props.employeeInfo);
+    });
+    console.log(this.props.employeeInfo.locationone, "clicked one")
   }
 
   onMarkerTwoClick(event) {
-    this.renderPage('gameplan', this.props.employeeInfo);
-    console.log(this.state.locations.two, "clicked two")
+    this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationtwo;
+    const drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationtwo, this.props.employeeInfo.locationtwo);
+    drivetime.then((resolve) => {
+      console.log(resolve, " find locations resolve")
+      this.props.employeeInfo.drivetime = 130;
+      this.renderPage('gameplan', this.props.employeeInfo);
+    });
+    console.log(this.props.employeeInfo.locationtwo, "clicked two")
   }
 
   onMarkerThreeClick(event) {
-    this.renderPage('gameplan', this.props.employeeInfo);
-    console.log(this.state.locations.three, "clicked three")
+    this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationthree;
+    const drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationthree, this.props.employeeInfo.locationtwo);
+    drivetime.then((resolve) => {
+      console.log(resolve, " find locations resolve")
+      this.props.employeeInfo.drivetime = 130;
+      this.renderPage('gameplan', this.props.employeeInfo);
+    });
+    console.log(this.props.employeeInfo.locationthree, "clicked three")
   }
 
   renderPage(page, info) {
@@ -45,7 +65,7 @@ class MapPage extends React.Component {
 
   render() {
     const { google } = this.props;
-    const { center } = this.state;
+    // const { center } = this.state;
     return (
       <div>
         <Map
@@ -59,21 +79,21 @@ class MapPage extends React.Component {
           />
           <Marker
             title={'The marker`s title will appear as a tooltip.'}
-            name={'SOMA'}
+            name={'one'}
             onClick={this.onMarkerOneClick.bind(this, google.maps.event)}
-            position={this.state.locations.one}
+            position={this.props.employeeInfo.locationone}
           />
           <Marker
             title={'The marker`s title will appear as a tooltip.'}
-            name={'SOMA'}
+            name={'two'}
             onClick={this.onMarkerTwoClick.bind(this, google.maps.event)}
-            position={this.state.locations.two}
+            position={this.props.employeeInfo.locationtwo}
           />
           <Marker
             title={'The marker`s title will appear as a tooltip.'}
-            name={'SOMA'}
+            name={'three'}
             onClick={this.onMarkerThreeClick.bind(this, google.maps.event)}
-            position={this.state.locations.three}
+            position={this.props.employeeInfo.locationthree}
           />
           <InfoWindow onClose={this.onInfoWindowClose} />
         </Map>
