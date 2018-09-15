@@ -65,7 +65,7 @@ class NewUser extends React.Component {
     this.state.clicked++;
     if (this.state.clicked > 0) {
       // Utilities.calcRoute();
-      this.props.changePage(page, info);
+      this.props.changePage(page, info); 
     }
   }
 
@@ -75,7 +75,7 @@ class NewUser extends React.Component {
         <div className="row">
           <div className="col-md-6">
             <h3>
-              Official Sponsors of Democracy
+              Official Sponsors of NewUser page
             </h3>
             <dl>
               <dt>

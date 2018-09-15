@@ -19,17 +19,33 @@ class Welcome extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  // checkUser() {
+  //   const { email } = this.state;
+  //   const { password } = this.state;
+  //   Utilities.checkUser(email, password);
+  //   this.renderPage('profile');
+  // }
+
   checkUser() {
     const { email } = this.state;
     const { password } = this.state;
-    Utilities.checkUser(email, password);
-    this.renderPage('profile');
+    const userCheck = Utilities.checkUser(email, password);
+    userCheck.then((resolve) => {
+      if (resolve) {
+        console.log("in check user")
+        this.renderPage('profile', 20);
+      } else {
+        alert('User Not Recognized')
+        this.renderPage('welcome');
+      }
+    });
   }
 
-  renderPage(page) {
+  renderPage(page, id) {
+    console.log(id)
     this.state.clicked++;
     if (this.state.clicked > 0) {
-      this.props.changePage(page);
+      this.props.changePage(page, id);
     }
   }
 
@@ -39,7 +55,7 @@ class Welcome extends React.Component {
         <div className="row">
           <div className="col-md-6">
             <h3>
-              Official Sponsors of Democracy
+              Official Sponsors of Welcom page
             </h3>
             <dl>
               <dt>

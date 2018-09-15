@@ -15,6 +15,14 @@ function addNewUser(email, password) {
   }
 } 
 
+function getBusinessInfo(id) {
+  if (id === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get('/home', id);
+  }
+} 
+
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
@@ -85,3 +93,4 @@ module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
 module.exports.getWorkCoordinates = getWorkCoordinates;
+module.exports.getBusinessInfo = getBusinessInfo;
