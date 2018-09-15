@@ -22205,14 +22205,14 @@ function signUserIn(name, email, phonenumber, address, businessid) {
   }
 }
 
-function addNewBusiness(businessName, employerContact, address, numEmployees) {
+function addNewBusiness(businessName, email, password, employerContact, address, numEmployees) {
   if (businessName === undefined && address === undefined) {
     console.log('made call to server which added to database');
   } else {
     axios.get('https://swapi.co/api/people/1/').then(function (resolve) {
       console.log(resolve);
     });
-    console.log(businessName, employerContact, address, numEmployees);
+    console.log(businessName, email, password, employerContact, address, numEmployees);
   }
 }
 
@@ -22271,13 +22271,13 @@ var Welcome = function (_React$Component) {
       this.setState({ password: event.target.value });
     }
   }, {
-    key: 'addUser',
-    value: function addUser() {
+    key: 'checkUser',
+    value: function checkUser() {
       var email = this.state.email;
       var password = this.state.password;
 
-      Utilities.addNewUser(email, password);
-      this.renderPage('businessForm');
+      Utilities.checkUser(email, password);
+      this.renderPage('profile');
     }
   }, {
     key: 'renderPage',
@@ -22367,18 +22367,18 @@ var Welcome = function (_React$Component) {
               ),
               React.createElement(
                 'button',
-                { type: 'submit', className: 'btn btn-primary', onClick: this.addUser.bind(this) },
-                'Submit'
+                { type: 'submit', className: 'btn btn-primary', onClick: this.checkUser.bind(this) },
+                'Sign In'
               )
             ),
             React.createElement(
               'div',
               null,
-              'Already a member?',
+              'Not a member?',
               React.createElement(
                 'button',
-                { type: 'button', id: 'existingMember', className: 'btn btn-background', onClick: this.renderPage.bind(this, "login") },
-                'Sign In Here'
+                { type: 'button', id: 'notexistingMember', className: 'btn btn-background', onClick: this.renderPage.bind(this, "businessForm") },
+                'Sign Up Here'
               )
             )
           )
@@ -22416,6 +22416,8 @@ var BusinessForm = function (_React$Component) {
       employerContact: '',
       address: '',
       numEmployees: '',
+      email: '',
+      password: '',
       clicked: 0
     };
     return _this;
@@ -22425,6 +22427,16 @@ var BusinessForm = function (_React$Component) {
     key: 'handleNameChange',
     value: function handleNameChange(event) {
       this.setState({ businessName: event.target.value });
+    }
+  }, {
+    key: 'handleEmailChange',
+    value: function handleEmailChange(event) {
+      this.setState({ email: event.target.value });
+    }
+  }, {
+    key: 'handlePasswordChange',
+    value: function handlePasswordChange(event) {
+      this.setState({ password: event.target.value });
     }
   }, {
     key: 'handleAddressChange',
@@ -22448,8 +22460,10 @@ var BusinessForm = function (_React$Component) {
       var employerContact = this.state.employerContact;
       var address = this.state.address;
       var numEmployees = this.state.numEmployees;
+      var email = this.state.email;
+      var password = this.state.password;
 
-      Utilities.addNewBusiness(businessName, employerContact, address, numEmployees);
+      Utilities.addNewBusiness(businessName, email, password, employerContact, address, numEmployees);
       this.renderPage('signupcomplete');
     }
   }, {
@@ -22498,6 +22512,26 @@ var BusinessForm = function (_React$Component) {
                   { htmlFor: 'businessNameInput' },
                   'Business Name',
                   React.createElement('input', { type: 'businessname', className: 'form-control', id: 'businessNameInput', businessname: this.value, onChange: this.handleNameChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputEmail1' },
+                  'Email address',
+                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', email: this.value, onChange: this.handleEmailChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputPassword1' },
+                  'Password',
+                  React.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1', password: this.value, onChange: this.handlePasswordChange.bind(this) })
                 )
               ),
               React.createElement(
@@ -22894,6 +22928,91 @@ var Profile = function (_React$Component) {
 }(React.Component);
 
 module.exports = Profile;
+},{"react":"../node_modules/react/react.js","../utilities":"utilities.js"}],"components/SignupComplete.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Utilities = require('../utilities');
+
+var SignupComplete = function (_React$Component) {
+  _inherits(SignupComplete, _React$Component);
+
+  function SignupComplete(props) {
+    _classCallCheck(this, SignupComplete);
+
+    var _this = _possibleConstructorReturn(this, (SignupComplete.__proto__ || Object.getPrototypeOf(SignupComplete)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+  // renderPage(page) {
+  //   this.state.clicked++;
+  //   if (this.state.clicked > 0) {
+  //     this.props.changePage(page);
+  //   }
+  // }
+
+  // changePage(pageId) {
+  //   this.setState(() => {
+  //     return { renderThis: pageId };
+  //   });
+  // }
+
+  _createClass(SignupComplete, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { 'class': 'container-fluid' },
+        React.createElement(
+          'div',
+          { 'class': 'row' },
+          React.createElement(
+            'div',
+            { 'class': 'col-md-12' },
+            React.createElement(
+              'h3',
+              null,
+              'h3. Lorem ipsum dolor sit amet.'
+            ),
+            React.createElement(
+              'p',
+              null,
+              'Lorem ipsum dolor sit amet, ',
+              React.createElement(
+                'strong',
+                null,
+                'consectetur adipiscing elit'
+              ),
+              '. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. ',
+              React.createElement(
+                'em',
+                null,
+                'Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.'
+              ),
+              ' Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. ',
+              React.createElement(
+                'small',
+                null,
+                'Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return SignupComplete;
+}(React.Component);
+
+module.exports = SignupComplete;
 },{"react":"../node_modules/react/react.js","../utilities":"utilities.js"}],"components/App.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -22908,6 +23027,7 @@ var Welcome = require('./Welcome.jsx');
 var BusinessForm = require('./BusinessForm.jsx');
 var BusinessLogin = require('./BusinessLogIn.jsx');
 var Profile = require('./Profile.jsx');
+var SignupComplete = require('./SignupComplete.jsx');
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -22926,6 +23046,7 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'changePage',
     value: function changePage(pageId) {
+      console.log(pageId, " in change page");
       this.setState(function () {
         return { renderThis: pageId };
       });
@@ -22975,7 +23096,7 @@ var App = function (_React$Component) {
 }(React.Component);
 
 module.exports = App;
-},{"react":"../node_modules/react/react.js","./Welcome.jsx":"components/Welcome.jsx","./BusinessForm.jsx":"components/BusinessForm.jsx","./BusinessLogIn.jsx":"components/BusinessLogIn.jsx","./Profile.jsx":"components/Profile.jsx"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/react.js","./Welcome.jsx":"components/Welcome.jsx","./BusinessForm.jsx":"components/BusinessForm.jsx","./BusinessLogIn.jsx":"components/BusinessLogIn.jsx","./Profile.jsx":"components/Profile.jsx","./SignupComplete.jsx":"components/SignupComplete.jsx"}],"index.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
