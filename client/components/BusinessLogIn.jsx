@@ -22,19 +22,23 @@ class BusinessLogin extends React.Component {
   checkUser() {
     const { email } = this.state;
     const { password } = this.state;
-    Utilities.checkUser(email, password);
-    if (true){
-      this.renderPage('profile');
-    } else {
-      alert('User Not Recognized')
-      this.renderPage('welcome');
-    }
+    const userCheck = Utilities.checkUser(email, password);
+    userCheck.then((resolve) => {
+      if (resolve) {
+        // get id from resolve and put where 20 is
+        this.renderPage('profile', 20);
+      } else {
+        alert('User Not Recognized')
+        this.renderPage('welcome');
+      }
+    });  
   }
 
-  renderPage(page) {
+  renderPage(page, id) {
+    // console.log(id, " in render page")
     this.state.clicked++;
     if (this.state.clicked > 0) {
-      this.props.changePage(page);
+      this.props.changePage(page, id);
     }
   }
 
@@ -44,7 +48,7 @@ class BusinessLogin extends React.Component {
         <div className="row">
           <div className="col-md-6">
             <h3>
-              Official Sponsors of Democracy
+              Official Sponsors of Business Login Page
             </h3>
             <dl>
               <dt>

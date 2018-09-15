@@ -9,11 +9,22 @@ class BusinessForm extends React.Component {
       employerContact: '',
       address: '',
       numEmployees: '',
+      email: '',
+      password: '',
+      clicked: 0,
     };
   }
 
   handleNameChange(event) {
     this.setState({ businessName: event.target.value });
+  }
+
+  handleEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
   }
 
   handleAddressChange(event) {
@@ -27,13 +38,23 @@ class BusinessForm extends React.Component {
   handleEmployerContactChange(event) {
     this.setState({ employerContact: event.target.value });
   }
-
+  
   addBusiness() {
     const { businessName } = this.state;
     const { employerContact } = this.state;
     const { address } = this.state;
     const { numEmployees } = this.state;
-    Utilities.addNewBusiness(businessName, employerContact, address, numEmployees);
+    const { email } = this.state;
+    const { password } = this.state;
+    Utilities.addNewBusiness(businessName, email, password, employerContact, address, numEmployees);
+    this.renderPage('signupcomplete')
+  }
+
+  renderPage(page) {
+    this.state.clicked++;
+    if (this.state.clicked > 0) {
+      this.props.changePage(page);
+    }
   }
 
   render() {
@@ -57,6 +78,18 @@ class BusinessForm extends React.Component {
                 <label htmlFor="businessNameInput">
                   Business Name
                   <input type="businessname" className="form-control" id="businessNameInput" businessname={this.value} onChange={this.handleNameChange.bind(this)} />
+                </label>
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">
+                  Email address
+                  <input type="email" className="form-control" id="exampleInputEmail1" email={this.value} onChange={this.handleEmailChange.bind(this)} />
+                </label>
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1">
+                  Password
+                  <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handlePasswordChange.bind(this)} />
                 </label>
               </div>
               <div className="form-group">
