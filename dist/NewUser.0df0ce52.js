@@ -5463,14 +5463,19 @@ function addNewUser(email, password) {
   }
 }
 
+function getBusinessInfo(id) {
+  if (id === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get('/home', id);
+  }
+}
+
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('/home').then(function (resolve) {
-      console.log(resolve);
-    });
-    console.log(email, password);
+    return axios.get('/home');
   }
 }
 
@@ -5508,14 +5513,14 @@ function signUserIn(name, email, phonenumber, address, businessid) {
   }
 }
 
-function addNewBusiness(businessName, employerContact, address, numEmployees) {
+function addNewBusiness(businessName, email, password, employerContact, address, numEmployees) {
   if (businessName === undefined && address === undefined) {
     console.log('made call to server which added to database');
   } else {
     axios.get('https://swapi.co/api/people/1/').then(function (resolve) {
       console.log(resolve);
     });
-    console.log(businessName, employerContact, address, numEmployees);
+    console.log(businessName, email, password, employerContact, address, numEmployees);
   }
 }
 
@@ -5535,6 +5540,7 @@ module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
 module.exports.getWorkCoordinates = getWorkCoordinates;
+module.exports.getBusinessInfo = getBusinessInfo;
 },{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/NewUser.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -5647,7 +5653,7 @@ var NewUser = function (_React$Component) {
             React.createElement(
               'h3',
               null,
-              'Official Sponsors of Democracy'
+              'Official Sponsors of NewUser page'
             ),
             React.createElement(
               'dl',
@@ -5789,7 +5795,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50657' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51059' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
