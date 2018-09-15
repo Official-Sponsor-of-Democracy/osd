@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 app.post('/createBusiness', (req, res) => {
   res.set('Allow-Control-Access-Origin', '*');
+  // console.log(req.body);
   // get the data given to the req should be an email and a name
   // with the email and name save the given data to the mongo database
   // respond with the data in that the user just input to display on the page plus any additional beginner stats
