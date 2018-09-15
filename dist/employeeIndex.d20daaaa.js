@@ -25226,6 +25226,14 @@ function getCoordinates(address) {
   }
 }
 
+function getWorkCoordinates(id) {
+  if (id === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get('https://swapi.co/api/people/1/');
+  }
+}
+
 function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
   if (homeCoordinates === undefined) {
     console.log('made call to server which added to database');
@@ -25269,6 +25277,7 @@ module.exports.findVotingLocations = findVotingLocations;
 module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
+module.exports.getWorkCoordinates = getWorkCoordinates;
 },{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/Map.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -25310,7 +25319,6 @@ var MapPage = function (_React$Component) {
   _createClass(MapPage, [{
     key: 'onMarkerClick',
     value: function onMarkerClick(event) {
-
       this.renderPage('gameplan', this.props.employeeInfo);
       console.log(this, "this in marker");
     }
@@ -25472,15 +25480,6 @@ var NewUser = function (_React$Component) {
       this.setState({ address: event.target.value });
     }
   }, {
-    key: 'findLocations',
-    value: function findLocations() {
-      var address = this.state.address;
-      var cityzip = this.state.cityzip;
-
-      Utilities.findVotingLocations(address, cityzip);
-      this.renderPage('map');
-    }
-  }, {
     key: 'signUser',
     value: function signUser() {
       var _this2 = this;
@@ -25492,15 +25491,20 @@ var NewUser = function (_React$Component) {
       var phonenumber = this.state.phonenumber;
 
       Utilities.signUserIn(name, email, phonenumber, address, businessid);
-      var printout = Utilities.getCoordinates(address);
-      printout.then(function (resolve) {
-        var votinglocations = Utilities.findVotingLocations(resolve.data.results[0].geometry.location);
-        var geocoordinates = resolve.data.results[0].geometry.location;
-        votinglocations.then(function (resolve) {
-          console.log(resolve, " find locations resolve");
-          _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: geocoordinates, locationone: { lat: 46.3601, lng: -61.0589 }, locationtwo: { lat: 42.3601, lng: -71.0589 }, locationthree: { lat: 45.3601, lng: -74.0589 } });
+      var workCoordinates = Utilities.getWorkCoordinates(businessid);
+      workCoordinates.then(function (resolve) {
+        var printout = Utilities.getCoordinates(address);
+        var geoWorkCoordinates = resolve;
+        printout.then(function (resolve) {
+          var votinglocations = Utilities.findVotingLocations(resolve.data.results[0].geometry.location);
+          var geocoordinates = resolve.data.results[0].geometry.location;
+          votinglocations.then(function (resolve) {
+            console.log(resolve, " find locations resolve");
+            _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: geocoordinates, locationone: { lat: 46.3601, lng: -61.0589 }, locationtwo: { lat: 42.3601, lng: -71.0589 }, locationthree: { lat: 45.3601, lng: -74.0589 }, workcoordinates: geoWorkCoordinates });
+          });
         });
       });
+
       // const printout = Utilities.getCoordinates(address);
       // printout.then((resolve) => {
       //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location});
@@ -25885,7 +25889,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56370' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50657' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

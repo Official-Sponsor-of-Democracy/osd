@@ -18,7 +18,6 @@ class MapPage extends React.Component {
   }
 
   onMarkerClick(event) {
-    
     this.renderPage('gameplan', this.props.employeeInfo);
     console.log(this, "this in marker")
   }
