@@ -22163,6 +22163,14 @@ function addNewUser(email, password) {
   }
 }
 
+function getBusinessInfo(id) {
+  if (id === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get('/home', id);
+  }
+}
+
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
@@ -22232,6 +22240,7 @@ module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
 module.exports.getWorkCoordinates = getWorkCoordinates;
+module.exports.getBusinessInfo = getBusinessInfo;
 },{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/Welcome.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -22270,21 +22279,40 @@ var Welcome = function (_React$Component) {
     value: function handlePasswordChange(event) {
       this.setState({ password: event.target.value });
     }
+
+    // checkUser() {
+    //   const { email } = this.state;
+    //   const { password } = this.state;
+    //   Utilities.checkUser(email, password);
+    //   this.renderPage('profile');
+    // }
+
   }, {
     key: 'checkUser',
     value: function checkUser() {
+      var _this2 = this;
+
       var email = this.state.email;
       var password = this.state.password;
 
-      Utilities.checkUser(email, password);
-      this.renderPage('profile');
+      var userCheck = Utilities.checkUser(email, password);
+      userCheck.then(function (resolve) {
+        if (resolve) {
+          console.log("in check user");
+          _this2.renderPage('profile', 20);
+        } else {
+          alert('User Not Recognized');
+          _this2.renderPage('welcome');
+        }
+      });
     }
   }, {
     key: 'renderPage',
-    value: function renderPage(page) {
+    value: function renderPage(page, id) {
+      console.log(id);
       this.state.clicked++;
       if (this.state.clicked > 0) {
-        this.props.changePage(page);
+        this.props.changePage(page, id);
       }
     }
   }, {
@@ -22302,7 +22330,7 @@ var Welcome = function (_React$Component) {
             React.createElement(
               'h3',
               null,
-              'Official Sponsors of Democracy'
+              'Official Sponsors of Welcom page'
             ),
             React.createElement(
               'dl',
@@ -22629,7 +22657,8 @@ var BusinessLogin = function (_React$Component) {
       var userCheck = Utilities.checkUser(email, password);
       userCheck.then(function (resolve) {
         if (resolve) {
-          _this2.renderPage('profile');
+          // get id from resolve and put where 20 is
+          _this2.renderPage('profile', 20);
         } else {
           alert('User Not Recognized');
           _this2.renderPage('welcome');
@@ -22638,10 +22667,11 @@ var BusinessLogin = function (_React$Component) {
     }
   }, {
     key: 'renderPage',
-    value: function renderPage(page) {
+    value: function renderPage(page, id) {
+      // console.log(id, " in render page")
       this.state.clicked++;
       if (this.state.clicked > 0) {
-        this.props.changePage(page);
+        this.props.changePage(page, id);
       }
     }
   }, {
@@ -22659,7 +22689,7 @@ var BusinessLogin = function (_React$Component) {
             React.createElement(
               'h3',
               null,
-              'Official Sponsors of Democracy'
+              'Official Sponsors of Business Login Page'
             ),
             React.createElement(
               'dl',
@@ -22772,23 +22802,24 @@ var Profile = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.props);
       return React.createElement(
         'div',
-        { 'class': 'container-fluid' },
+        { className: 'container-fluid' },
         React.createElement(
           'div',
-          { 'class': 'row' },
+          { className: 'row' },
           React.createElement(
             'div',
-            { 'class': 'col-md-8' },
+            { className: 'col-sm-8' },
             React.createElement(
               'h3',
               null,
-              'h3. Lorem ipsum dolor sit amet.'
+              'hello'
             ),
             React.createElement(
               'table',
-              { 'class': 'table' },
+              { className: 'table' },
               React.createElement(
                 'thead',
                 null,
@@ -22846,7 +22877,7 @@ var Profile = function (_React$Component) {
                 ),
                 React.createElement(
                   'tr',
-                  { 'class': 'table-active' },
+                  { className: 'table-active' },
                   React.createElement(
                     'td',
                     null,
@@ -22870,7 +22901,7 @@ var Profile = function (_React$Component) {
                 ),
                 React.createElement(
                   'tr',
-                  { 'class': 'table-success' },
+                  { className: 'table-success' },
                   React.createElement(
                     'td',
                     null,
@@ -22885,6 +22916,59 @@ var Profile = function (_React$Component) {
                     'td',
                     null,
                     '02/04/2012'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'Declined'
+                  )
+                ),
+                React.createElement(
+                  'tr',
+                  { className: 'table-warning' },
+                  React.createElement(
+                    'td',
+                    null,
+                    '3'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'TB - Monthly'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    '03/04/2012'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'Pending'
+                  )
+                ),
+                React.createElement(
+                  'tr',
+                  { className: 'table-danger' },
+                  React.createElement(
+                    'td',
+                    null,
+                    '4'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'TB - Monthly'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    '04/04/2012'
+                  ),
+                  React.createElement(
+                    'td',
+                    null,
+                    'Call in to confirm'
                   )
                 )
               )
@@ -22892,30 +22976,55 @@ var Profile = function (_React$Component) {
           ),
           React.createElement(
             'div',
-            { 'class': 'col-md-4' },
+            { className: 'col-sm-4' },
+            React.createElement('img', { alt: 'Bootstrap Image Preview', src: 'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg' }),
             React.createElement(
               'h3',
               null,
               'h3. Lorem ipsum dolor sit amet.'
             ),
-            React.createElement('img', { alt: 'Bootstrap Image Preview', src: 'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg' }),
             React.createElement(
-              'ol',
+              'ul',
               null,
               React.createElement(
                 'li',
-                { 'class': 'list-item' },
+                { className: 'list-item' },
                 'Lorem ipsum dolor sit amet'
               ),
               React.createElement(
                 'li',
-                { 'class': 'list-item' },
+                { className: 'list-item' },
                 'Consectetur adipiscing elit'
               ),
               React.createElement(
                 'li',
-                { 'class': 'list-item' },
+                { className: 'list-item' },
                 'Integer molestie lorem at massa'
+              ),
+              React.createElement(
+                'li',
+                { className: 'list-item' },
+                'Facilisis in pretium nisl aliquet'
+              ),
+              React.createElement(
+                'li',
+                { className: 'list-item' },
+                'Nulla volutpat aliquam velit'
+              ),
+              React.createElement(
+                'li',
+                { className: 'list-item' },
+                'Faucibus porta lacus fringilla vel'
+              ),
+              React.createElement(
+                'li',
+                { className: 'list-item' },
+                'Aenean sit amet erat nunc'
+              ),
+              React.createElement(
+                'li',
+                { className: 'list-item' },
+                'Eget porttitor lorem'
               )
             )
           )
@@ -23011,6 +23120,7 @@ var BusinessForm = require('./BusinessForm.jsx');
 var BusinessLogin = require('./BusinessLogIn.jsx');
 var Profile = require('./Profile.jsx');
 var SignupComplete = require('./SignupComplete.jsx');
+var Utilities = require('../utilities');
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -23021,19 +23131,34 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      renderThis: 'welcome'
+      renderThis: 'welcome',
+      businessInfo: 'goodbye'
     };
     return _this;
   }
 
   _createClass(App, [{
     key: 'changePage',
-    value: function changePage(pageId) {
-      console.log(pageId, " in change page");
-      this.setState(function () {
-        return { renderThis: pageId };
-      });
+    value: function changePage(pageId, id) {
+      console.log(id, "in change page");
+      if (pageId === 'profile') {
+        Utilities.getBusinessInfo(id).then(this.setState(function () {
+          return { businessInfo: "hello", renderThis: pageId };
+        }));
+      } else {
+        this.setState(function () {
+          return { renderThis: pageId };
+        });
+      }
     }
+    // changePage(pageId) {
+    //   console.log(pageId, " in change page")
+
+    //   this.setState(() => {
+    //     return { renderThis: pageId };
+    //   });
+    // }
+
   }, {
     key: 'render',
     value: function render() {
@@ -23062,7 +23187,7 @@ var App = function (_React$Component) {
         return React.createElement(
           'div',
           { className: 'container-fluid' },
-          React.createElement(Profile, { changePage: this.changePage.bind(this) })
+          React.createElement(Profile, { info: this.state.businessInfo, changePage: this.changePage.bind(this) })
         );
       }
       if (this.state.renderThis === 'signupcomplete') {
@@ -23079,7 +23204,7 @@ var App = function (_React$Component) {
 }(React.Component);
 
 module.exports = App;
-},{"react":"../node_modules/react/react.js","./Welcome.jsx":"components/Welcome.jsx","./BusinessForm.jsx":"components/BusinessForm.jsx","./BusinessLogIn.jsx":"components/BusinessLogIn.jsx","./Profile.jsx":"components/Profile.jsx","./SignupComplete.jsx":"components/SignupComplete.jsx"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/react.js","./Welcome.jsx":"components/Welcome.jsx","./BusinessForm.jsx":"components/BusinessForm.jsx","./BusinessLogIn.jsx":"components/BusinessLogIn.jsx","./Profile.jsx":"components/Profile.jsx","./SignupComplete.jsx":"components/SignupComplete.jsx","../utilities":"utilities.js"}],"index.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
@@ -23148,7 +23273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59393' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62194' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
