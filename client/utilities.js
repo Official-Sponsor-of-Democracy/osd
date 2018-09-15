@@ -35,6 +35,14 @@ function getCoordinates(address) {
   }
 }
 
+function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
+  if (homeCoordinates === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get(`https://swapi.co/api/people/1/`)
+  }
+}
+
 function signUserIn(name, email, phonenumber, address, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
@@ -56,13 +64,11 @@ function addNewBusiness(businessName, employerContact, address, numEmployees) {
   }
 }
 
-function findVotingLocations(address, cityzip) {
-  if (address === undefined && cityzip === undefined) {
+function findVotingLocations(coordinates) {
+  if (coordinates === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.05,-90.03&radius=8046&type=library&keyword=public&key=${googleApi}`).then((resolve) => {
-      console.log(resolve);
-    });
+    return axios.get(`https://swapi.co/api/people/1/`);
   }
 }
 
@@ -72,3 +78,4 @@ module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
 module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
+module.exports.getDriveTime = getDriveTime;
