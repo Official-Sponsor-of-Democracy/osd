@@ -22298,8 +22298,17 @@ var Welcome = function (_React$Component) {
       var userCheck = Utilities.checkUser(email, password);
       userCheck.then(function (resolve) {
         if (resolve) {
-          console.log("in check user");
-          _this2.renderPage('profile', 20);
+          var fromResolve = {
+            name: "AAA Plumbing",
+            email: "jldela@Gmail.com",
+            employeeCount: 20,
+            referenceNum: 2,
+            password: "hello",
+            employerContact: "Roger",
+            address: "1808 Elysian Fields Ave New Orleans, La ",
+            coordinates: { lat: 2020, lng: 2999 }
+            // console.log("in check user")
+          };_this2.renderPage('profile', fromResolve);
         } else {
           alert('User Not Recognized');
           _this2.renderPage('welcome');
@@ -22308,11 +22317,10 @@ var Welcome = function (_React$Component) {
     }
   }, {
     key: 'renderPage',
-    value: function renderPage(page, id) {
-      console.log(id);
+    value: function renderPage(page, info) {
       this.state.clicked++;
       if (this.state.clicked > 0) {
-        this.props.changePage(page, id);
+        this.props.changePage(page, info);
       }
     }
   }, {
@@ -22657,8 +22665,17 @@ var BusinessLogin = function (_React$Component) {
       var userCheck = Utilities.checkUser(email, password);
       userCheck.then(function (resolve) {
         if (resolve) {
-          // get id from resolve and put where 20 is
-          _this2.renderPage('profile', 20);
+          var fromResolve = {
+            name: "AAA Plumbing",
+            email: "jldela@Gmail.com",
+            employeeCount: 20,
+            referenceNum: 2,
+            password: "hello",
+            employerContact: "Roger",
+            address: "1808 Elysian Fields Ave New Orleans, La ",
+            coordinates: { lat: 2020, lng: 2999 }
+            // get id from resolve and put where 20 is
+          };_this2.renderPage('profile', fromResolve);
         } else {
           alert('User Not Recognized');
           _this2.renderPage('welcome');
@@ -22667,11 +22684,11 @@ var BusinessLogin = function (_React$Component) {
     }
   }, {
     key: 'renderPage',
-    value: function renderPage(page, id) {
+    value: function renderPage(page, info) {
       // console.log(id, " in render page")
       this.state.clicked++;
       if (this.state.clicked > 0) {
-        this.props.changePage(page, id);
+        this.props.changePage(page, info);
       }
     }
   }, {
@@ -22802,7 +22819,7 @@ var Profile = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props);
+      console.log(this, "in profile");
       return React.createElement(
         'div',
         { className: 'container-fluid' },
@@ -23139,12 +23156,13 @@ var App = function (_React$Component) {
 
   _createClass(App, [{
     key: 'changePage',
-    value: function changePage(pageId, id) {
-      console.log(id, "in change page");
+    value: function changePage(pageId, info) {
+
       if (pageId === 'profile') {
-        Utilities.getBusinessInfo(id).then(this.setState(function () {
-          return { businessInfo: "hello", renderThis: pageId };
-        }));
+        this.setState(function () {
+          console.log("in change page");
+          return { businessInfo: info, renderThis: pageId };
+        });
       } else {
         this.setState(function () {
           return { renderThis: pageId };
@@ -23273,7 +23291,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51129' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '57234' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
