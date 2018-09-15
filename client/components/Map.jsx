@@ -11,15 +11,29 @@ class MapPage extends React.Component {
     super(props);
     this.state = {
       center: { lat: 42.3601, lng: -71.0589 },
-      locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: null},
+      locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: { lat: 45.3601, lng: -74.0589 }},
       clicked: 0,
     };
   }
 
   onMarkerClick(event) {
-
     this.renderPage('gameplan', this.props.employeeInfo);
     console.log(this, "this in marker")
+  }
+
+  onMarkerOneClick(event) {
+    this.renderPage('gameplan', this.props.employeeInfo);
+    console.log(this.state.locations.one, "clicked one")
+  }
+
+  onMarkerTwoClick(event) {
+    this.renderPage('gameplan', this.props.employeeInfo);
+    console.log(this.state.locations.two, "clicked two")
+  }
+
+  onMarkerThreeClick(event) {
+    this.renderPage('gameplan', this.props.employeeInfo);
+    console.log(this.state.locations.three, "clicked three")
   }
 
   renderPage(page, info) {
@@ -46,12 +60,20 @@ class MapPage extends React.Component {
           <Marker
             title={'The marker`s title will appear as a tooltip.'}
             name={'SOMA'}
-            position={{ lat: 37.778519, lng: -122.405640 }}
+            onClick={this.onMarkerOneClick.bind(this, google.maps.event)}
+            position={this.state.locations.one}
           />
           <Marker
             title={'The marker`s title will appear as a tooltip.'}
             name={'SOMA'}
+            onClick={this.onMarkerTwoClick.bind(this, google.maps.event)}
             position={this.state.locations.two}
+          />
+          <Marker
+            title={'The marker`s title will appear as a tooltip.'}
+            name={'SOMA'}
+            onClick={this.onMarkerThreeClick.bind(this, google.maps.event)}
+            position={this.state.locations.three}
           />
           <InfoWindow onClose={this.onInfoWindowClose} />
         </Map>

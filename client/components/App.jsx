@@ -1,9 +1,8 @@
 const React = require('react');
-const Welcome = require('./Welcome');
-const BusinessForm = require('./BusinessForm');
-const BusinessLogin = require('./BusinessLogIn');
-const Profile = require('./Profile');
-const SignupComplete = require('./SignupComplete');
+const Welcome = require('./Welcome.jsx');
+const BusinessForm = require('./BusinessForm.jsx');
+const BusinessLogin = require('./BusinessLogIn.jsx');
+const Profile = require('./Profile.jsx');
 
 class App extends React.Component {
   constructor(props) {
