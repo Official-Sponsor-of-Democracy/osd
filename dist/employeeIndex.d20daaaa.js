@@ -23754,125 +23754,7 @@ var global = arguments[3];
 var googleApi = 'AIzaSyDyOcw4O6ZqUChULjprwYUoa33GHO5I7AE';
 
 module.exports.googleApi = googleApi;
-},{}],"components/Map.jsx":[function(require,module,exports) {
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var React = require('react');
-
-var _require = require('google-maps-react'),
-    Map = _require.Map,
-    InfoWindow = _require.InfoWindow,
-    Marker = _require.Marker,
-    GoogleApiWrapper = _require.GoogleApiWrapper;
-
-var _require2 = require('../config'),
-    googleApi = _require2.googleApi;
-
-var MapPage = function (_React$Component) {
-  _inherits(MapPage, _React$Component);
-
-  function MapPage(props) {
-    _classCallCheck(this, MapPage);
-
-    var _this = _possibleConstructorReturn(this, (MapPage.__proto__ || Object.getPrototypeOf(MapPage)).call(this, props));
-
-    _this.state = {
-      center: { lat: 42.3601, lng: -71.0589 },
-      locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: { lat: 45.3601, lng: -74.0589 } },
-      clicked: 0
-    };
-    return _this;
-  }
-
-  _createClass(MapPage, [{
-    key: 'onMarkerClick',
-    value: function onMarkerClick(event) {
-      this.renderPage('gameplan', this.props.employeeInfo);
-      console.log(this, "this in marker");
-    }
-  }, {
-    key: 'onMarkerOneClick',
-    value: function onMarkerOneClick(event) {
-      this.renderPage('gameplan', this.props.employeeInfo);
-      console.log(this.state.locations.one, "clicked one");
-    }
-  }, {
-    key: 'onMarkerTwoClick',
-    value: function onMarkerTwoClick(event) {
-      this.renderPage('gameplan', this.props.employeeInfo);
-      console.log(this.state.locations.two, "clicked two");
-    }
-  }, {
-    key: 'onMarkerThreeClick',
-    value: function onMarkerThreeClick(event) {
-      this.renderPage('gameplan', this.props.employeeInfo);
-      console.log(this.state.locations.three, "clicked three");
-    }
-  }, {
-    key: 'renderPage',
-    value: function renderPage(page, info) {
-      this.state.clicked++;
-      if (this.state.clicked > 0) {
-        this.props.changePage(page, info);
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var google = this.props.google;
-      var center = this.state.center;
-
-      return React.createElement(
-        'div',
-        null,
-        React.createElement(
-          Map,
-          {
-            google: google,
-            initialCenter: this.props.employeeInfo.coordinates,
-            zoom: 15
-          },
-          React.createElement(Marker, {
-            onClick: this.onMarkerClick.bind(this, google.maps.event),
-            name: 'hello'
-          }),
-          React.createElement(Marker, {
-            title: 'The marker`s title will appear as a tooltip.',
-            name: 'SOMA',
-            onClick: this.onMarkerOneClick.bind(this, google.maps.event),
-            position: this.state.locations.one
-          }),
-          React.createElement(Marker, {
-            title: 'The marker`s title will appear as a tooltip.',
-            name: 'SOMA',
-            onClick: this.onMarkerTwoClick.bind(this, google.maps.event),
-            position: this.state.locations.two
-          }),
-          React.createElement(Marker, {
-            title: 'The marker`s title will appear as a tooltip.',
-            name: 'SOMA',
-            onClick: this.onMarkerThreeClick.bind(this, google.maps.event),
-            position: this.state.locations.three
-          }),
-          React.createElement(InfoWindow, { onClose: this.onInfoWindowClose })
-        )
-      );
-    }
-  }]);
-
-  return MapPage;
-}(React.Component);
-
-module.exports = GoogleApiWrapper({
-  apiKey: googleApi
-})(MapPage);
-},{"react":"../node_modules/react/react.js","google-maps-react":"../node_modules/google-maps-react/dist/index.js","../config":"config.js"}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -25344,6 +25226,14 @@ function getCoordinates(address) {
   }
 }
 
+function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
+  if (homeCoordinates === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get('https://swapi.co/api/people/1/');
+  }
+}
+
 function signUserIn(name, email, phonenumber, address, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
@@ -25364,13 +25254,11 @@ function addNewBusiness(businessName, employerContact, address, numEmployees) {
   }
 }
 
-function findVotingLocations(address, cityzip) {
-  if (address === undefined && cityzip === undefined) {
+function findVotingLocations(coordinates) {
+  if (coordinates === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.05,-90.03&radius=8046&type=library&keyword=public&key=' + googleApi).then(function (resolve) {
-      console.log(resolve);
-    });
+    return axios.get('https://swapi.co/api/people/1/');
   }
 }
 
@@ -25380,7 +25268,153 @@ module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
 module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
-},{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/NewUser.jsx":[function(require,module,exports) {
+module.exports.getDriveTime = getDriveTime;
+},{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/Map.jsx":[function(require,module,exports) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+var _require = require('google-maps-react'),
+    Map = _require.Map,
+    InfoWindow = _require.InfoWindow,
+    Marker = _require.Marker,
+    GoogleApiWrapper = _require.GoogleApiWrapper;
+
+var _require2 = require('../config'),
+    googleApi = _require2.googleApi;
+
+var Utilities = require('../utilities');
+
+var MapPage = function (_React$Component) {
+  _inherits(MapPage, _React$Component);
+
+  function MapPage(props) {
+    _classCallCheck(this, MapPage);
+
+    var _this = _possibleConstructorReturn(this, (MapPage.__proto__ || Object.getPrototypeOf(MapPage)).call(this, props));
+
+    _this.state = {
+      // center: { lat: 42.3601, lng: -71.0589 },
+      // locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: { lat: 45.3601, lng: -74.0589 }},
+      clicked: 0
+    };
+    return _this;
+  }
+
+  _createClass(MapPage, [{
+    key: 'onMarkerClick',
+    value: function onMarkerClick(event) {
+
+      this.renderPage('gameplan', this.props.employeeInfo);
+      console.log(this, "this in marker");
+    }
+  }, {
+    key: 'onMarkerOneClick',
+    value: function onMarkerOneClick(event) {
+      var _this2 = this;
+
+      this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationone;
+      var drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationone, this.props.employeeInfo.locationtwo);
+      drivetime.then(function (resolve) {
+        console.log(resolve, " find locations resolve");
+        _this2.props.employeeInfo.drivetime = 130;
+        _this2.renderPage('gameplan', _this2.props.employeeInfo);
+      });
+      console.log(this.props.employeeInfo.locationone, "clicked one");
+    }
+  }, {
+    key: 'onMarkerTwoClick',
+    value: function onMarkerTwoClick(event) {
+      var _this3 = this;
+
+      this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationtwo;
+      var drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationtwo, this.props.employeeInfo.locationtwo);
+      drivetime.then(function (resolve) {
+        console.log(resolve, " find locations resolve");
+        _this3.props.employeeInfo.drivetime = 130;
+        _this3.renderPage('gameplan', _this3.props.employeeInfo);
+      });
+      console.log(this.props.employeeInfo.locationtwo, "clicked two");
+    }
+  }, {
+    key: 'onMarkerThreeClick',
+    value: function onMarkerThreeClick(event) {
+      var _this4 = this;
+
+      this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationthree;
+      var drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationthree, this.props.employeeInfo.locationtwo);
+      drivetime.then(function (resolve) {
+        console.log(resolve, " find locations resolve");
+        _this4.props.employeeInfo.drivetime = 130;
+        _this4.renderPage('gameplan', _this4.props.employeeInfo);
+      });
+      console.log(this.props.employeeInfo.locationthree, "clicked three");
+    }
+  }, {
+    key: 'renderPage',
+    value: function renderPage(page, info) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        this.props.changePage(page, info);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var google = this.props.google;
+      // const { center } = this.state;
+
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          Map,
+          {
+            google: google,
+            initialCenter: this.props.employeeInfo.coordinates,
+            zoom: 15
+          },
+          React.createElement(Marker, {
+            onClick: this.onMarkerClick.bind(this, google.maps.event),
+            name: 'hello'
+          }),
+          React.createElement(Marker, {
+            title: 'The marker`s title will appear as a tooltip.',
+            name: 'one',
+            onClick: this.onMarkerOneClick.bind(this, google.maps.event),
+            position: this.props.employeeInfo.locationone
+          }),
+          React.createElement(Marker, {
+            title: 'The marker`s title will appear as a tooltip.',
+            name: 'two',
+            onClick: this.onMarkerTwoClick.bind(this, google.maps.event),
+            position: this.props.employeeInfo.locationtwo
+          }),
+          React.createElement(Marker, {
+            title: 'The marker`s title will appear as a tooltip.',
+            name: 'three',
+            onClick: this.onMarkerThreeClick.bind(this, google.maps.event),
+            position: this.props.employeeInfo.locationthree
+          }),
+          React.createElement(InfoWindow, { onClose: this.onInfoWindowClose })
+        )
+      );
+    }
+  }]);
+
+  return MapPage;
+}(React.Component);
+
+module.exports = GoogleApiWrapper({
+  apiKey: googleApi
+})(MapPage);
+},{"react":"../node_modules/react/react.js","google-maps-react":"../node_modules/google-maps-react/dist/index.js","../config":"config.js","../utilities":"utilities.js"}],"components/NewUser.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25460,8 +25494,17 @@ var NewUser = function (_React$Component) {
       Utilities.signUserIn(name, email, phonenumber, address, businessid);
       var printout = Utilities.getCoordinates(address);
       printout.then(function (resolve) {
-        _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location });
+        var votinglocations = Utilities.findVotingLocations(resolve.data.results[0].geometry.location);
+        var geocoordinates = resolve.data.results[0].geometry.location;
+        votinglocations.then(function (resolve) {
+          console.log(resolve, " find locations resolve");
+          _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: geocoordinates, locationone: { lat: 46.3601, lng: -61.0589 }, locationtwo: { lat: 42.3601, lng: -71.0589 }, locationthree: { lat: 45.3601, lng: -74.0589 } });
+        });
       });
+      // const printout = Utilities.getCoordinates(address);
+      // printout.then((resolve) => {
+      //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location});
+      // });
     }
   }, {
     key: 'renderPage',
@@ -25715,7 +25758,9 @@ var Gameplan = function (_React$Component) {
               { className: "text-center text-muted" },
               "Based on our calculations it should take ",
               this.props.employeeInfo.name.toString(),
-              " [number] hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
+              " ",
+              this.props.employeeInfo.drivetime.toString(),
+              " hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
             )
           )
         )
