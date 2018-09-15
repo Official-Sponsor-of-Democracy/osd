@@ -19,10 +19,7 @@ function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('/home').then((resolve) => {
-      console.log(resolve);
-    });
-    console.log(email, password);
+    return axios.get('/home');
   }
 } 
 

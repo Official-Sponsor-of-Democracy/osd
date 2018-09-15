@@ -22,13 +22,15 @@ class BusinessLogin extends React.Component {
   checkUser() {
     const { email } = this.state;
     const { password } = this.state;
-    Utilities.checkUser(email, password);
-    if (true){
-      this.renderPage('profile');
-    } else {
-      alert('User Not Recognized')
-      this.renderPage('welcome');
-    }
+    const userCheck = Utilities.checkUser(email, password);
+    userCheck.then((resolve) => {
+      if (resolve) {
+        this.renderPage('profile');
+      } else {
+        alert('User Not Recognized')
+        this.renderPage('welcome');
+      }
+    });  
   }
 
   renderPage(page) {
