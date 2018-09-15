@@ -59,7 +59,7 @@ class Gameplan extends React.Component {
               can finalize your plan
             </dd>
             <p className="text-center text-muted">
-              Based on our calculations it should take {this.props.employeeInfo.name.toString()} [number] hours
+              Based on our calculations it should take {this.props.employeeInfo.name.toString()} {this.props.employeeInfo.drivetime.toString()} hours
               to exercise their right to vote on [date]. Talk to each other to sort
               out the specifics so everything goes smoothly on election day. Thank
               you for supporting democracy one vote at a time!

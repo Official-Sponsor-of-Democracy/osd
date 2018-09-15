@@ -15,14 +15,19 @@ function addNewUser(email, password) {
   }
 }
 
+function getBusinessInfo(id) {
+  if (id === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get('/home', id);
+  }
+} 
+
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('/home').then((resolve) => {
-      console.log(resolve);
-    });
-    console.log(email, password);
+    return axios.get('/home');
   }
 }
 
@@ -32,6 +37,22 @@ function getCoordinates(address) {
   } else {
     const formattedAddress = address.replace(/" "/g, '+');
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${formattedAddress}&key=${googleApi}`)
+  }
+}
+
+function getWorkCoordinates(id) {
+  if (id === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get(`https://swapi.co/api/people/1/`)
+  }
+}
+
+function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
+  if (homeCoordinates === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.get(`https://swapi.co/api/people/1/`)
   }
 }
 
@@ -45,25 +66,22 @@ function signUserIn(name, email, phonenumber, address, businessid) {
   }
 }
 
-function addNewBusiness(businessName, employerContact, address, numEmployees) {
+function addNewBusiness(businessName, email, password, employerContact, address, numEmployees) {
   if (businessName === undefined && address === undefined) {
     console.log('made call to server which added to database');
   } else {
     axios.get('https://swapi.co/api/people/1/').then((resolve) => {
       console.log(resolve);
     });
-    console.log(businessName, employerContact, address, numEmployees);
+    console.log(businessName, email, password, employerContact, address, numEmployees);
   }
 }
 
-function findVotingLocations(address, cityzip) {
-  if (address === undefined && cityzip === undefined) {
+function findVotingLocations(coordinates) {
+  if (coordinates === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/5/').then((resolve) => {
-      console.log(resolve);
-    });
-    console.log(address, cityzip);
+    return axios.get(`https://swapi.co/api/people/1/`);
   }
 }
 
@@ -73,3 +91,6 @@ module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
 module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
+module.exports.getDriveTime = getDriveTime;
+module.exports.getWorkCoordinates = getWorkCoordinates;
+module.exports.getBusinessInfo = getBusinessInfo;
