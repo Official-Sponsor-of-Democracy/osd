@@ -22902,14 +22902,6 @@ var Welcome = function (_React$Component) {
     value: function handlePasswordChange(event) {
       this.setState({ password: event.target.value });
     }
-
-    // checkUser() {
-    //   const { email } = this.state;
-    //   const { password } = this.state;
-    //   Utilities.checkUser(email, password);
-    //   this.renderPage('profile');
-    // }
-
   }, {
     key: 'checkUser',
     value: function checkUser() {
@@ -22931,8 +22923,8 @@ var Welcome = function (_React$Component) {
             address: "1808 Elysian Fields Ave New Orleans, La ",
             coordinates: { lat: 2020, lng: 2999 },
             employeeVoterCount: 7
-            // console.log("in check user")
-          };_this2.renderPage('profile', fromResolve);
+          };
+          _this2.renderPage('profile', fromResolve);
         } else {
           alert('User Not Recognized');
           _this2.renderPage('welcome');
@@ -22950,7 +22942,6 @@ var Welcome = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log("in welcome");
       return React.createElement(
         'div',
         { id: 'welcome', className: 'container-fluid h-100' },
@@ -23034,12 +23025,11 @@ var Welcome = function (_React$Component) {
             ),
             React.createElement(
               'div',
-              null,
-              'Not a member?',
+              { id: 'signupbtn', className: 'text-muted' },
               React.createElement(
                 'button',
-                { type: 'button', id: 'notexistingMember', className: 'btn btn-background', onClick: this.renderPage.bind(this, "businessForm") },
-                'Sign Up Here'
+                { type: 'button', id: 'notexistingMember', className: 'btn text-muted', onClick: this.renderPage.bind(this, "businessForm") },
+                'Not a member? Sign up here'
               )
             )
           )
@@ -23276,36 +23266,9 @@ var BusinessLogin = function (_React$Component) {
     value: function handlePasswordChange(event) {
       this.setState({ password: event.target.value });
     }
-
-    // checkUser() {
-    //   const { email } = this.state;
-    //   const { password } = this.state;
-    //   const userCheck = Utilities.checkUser(email, password);
-    //   userCheck.then((resolve) => {
-    //     if (resolve) {
-    //       const fromResolve = {
-    //         name: "AAA Plumbing",
-    //         email: "jldela@Gmail.com",
-    //         employeeCount: 20,
-    //         referenceNum: 2,
-    //         password: "hello",
-    //         employerContact: "Roger",
-    //         address: "1808 Elysian Fields Ave New Orleans, La ",
-    //         coordinates: {lat: 2020, lng: 2999},
-    //         employeeVoterCount: 7,
-    //       }
-    //       this.renderPage('profile', fromResolve);
-    //     } else {
-    //       alert('User Not Recognized')
-    //       this.renderPage('welcome');
-    //     }
-    //   });  
-    // }
-
   }, {
     key: 'renderPage',
     value: function renderPage(page, info) {
-      // console.log(id, " in render page")
       this.state.clicked++;
       if (this.state.clicked > 0) {
         this.props.changePage(page, info);
@@ -23655,7 +23618,6 @@ var BusinessForm = require('./BusinessForm.jsx');
 var BusinessLogin = require('./BusinessLogIn.jsx');
 var Profile = require('./Profile.jsx');
 var SignupComplete = require('./SignupComplete.jsx');
-var Utilities = require('../utilities');
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -23675,10 +23637,8 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'changePage',
     value: function changePage(pageId, info) {
-
       if (pageId === 'profile') {
         this.setState(function () {
-          console.log("in change page");
           return { businessInfo: info, renderThis: pageId };
         });
       } else {
@@ -23687,14 +23647,6 @@ var App = function (_React$Component) {
         });
       }
     }
-    // changePage(pageId) {
-    //   console.log(pageId, " in change page")
-
-    //   this.setState(() => {
-    //     return { renderThis: pageId };
-    //   });
-    // }
-
   }, {
     key: 'render',
     value: function render() {
@@ -23740,7 +23692,7 @@ var App = function (_React$Component) {
 }(React.Component);
 
 module.exports = App;
-},{"react":"../node_modules/react/index.js","./Welcome.jsx":"components/Welcome.jsx","./BusinessForm.jsx":"components/BusinessForm.jsx","./BusinessLogIn.jsx":"components/BusinessLogIn.jsx","./Profile.jsx":"components/Profile.jsx","./SignupComplete.jsx":"components/SignupComplete.jsx","../utilities":"utilities.js"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Welcome.jsx":"components/Welcome.jsx","./BusinessForm.jsx":"components/BusinessForm.jsx","./BusinessLogIn.jsx":"components/BusinessLogIn.jsx","./Profile.jsx":"components/Profile.jsx","./SignupComplete.jsx":"components/SignupComplete.jsx"}],"index.jsx":[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
@@ -23809,7 +23761,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63896' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64011' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

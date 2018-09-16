@@ -28817,8 +28817,6 @@ var MapPage = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MapPage.__proto__ || Object.getPrototypeOf(MapPage)).call(this, props));
 
     _this.state = {
-      // center: { lat: 42.3601, lng: -71.0589 },
-      // locations: { one: { lat: 46.3601, lng: -61.0589 }, two: { lat: 42.3601, lng: -71.0589 }, three: { lat: 45.3601, lng: -74.0589 }},
       clicked: 0
     };
     return _this;
@@ -28826,51 +28824,44 @@ var MapPage = function (_React$Component) {
 
   _createClass(MapPage, [{
     key: 'onMarkerClick',
-    value: function onMarkerClick(event) {
-      this.renderPage('gameplan', this.props.employeeInfo);
-      console.log(this, "this in marker");
+    value: function onMarkerClick() {
+      alert("Please select a polling location");
     }
   }, {
     key: 'onMarkerOneClick',
-    value: function onMarkerOneClick(event) {
+    value: function onMarkerOneClick() {
       var _this2 = this;
 
       this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationone;
       var drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationone, this.props.employeeInfo.locationtwo);
       drivetime.then(function (resolve) {
-        console.log(resolve, " find locations resolve");
         _this2.props.employeeInfo.drivetime = 130;
         _this2.renderPage('gameplan', _this2.props.employeeInfo);
       });
-      console.log(this.props.employeeInfo.locationone, "clicked one");
     }
   }, {
     key: 'onMarkerTwoClick',
-    value: function onMarkerTwoClick(event) {
+    value: function onMarkerTwoClick() {
       var _this3 = this;
 
       this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationtwo;
       var drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationtwo, this.props.employeeInfo.locationtwo);
       drivetime.then(function (resolve) {
-        console.log(resolve, " find locations resolve");
         _this3.props.employeeInfo.drivetime = 130;
         _this3.renderPage('gameplan', _this3.props.employeeInfo);
       });
-      console.log(this.props.employeeInfo.locationtwo, "clicked two");
     }
   }, {
     key: 'onMarkerThreeClick',
-    value: function onMarkerThreeClick(event) {
+    value: function onMarkerThreeClick() {
       var _this4 = this;
 
       this.props.employeeInfo.chosenlocation = this.props.employeeInfo.locationthree;
       var drivetime = Utilities.getDriveTime(this.props.employeeInfo.coordinates, this.props.employeeInfo.locationthree, this.props.employeeInfo.locationtwo);
       drivetime.then(function (resolve) {
-        console.log(resolve, " find locations resolve");
         _this4.props.employeeInfo.drivetime = 130;
         _this4.renderPage('gameplan', _this4.props.employeeInfo);
       });
-      console.log(this.props.employeeInfo.locationthree, "clicked three");
     }
   }, {
     key: 'renderPage',
@@ -28883,9 +28874,8 @@ var MapPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      alert("Click on a voting location in your area");
+      alert("Choose a polling location in your area");
       var google = this.props.google;
-      // const { center } = this.state;
 
       return React.createElement(
         'div',
@@ -28895,27 +28885,20 @@ var MapPage = function (_React$Component) {
           {
             google: google,
             initialCenter: this.props.employeeInfo.coordinates,
-            zoom: 15
+            zoom: 13
           },
           React.createElement(Marker, {
-            onClick: this.onMarkerClick.bind(this, google.maps.event),
-            name: 'hello'
+            onClick: this.onMarkerClick.bind(this, google.maps.event)
           }),
           React.createElement(Marker, {
-            title: 'The marker`s title will appear as a tooltip.',
-            name: 'one',
             onClick: this.onMarkerOneClick.bind(this, google.maps.event),
             position: this.props.employeeInfo.locationone
           }),
           React.createElement(Marker, {
-            title: 'The marker`s title will appear as a tooltip.',
-            name: 'two',
             onClick: this.onMarkerTwoClick.bind(this, google.maps.event),
             position: this.props.employeeInfo.locationtwo
           }),
           React.createElement(Marker, {
-            title: 'The marker`s title will appear as a tooltip.',
-            name: 'three',
             onClick: this.onMarkerThreeClick.bind(this, google.maps.event),
             position: this.props.employeeInfo.locationthree
           }),
@@ -29170,11 +29153,6 @@ var Gameplan = function (_React$Component) {
   }
 
   _createClass(Gameplan, [{
-    key: "printStuff",
-    value: function printStuff(stuff) {
-      console.log(stuff);
-    }
-  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -29187,7 +29165,7 @@ var Gameplan = function (_React$Component) {
           React.createElement(
             "div",
             { id: "gameplan-middle-column", className: "col-md-6" },
-            React.createElement("img", { id: "osd-icon-gameplan", src: "https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png", onClick: this.printStuff.bind(this, this.props) }),
+            React.createElement("img", { id: "osd-icon-gameplan", src: "https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png" }),
             React.createElement(
               "h3",
               { className: "text-center" },
@@ -29214,7 +29192,7 @@ var Gameplan = function (_React$Component) {
               React.createElement(
                 "dd",
                 null,
-                "11/6/2018"
+                "Tuesday, November 6th, 2018"
               ),
               React.createElement(
                 "dt",
@@ -29236,7 +29214,7 @@ var Gameplan = function (_React$Component) {
                 null,
                 "It should take you about ",
                 this.props.employeeInfo.drivetime.toString(),
-                " hours to drive to your polling location, vote, and get to work"
+                "hours to drive to your polling location, vote, and get to work"
               )
             ),
             React.createElement(
@@ -29259,9 +29237,9 @@ var Gameplan = function (_React$Component) {
               { className: "text-center text-muted" },
               "Based on our calculations it should take ",
               this.props.employeeInfo.name.toString(),
-              " ",
+              " approximately ",
               this.props.employeeInfo.drivetime.toString(),
-              " hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
+              " hours to exercise their right to vote on Tuesday, November 6th, 2018. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
             )
           ),
           React.createElement("div", { className: "col-md-3" })
@@ -29331,7 +29309,9 @@ var EmployeeApp = function (_React$Component) {
         return React.createElement(
           'div',
           { id: 'gameplan', className: 'container-fluid' },
-          React.createElement(Gameplan, { changePage: this.changePage.bind(this), employeeInfo: this.state.employeeInfo })
+          React.createElement(Gameplan, { changePage: this.changePage.bind(this),
+            employeeInfo: this.state.employeeInfo
+          })
         );
       }
     }
@@ -29387,7 +29367,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62246' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64257' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
