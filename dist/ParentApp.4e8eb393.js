@@ -3656,19 +3656,20 @@ function addNewUser(email, password) {
   }
 }
 
-function getBusinessInfo(id) {
-  if (id === undefined) {
-    console.log('made call to server which added to database');
-  } else {
-    return axios.get('/home', id);
-  }
-}
+// function getBusinessInfo(id) {
+//   if (id === undefined) {
+//     console.log('made call to server which added to database');
+//   } else {
+//     return axios.get('/loginBusiness', id);
+//   }
+// } 
 
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    return axios.get('/home');
+    console.log("in check user");
+    return axios.post('/loginBusiness', { email: email, password: password });
   }
 }
 
@@ -3733,7 +3734,7 @@ module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
 module.exports.getWorkCoordinates = getWorkCoordinates;
-module.exports.getBusinessInfo = getBusinessInfo;
+// module.exports.getBusinessInfo = getBusinessInfo;
 },{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/Welcome.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -4521,25 +4522,13 @@ var App = function (_React$Component) {
     key: 'render',
     value: function render() {
       if (this.state.renderThis === 'welcome') {
-        return React.createElement(
-          'div',
-          { className: 'container-fluid' },
-          React.createElement(Welcome, { changePage: this.changePage.bind(this) })
-        );
+        return React.createElement(Welcome, { changePage: this.changePage.bind(this) });
       }
       if (this.state.renderThis === 'businessForm') {
-        return React.createElement(
-          'div',
-          { id: 'business-form', className: 'container-fluid' },
-          React.createElement(BusinessForm, { changePage: this.changePage.bind(this) })
-        );
+        return React.createElement(BusinessForm, { changePage: this.changePage.bind(this) });
       }
       if (this.state.renderThis === 'login') {
-        return React.createElement(
-          'div',
-          { className: 'container-fluid' },
-          React.createElement(BusinessLogin, { changePage: this.changePage.bind(this) })
-        );
+        return React.createElement(BusinessLogin, { changePage: this.changePage.bind(this) });
       }
       if (this.state.renderThis === 'profile') {
         return React.createElement(
@@ -29985,7 +29974,7 @@ var Gameplan = function (_React$Component) {
     value: function render() {
       return React.createElement(
         "div",
-        { className: "container-fluid" },
+        { id: "gameplan", className: "container-fluid" },
         React.createElement(
           "div",
           { className: "row" },
@@ -30120,27 +30109,15 @@ var EmployeeApp = function (_React$Component) {
     key: 'render',
     value: function render() {
       if (this.state.renderThis === 'welcome') {
-        return React.createElement(
-          'div',
-          { className: 'container-fluid' },
-          React.createElement(NewUser, { changePage: this.changePage.bind(this) })
-        );
+        return React.createElement(NewUser, { changePage: this.changePage.bind(this) });
       }
       if (this.state.renderThis === 'map') {
-        return React.createElement(
-          'div',
-          { className: 'container-fluid' },
-          React.createElement(Map, { changePage: this.changePage.bind(this), employeeInfo: this.state.employeeInfo })
-        );
+        return React.createElement(Map, { changePage: this.changePage.bind(this), employeeInfo: this.state.employeeInfo });
       }
       if (this.state.renderThis === 'gameplan') {
-        return React.createElement(
-          'div',
-          { id: 'gameplan', className: 'container-fluid' },
-          React.createElement(Gameplan, { changePage: this.changePage.bind(this),
-            employeeInfo: this.state.employeeInfo
-          })
-        );
+        return React.createElement(Gameplan, { changePage: this.changePage.bind(this),
+          employeeInfo: this.state.employeeInfo
+        });
       }
     }
   }]);
@@ -30241,8 +30218,12 @@ var ParentApp = function (_React$Component) {
               { className: 'col-md-6 h-100', id: 'right-column' },
               React.createElement(
                 'div',
-                { id: 'signupbtn', className: 'text-muted' },
-                'Who are you?',
+                { id: 'parentbtn', className: 'text-muted' },
+                'Who are you?'
+              ),
+              React.createElement(
+                'div',
+                null,
                 React.createElement(
                   'button',
                   { type: 'submit', className: 'btn btn-primary', onClick: this.changePage.bind(this, "app") },
@@ -30251,10 +30232,10 @@ var ParentApp = function (_React$Component) {
               ),
               React.createElement(
                 'div',
-                null,
+                { id: 'parentbtn' },
                 React.createElement(
                   'button',
-                  { type: 'button', id: 'notexistingMember', className: 'btn text-muted', onClick: this.changePage.bind(this, "employeeapp") },
+                  { type: 'submit', className: 'btn btn-primary', onClick: this.changePage.bind(this, "employeeapp") },
                   'Employee Voter'
                 )
               )
@@ -30263,18 +30244,10 @@ var ParentApp = function (_React$Component) {
         );
       }
       if (this.state.renderThis === 'app') {
-        return React.createElement(
-          'div',
-          { className: 'container-fluid' },
-          React.createElement(App, { changePage: this.changePage.bind(this) })
-        );
+        return React.createElement(App, { changePage: this.changePage.bind(this) });
       }
       if (this.state.renderThis === 'employeeapp') {
-        return React.createElement(
-          'div',
-          { id: 'business-form', className: 'container-fluid' },
-          React.createElement(EmployeeApp, { changePage: this.changePage.bind(this) })
-        );
+        return React.createElement(EmployeeApp, { changePage: this.changePage.bind(this) });
       }
     }
   }]);
@@ -30312,7 +30285,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49702' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49751' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

@@ -3656,19 +3656,20 @@ function addNewUser(email, password) {
   }
 }
 
-function getBusinessInfo(id) {
-  if (id === undefined) {
-    console.log('made call to server which added to database');
-  } else {
-    return axios.get('/home', id);
-  }
-}
+// function getBusinessInfo(id) {
+//   if (id === undefined) {
+//     console.log('made call to server which added to database');
+//   } else {
+//     return axios.get('/loginBusiness', id);
+//   }
+// } 
 
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    return axios.get('/home');
+    console.log("in check user");
+    return axios.post('/loginBusiness', { email: email, password: password });
   }
 }
 
@@ -3733,7 +3734,7 @@ module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
 module.exports.getWorkCoordinates = getWorkCoordinates;
-module.exports.getBusinessInfo = getBusinessInfo;
+// module.exports.getBusinessInfo = getBusinessInfo;
 },{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/Profile.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -3927,7 +3928,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49702' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49751' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
