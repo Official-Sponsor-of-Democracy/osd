@@ -9,7 +9,7 @@ class Gameplan extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div id="gameplan" className="container-fluid">
         <div className="row">
           <div className="col-md-3" />
           <div id="gameplan-middle-column" className="col-md-6">
