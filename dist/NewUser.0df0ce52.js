@@ -3836,13 +3836,21 @@ var NewUser = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'div',
+<<<<<<< HEAD
         { className: 'container-fluid' },
+=======
+        { id: 'welcome', className: 'container-fluid' },
+>>>>>>> 2
         React.createElement(
           'div',
           { className: 'row' },
           React.createElement(
             'div',
+<<<<<<< HEAD
             { className: 'col-md-6' },
+=======
+            { id: 'welcome-left-column', className: 'col-md-6' },
+>>>>>>> 2
             React.createElement(
               'h3',
               null,
@@ -3885,7 +3893,11 @@ var NewUser = function (_React$Component) {
           ),
           React.createElement(
             'div',
+<<<<<<< HEAD
             { className: 'col-md-6' },
+=======
+            { id: 'right-column', className: 'col-md-6' },
+>>>>>>> 2
             React.createElement(
               'div',
               { role: 'form' },
@@ -3988,7 +4000,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + '61102' + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61612' + '/');
+>>>>>>> 2
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

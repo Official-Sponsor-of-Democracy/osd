@@ -29032,13 +29032,21 @@ var NewUser = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'div',
+<<<<<<< HEAD
         { className: 'container-fluid' },
+=======
+        { id: 'welcome', className: 'container-fluid' },
+>>>>>>> 2
         React.createElement(
           'div',
           { className: 'row' },
           React.createElement(
             'div',
+<<<<<<< HEAD
             { className: 'col-md-6' },
+=======
+            { id: 'welcome-left-column', className: 'col-md-6' },
+>>>>>>> 2
             React.createElement(
               'h3',
               null,
@@ -29081,7 +29089,11 @@ var NewUser = function (_React$Component) {
           ),
           React.createElement(
             'div',
+<<<<<<< HEAD
             { className: 'col-md-6' },
+=======
+            { id: 'right-column', className: 'col-md-6' },
+>>>>>>> 2
             React.createElement(
               'div',
               { role: 'form' },
@@ -29192,9 +29204,17 @@ var Gameplan = function (_React$Component) {
         React.createElement(
           "div",
           { className: "row" },
+<<<<<<< HEAD
           React.createElement(
             "div",
             { className: "col-md-12" },
+=======
+          React.createElement("div", { className: "col-md-3" }),
+          React.createElement(
+            "div",
+            { id: "gameplan-middle-column", className: "col-md-6" },
+            React.createElement("img", { id: "osd-icon-gameplan", src: "https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png", onClick: this.printStuff.bind(this, this.props) }),
+>>>>>>> 2
             React.createElement(
               "h3",
               { className: "text-center" },
@@ -29249,10 +29269,16 @@ var Gameplan = function (_React$Component) {
                 "It should take you about two hours to drive to your polling location, vote, and get to work"
               )
             ),
+<<<<<<< HEAD
             React.createElement("img", { alt: "Bootstrap Preview", src: "https://www.layoutit.com/img/sports-q-c-140-140-3.jpg", onClick: this.printStuff.bind(this, this.props) }),
             React.createElement(
               "h3",
               { className: "text-center text-success" },
+=======
+            React.createElement(
+              "h3",
+              { className: "text-center" },
+>>>>>>> 2
               "Looping in your boss"
             ),
             React.createElement(
@@ -29274,7 +29300,12 @@ var Gameplan = function (_React$Component) {
               this.props.employeeInfo.drivetime.toString(),
               " hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
             )
+<<<<<<< HEAD
           )
+=======
+          ),
+          React.createElement("div", { className: "col-md-3" })
+>>>>>>> 2
         )
       );
     }
@@ -29326,7 +29357,11 @@ var EmployeeApp = function (_React$Component) {
       if (this.state.renderThis === 'welcome') {
         return React.createElement(
           'div',
+<<<<<<< HEAD
           { id: 'autocomplete', className: 'container-fluid' },
+=======
+          { className: 'container-fluid' },
+>>>>>>> 2
           React.createElement(NewUser, { changePage: this.changePage.bind(this) })
         );
       }
@@ -29340,7 +29375,11 @@ var EmployeeApp = function (_React$Component) {
       if (this.state.renderThis === 'gameplan') {
         return React.createElement(
           'div',
+<<<<<<< HEAD
           { className: 'container-fluid' },
+=======
+          { id: 'gameplan', className: 'container-fluid' },
+>>>>>>> 2
           React.createElement(Gameplan, { changePage: this.changePage.bind(this), employeeInfo: this.state.employeeInfo })
         );
       }
@@ -29380,7 +29419,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + '61102' + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61612' + '/');
+>>>>>>> 2
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

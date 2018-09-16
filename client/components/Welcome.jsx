@@ -63,11 +63,11 @@ class Welcome extends React.Component {
     console.log("in welcome")
     return (
       
-      <div className="container-fluid h-100">
+      <div id="welcome" className="container-fluid h-100">
         <div className="row h-100">
-          <div className="col-md-6 h-100" id="left-column">
+          <div className="col-md-6 h-100" id="welcome-left-column">
             <h3>
-              Official Sponsors of Welcom page
+              Official Sponsors of Democracy
             </h3>
             <dl>
               <dt>

@@ -71,9 +71,9 @@ class NewUser extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div id="welcome" className="container-fluid">
         <div className="row">
-          <div className="col-md-6">
+          <div id="welcome-left-column" className="col-md-6">
             <h3>
               Official Sponsors of NewUser page
             </h3>
@@ -98,7 +98,7 @@ class NewUser extends React.Component {
               </dd>
             </dl>
           </div>
-          <div className="col-md-6">
+          <div id="right-column" className="col-md-6">
             <div role="form">
               <div className="form-group">
                 <label htmlFor="InputName">
