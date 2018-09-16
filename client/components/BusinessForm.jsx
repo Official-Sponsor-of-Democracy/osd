@@ -59,23 +59,19 @@ class BusinessForm extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div id="business-form" className="container-fluid">
         <div className="row">
-          <div className="col-md-6" id="right-column">
+          <div className="col-md-3">
+          </div>
+          <div className="col-md-6" id="middle-column">
             <h3>
               Becoming a Sponsor
             </h3>
             <p>
               Support democracy, create a happier workplace, and simplify election day scheduling
             </p>
-            <p>
-              After the election we will send you information about your employee-voter turnout,
-              along with an Offical Sponsor of Democracy seal
-              which you can proudly display at the office
-            </p>
-            </div>
             
-            <div className="col-md-6" id="left-column">
+           
             <div role="form">
               <div className="form-group">
                 <label htmlFor="businessNameInput">
@@ -117,9 +113,11 @@ class BusinessForm extends React.Component {
                 Submit
               </button>
           </div>
-            </div>
+           </div>
+          <div className="col-md-3">
           </div>
       </div>
+    </div>
     );
   }
 }

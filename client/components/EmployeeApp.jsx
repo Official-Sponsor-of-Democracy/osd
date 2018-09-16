@@ -21,7 +21,7 @@ class EmployeeApp extends React.Component {
   render() {
     if (this.state.renderThis === 'welcome') {
       return (
-        <div id="autocomplete" className="container-fluid">
+        <div className="container-fluid">
           <NewUser changePage={this.changePage.bind(this)} />
         </div>
       );
@@ -35,7 +35,7 @@ class EmployeeApp extends React.Component {
     }
     if (this.state.renderThis === 'gameplan') {
       return (
-        <div className="container-fluid">
+        <div id="gameplan" className="container-fluid">
           <Gameplan changePage={this.changePage.bind(this)} employeeInfo={this.state.employeeInfo} />
         </div>
       );

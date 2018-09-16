@@ -11,9 +11,11 @@ class Gameplan extends React.Component {
   }
   render() {
     return (
-      <div className="container-fluid">
+      <div  className="container-fluid">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-3"></div>
+          <div id="gameplan-middle-column" className="col-md-6">
+            <img id="osd-icon-gameplan" src="https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png" onClick={this.printStuff.bind(this, this.props)} />
             <h3 className="text-center">
               The Gameplan
             </h3>
@@ -34,21 +36,18 @@ class Gameplan extends React.Component {
                 Voting Location
               </dt>
               <dd>
-                1808 Elysian Fields Ave
-              </dd>
-              <dd>
-                New Orleans, LA 70117
+                {this.props.employeeInfo.chosenlocation.toString()}
               </dd>
               <dt>
                 Plan Ahead
               </dt>
               <dd>
-                It should take you about two hours to drive to your
+                It should take you about {this.props.employeeInfo.drivetime.toString()} hours to drive to your
                 polling location, vote, and get to work
               </dd>
             </dl>
-            <img alt="Bootstrap Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" onClick={this.printStuff.bind(this, this.props)}/>
-            <h3 className="text-center text-success">
+            
+            <h3 className="text-center">
               Looping in your boss
             </h3>
             <dt>
@@ -65,6 +64,7 @@ class Gameplan extends React.Component {
               you for supporting democracy one vote at a time!
             </p>
           </div>
+          <div className="col-md-3"></div>
         </div>
       </div>
     );
