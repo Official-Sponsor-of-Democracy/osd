@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const App = require('./components/App.jsx');
+const App = require('./components/ParentApp.jsx');
 
 // ReactDOM.render(
 //   <App />, document.getElementById('app'),
@@ -27,5 +27,5 @@ const App = require('./components/App.jsx');
 //   }
 // }
 
-const index = document.getElementById('app');
+const index = document.getElementById('parentapp');
 ReactDOM.render(<App name="Yomi" />, index);

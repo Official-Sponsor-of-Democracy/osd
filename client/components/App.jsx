@@ -29,7 +29,7 @@ class App extends React.Component {
           <Welcome changePage={this.changePage.bind(this)} />
         </div>
       );
-    }  
+    }
     if (this.state.renderThis === 'businessForm') {
       return (
         <div id="business-form" className="container-fluid">
