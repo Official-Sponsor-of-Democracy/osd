@@ -169,7 +169,7 @@ module.exports = reloadCSS;
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../split4.png":[["split4.5fab5c6e.png","split4.png"],"split4.png"],"_css_loader":"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./../split4.png":[["split4.5fab5c6e.png","split4.png"],"split4.png"],"./../vote.jpg":[["vote.4587eda0.jpg","vote.jpg"],"vote.jpg"],"_css_loader":"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 

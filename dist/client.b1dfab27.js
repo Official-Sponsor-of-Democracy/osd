@@ -22330,17 +22330,17 @@ var Welcome = function (_React$Component) {
       console.log("in welcome");
       return React.createElement(
         'div',
-        { className: 'container-fluid h-100' },
+        { id: 'welcome', className: 'container-fluid h-100' },
         React.createElement(
           'div',
           { className: 'row h-100' },
           React.createElement(
             'div',
-            { className: 'col-md-6 h-100', id: 'left-column' },
+            { className: 'col-md-6 h-100', id: 'welcome-left-column' },
             React.createElement(
               'h3',
               null,
-              'Official Sponsors of Welcom page'
+              'Official Sponsors of Democracy'
             ),
             React.createElement(
               'dl',
@@ -22517,13 +22517,14 @@ var BusinessForm = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'div',
-        { className: 'container-fluid' },
+        { id: 'business-form', className: 'container-fluid' },
         React.createElement(
           'div',
           { className: 'row' },
+          React.createElement('div', { className: 'col-md-3' }),
           React.createElement(
             'div',
-            { className: 'col-md-6', id: 'right-column' },
+            { className: 'col-md-6', id: 'middle-column' },
             React.createElement(
               'h3',
               null,
@@ -22534,15 +22535,6 @@ var BusinessForm = function (_React$Component) {
               null,
               'Support democracy, create a happier workplace, and simplify election day scheduling'
             ),
-            React.createElement(
-              'p',
-              null,
-              'After the election we will send you information about your employee-voter turnout, along with an Offical Sponsor of Democracy seal which you can proudly display at the office'
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'col-md-6', id: 'left-column' },
             React.createElement(
               'div',
               { role: 'form' },
@@ -22612,7 +22604,8 @@ var BusinessForm = function (_React$Component) {
                 'Submit'
               )
             )
-          )
+          ),
+          React.createElement('div', { className: 'col-md-3' })
         )
       );
     }
@@ -22996,13 +22989,15 @@ var SignupComplete = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'div',
-        { 'class': 'container-fluid' },
+        { className: 'container-fluid' },
         React.createElement(
           'div',
-          { 'class': 'row' },
+          { className: 'row' },
+          React.createElement('div', { className: 'col-md-3' }),
           React.createElement(
             'div',
-            { 'class': 'col-md-12' },
+            { id: 'middle-column', className: 'col-md-6' },
+            React.createElement('img', { id: 'osd-icon', src: 'https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png' }),
             React.createElement(
               'h3',
               null,
@@ -23011,9 +23006,10 @@ var SignupComplete = function (_React$Component) {
             React.createElement(
               'p',
               null,
-              'You should receive an email from us with more info on how your employees can participate. After receiving the email you should be able to log in with your email and password to view your business profile.'
+              'After the election we will send you information about your employee-voter turnout, along with an Offical Sponsor of Democracy seal which you can proudly display at the office You should receive an email from us with more info on how your employees can participate. After receiving the email you should be able to log in with your email and password to view your business profile.'
             )
-          )
+          ),
+          React.createElement('div', { className: 'col-md-3' })
         )
       );
     }
@@ -23091,7 +23087,7 @@ var App = function (_React$Component) {
       if (this.state.renderThis === 'businessForm') {
         return React.createElement(
           'div',
-          { className: 'container-fluid' },
+          { id: 'business-form', className: 'container-fluid' },
           React.createElement(BusinessForm, { changePage: this.changePage.bind(this) })
         );
       }
