@@ -1,7 +1,7 @@
 const React = require('react');
-const Map = require('./Map');
-const NewUser = require('./NewUser');
-const Gameplan = require('./Gameplan');
+const Map = require('./Map.jsx');
+const NewUser = require('./NewUser.jsx');
+const Gameplan = require('./Gameplan.jsx');
 
 class EmployeeApp extends React.Component {
   constructor(props) {
