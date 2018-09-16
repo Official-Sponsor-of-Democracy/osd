@@ -36,16 +36,13 @@ class Gameplan extends React.Component {
                 Voting Location
               </dt>
               <dd>
-                1808 Elysian Fields Ave
-              </dd>
-              <dd>
-                New Orleans, LA 70117
+                {this.props.employeeInfo.chosenlocation.toString()}
               </dd>
               <dt>
                 Plan Ahead
               </dt>
               <dd>
-                It should take you about two hours to drive to your
+                It should take you about {this.props.employeeInfo.drivetime.toString()} hours to drive to your
                 polling location, vote, and get to work
               </dd>
             </dl>

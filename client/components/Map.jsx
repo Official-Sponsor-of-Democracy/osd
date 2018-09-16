@@ -63,6 +63,7 @@ class MapPage extends React.Component {
   }
 
   render() {
+    alert("Click on a voting location in your area")
     const { google } = this.props;
     // const { center } = this.state;
     return (

@@ -75,26 +75,20 @@ class NewUser extends React.Component {
         <div className="row">
           <div id="welcome-left-column" className="col-md-6">
             <h3>
-              Official Sponsors of NewUser page
+              Official Sponsors of Democracy
             </h3>
             <dl>
               <dt>
-                Support Your Employees
+                Supported
               </dt>
               <dd>
-                Bolster employee morale by letting them know that you support their right to vote
+                Afraid to ask for more time off? Your boss supports your right to vote
               </dd>
               <dt>
                 Logistics Made Easy
               </dt>
               <dd>
                 We create a logistical gameplan custom-tailored to each employee voter
-              </dd>
-              <dt>
-                No Surprises
-              </dt>
-              <dd>
-                Get ahead of election-day scheduling so business goes smoothly
               </dd>
             </dl>
           </div>
