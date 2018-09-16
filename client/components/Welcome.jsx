@@ -41,6 +41,7 @@ class Welcome extends React.Component {
           employerContact: "Roger",
           address: "1808 Elysian Fields Ave New Orleans, La ",
           coordinates: { lat: 2020, lng: 2999 },
+          employeeVoterCount: 7,
         }
         // console.log("in check user")
         this.renderPage('profile', fromResolve);
@@ -59,10 +60,12 @@ class Welcome extends React.Component {
   }
 
   render() {
+    console.log("in welcome")
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-6">
+      
+      <div className="container-fluid h-100">
+        <div className="row h-100">
+          <div className="col-md-6 h-100" id="left-column">
             <h3>
               Official Sponsors of Welcom page
             </h3>
@@ -87,7 +90,7 @@ class Welcome extends React.Component {
               </dd>
             </dl>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 h-100" id="right-column">
             <div role="form">
               <div className="form-group">
 

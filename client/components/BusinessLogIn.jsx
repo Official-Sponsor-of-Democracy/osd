@@ -19,30 +19,30 @@ class BusinessLogin extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  checkUser() {
-    const { email } = this.state;
-    const { password } = this.state;
-    const userCheck = Utilities.checkUser(email, password);
-    userCheck.then((resolve) => {
-      if (resolve) {
-        const fromResolve = {
-          name: "AAA Plumbing",
-          email: "jldela@Gmail.com",
-          employeeCount: 20,
-          referenceNum: 2,
-          password: "hello",
-          employerContact: "Roger",
-          address: "1808 Elysian Fields Ave New Orleans, La ",
-          coordinates: {lat: 2020, lng: 2999},
-        }
-        // get id from resolve and put where 20 is
-        this.renderPage('profile', fromResolve);
-      } else {
-        alert('User Not Recognized')
-        this.renderPage('welcome');
-      }
-    });  
-  }
+  // checkUser() {
+  //   const { email } = this.state;
+  //   const { password } = this.state;
+  //   const userCheck = Utilities.checkUser(email, password);
+  //   userCheck.then((resolve) => {
+  //     if (resolve) {
+  //       const fromResolve = {
+  //         name: "AAA Plumbing",
+  //         email: "jldela@Gmail.com",
+  //         employeeCount: 20,
+  //         referenceNum: 2,
+  //         password: "hello",
+  //         employerContact: "Roger",
+  //         address: "1808 Elysian Fields Ave New Orleans, La ",
+  //         coordinates: {lat: 2020, lng: 2999},
+  //         employeeVoterCount: 7,
+  //       }
+  //       this.renderPage('profile', fromResolve);
+  //     } else {
+  //       alert('User Not Recognized')
+  //       this.renderPage('welcome');
+  //     }
+  //   });  
+  // }
 
   renderPage(page, info) {
     // console.log(id, " in render page")
@@ -56,7 +56,7 @@ class BusinessLogin extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6" id="left-column">
             <h3>
               Official Sponsors of Business Login Page
             </h3>
