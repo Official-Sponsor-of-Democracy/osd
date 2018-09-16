@@ -169,7 +169,7 @@ module.exports = reloadCSS;
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../split4.png":[["split4.5fab5c6e.png","split4.png"],"split4.png"],"./../vote.jpg":[["vote.4587eda0.jpg","vote.jpg"],"vote.jpg"],"_css_loader":"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./../split4.png":[["split4.5fab5c6e.png","split4.png"],"split4.png"],"./../Vecteezy-16-4200-22.jpg":[["Vecteezy-16-4200-22.ed73c601.jpg","Vecteezy-16-4200-22.jpg"],"Vecteezy-16-4200-22.jpg"],"./../vote.jpg":[["vote.4587eda0.jpg","vote.jpg"],"vote.jpg"],"_css_loader":"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -198,7 +198,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61098' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61612' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

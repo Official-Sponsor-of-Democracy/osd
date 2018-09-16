@@ -3734,7 +3734,7 @@ module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
 module.exports.getWorkCoordinates = getWorkCoordinates;
 module.exports.getBusinessInfo = getBusinessInfo;
-},{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/Profile.jsx":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","./config":"config.js"}],"components/NewUser.jsx":[function(require,module,exports) {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3746,160 +3746,219 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('react');
 var Utilities = require('../utilities');
 
-var Profile = function (_React$Component) {
-  _inherits(Profile, _React$Component);
+var NewUser = function (_React$Component) {
+  _inherits(NewUser, _React$Component);
 
-  function Profile(props) {
-    _classCallCheck(this, Profile);
+  function NewUser(props) {
+    _classCallCheck(this, NewUser);
 
-    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NewUser.__proto__ || Object.getPrototypeOf(NewUser)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      name: '',
+      email: '',
+      phonenumber: null,
+      address: '',
+      businessid: null,
+      coordinates: null,
+      clicked: 0
+    };
     return _this;
   }
 
-  _createClass(Profile, [{
-    key: 'changePage',
-    value: function changePage(pageId, info) {
-      this.setState(function () {
-        return { renderThis: pageId, employeeInfo: info };
+  _createClass(NewUser, [{
+    key: 'handleEmailChange',
+    value: function handleEmailChange(event) {
+      this.setState({ email: event.target.value });
+    }
+  }, {
+    key: 'handleNameChange',
+    value: function handleNameChange(event) {
+      this.setState({ name: event.target.value });
+    }
+  }, {
+    key: 'handleBusinessIdChange',
+    value: function handleBusinessIdChange(event) {
+      this.setState({ businessid: event.target.value });
+    }
+  }, {
+    key: 'handlePhoneNumberChange',
+    value: function handlePhoneNumberChange(event) {
+      this.setState({ phonenumber: event.target.value });
+    }
+  }, {
+    key: 'handleStreetAddressChange',
+    value: function handleStreetAddressChange(event) {
+      this.setState({ address: event.target.value });
+    }
+  }, {
+    key: 'signUser',
+    value: function signUser() {
+      var _this2 = this;
+
+      var email = this.state.email;
+      var name = this.state.name;
+      var address = this.state.address;
+      var businessid = this.state.businessid;
+      var phonenumber = this.state.phonenumber;
+
+      Utilities.signUserIn(name, email, phonenumber, address, businessid);
+      var workCoordinates = Utilities.getWorkCoordinates(businessid);
+      workCoordinates.then(function (resolve) {
+        var printout = Utilities.getCoordinates(address);
+        var geoWorkCoordinates = resolve;
+        printout.then(function (resolve) {
+          var votinglocations = Utilities.findVotingLocations(resolve.data.results[0].geometry.location);
+          var geocoordinates = resolve.data.results[0].geometry.location;
+          votinglocations.then(function (resolve) {
+            console.log(resolve, " find locations resolve");
+            _this2.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: geocoordinates, locationone: { lat: 46.3601, lng: -61.0589 }, locationtwo: { lat: 42.3601, lng: -71.0589 }, locationthree: { lat: 45.3601, lng: -74.0589 }, workcoordinates: geoWorkCoordinates });
+          });
+        });
       });
+
+      // const printout = Utilities.getCoordinates(address);
+      // printout.then((resolve) => {
+      //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.data.results[0].geometry.location});
+      // });
+    }
+  }, {
+    key: 'renderPage',
+    value: function renderPage(page, info) {
+      this.state.clicked++;
+      if (this.state.clicked > 0) {
+        // Utilities.calcRoute();
+        this.props.changePage(page, info);
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-
       return React.createElement(
         'div',
-        { className: 'container-fluid' },
+        { id: 'welcome', className: 'container-fluid' },
         React.createElement(
           'div',
           { className: 'row' },
           React.createElement(
             'div',
-            { className: 'col-sm-8', id: 'left-column' },
+            { id: 'welcome-left-column', className: 'col-md-6' },
             React.createElement(
               'h3',
               null,
-              this.props.info.name
+              'Official Sponsors of NewUser page'
             ),
-            React.createElement('img', { alt: 'Bootstrap Image Preview', src: 'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg' }),
             React.createElement(
-              'table',
-              { className: 'table' },
+              'dl',
+              null,
               React.createElement(
-                'thead',
+                'dt',
                 null,
-                React.createElement(
-                  'tr',
-                  null,
-                  React.createElement(
-                    'th',
-                    null,
-                    'Stats'
-                  )
-                )
+                'Support Your Employees'
               ),
               React.createElement(
-                'tbody',
+                'dd',
                 null,
-                React.createElement(
-                  'tr',
-                  null,
-                  React.createElement(
-                    'td',
-                    null,
-                    'Business ID'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    this.props.info.referenceNum
-                  )
-                ),
-                React.createElement(
-                  'tr',
-                  { className: 'table-active' },
-                  React.createElement(
-                    'td',
-                    null,
-                    'Business Contact'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    this.props.info.employerContact
-                  )
-                ),
-                React.createElement(
-                  'tr',
-                  { className: 'table-warning' },
-                  React.createElement(
-                    'td',
-                    null,
-                    'Email'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    this.props.info.email
-                  )
-                ),
-                React.createElement(
-                  'tr',
-                  { className: 'table-success' },
-                  React.createElement(
-                    'td',
-                    null,
-                    'Address'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    this.props.info.address
-                  )
-                ),
-                React.createElement(
-                  'tr',
-                  { className: 'table-danger' },
-                  React.createElement(
-                    'td',
-                    null,
-                    'Total Number of Employees'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    this.props.info.employeeCount
-                  )
-                ),
-                React.createElement(
-                  'tr',
-                  { className: 'table-active' },
-                  React.createElement(
-                    'td',
-                    null,
-                    'Employee Voters'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    this.props.info.employeeVoterCount
-                  )
-                )
+                'Bolster employee morale by letting them know that you support their right to vote'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'Logistics Made Easy'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'We create a logistical gameplan custom-tailored to each employee voter'
+              ),
+              React.createElement(
+                'dt',
+                null,
+                'No Surprises'
+              ),
+              React.createElement(
+                'dd',
+                null,
+                'Get ahead of election-day scheduling so business goes smoothly'
               )
             )
           ),
-          React.createElement('div', { className: 'col-sm-4' })
+          React.createElement(
+            'div',
+            { id: 'right-column', className: 'col-md-6' },
+            React.createElement(
+              'div',
+              { role: 'form' },
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'InputName' },
+                  'Name',
+                  React.createElement('input', { type: 'name', className: 'form-control', id: 'InputName', name: this.value, onChange: this.handleNameChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'exampleInputEmail1' },
+                  'Email Address',
+                  React.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', email: this.value, onChange: this.handleEmailChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'InputPhoneNumber' },
+                  'Phone Number',
+                  React.createElement('input', { type: 'phonenumber', className: 'form-control', id: 'InputPhoneNumber', phonenumber: this.value, onChange: this.handlePhoneNumberChange.bind(this) })
+                )
+              )
+            ),
+            React.createElement(
+              'div',
+              { role: 'form' },
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'InputAddress' },
+                  'Address',
+                  React.createElement('input', { type: 'address', className: 'form-control', id: 'InputAddress', address: this.value, onChange: this.handleStreetAddressChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement(
+                  'label',
+                  { htmlFor: 'InputBusinessID' },
+                  'Business ID',
+                  React.createElement('input', { type: 'text', className: 'form-control', id: 'InputBusinessID', businessid: this.value, onChange: this.handleBusinessIdChange.bind(this) })
+                )
+              ),
+              React.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-primary', onClick: this.signUser.bind(this) },
+                'Submit'
+              )
+            )
+          )
         )
       );
     }
   }]);
 
-  return Profile;
+  return NewUser;
 }(React.Component);
 
-module.exports = Profile;
+module.exports = NewUser;
 },{"react":"../node_modules/react/index.js","../utilities":"utilities.js"}],"../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -3929,7 +3988,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61579' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61612' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -4070,5 +4129,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","components/Profile.jsx"], null)
-//# sourceMappingURL=/Profile.3ec1de09.map
+},{}]},{},["../../../../.nvm/versions/node/v8.11.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","components/NewUser.jsx"], null)
+//# sourceMappingURL=/NewUser.0df0ce52.map
