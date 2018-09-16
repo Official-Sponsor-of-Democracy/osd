@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { saveBusiness } = require('../db/database.js');
+const { validateBusiness } = require('../db/database.js');
+const { getRefNum } = require('../services/getReferneceNum.js');
 
 const app = express();
 
@@ -10,19 +13,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/createBusiness', (req, res) => {
-  res.set('Allow-Control-Access-Origin', '*');
-  // console.log(req.body);
-  // get the data given to the req should be an email and a name
-  // with the email and name save the given data to the mongo database
-  // respond with the data in that the user just input to display on the page plus any additional beginner stats
-  res.end('Hello');
+  // get the data given to the req should be name, email, password, contact, address, employee count
+  const business = req.body;
+  business.referenceNum = getRefNum();
+  business.employeeVoterCount = 0;
+
+  // with the info save the given data to the mongo database
+  saveBusiness(business, (newPartner) => {
+    // respond with the saved partner
+    console.log(newPartner);
+    res.send(newPartner);
+  });
 });
 
-app.get('/loginBusiness', (req, res) => {
-  // should take user info passed to the req body
-
-  // if the user info passed in is a valid user from
-  // the database respond with a session for the user
+app.post('/loginBusiness', (req, res) => {
+  // should take business info passed to the req body which will be email and password
+  const { email, password } = req.body;
+  // query the mongo database to see if the user inputs are valid
+  validateBusiness(email, password, (partner) => {
+    // the database responds with a session with the business information
+    res.send(partner);
+  });
 });
 
 app.post('/sendEmail', (req, res) => {
