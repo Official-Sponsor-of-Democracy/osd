@@ -53,6 +53,8 @@ html, body {
     margin: 0;
     background-image: url("split4.5fab5c6e.png");
     background-repeat: no-repeat;
+    background: no-repeat center center cover;
+    background-size:100%;
    /* opacity: 0.5; */
     
 }
