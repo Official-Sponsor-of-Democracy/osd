@@ -48,15 +48,30 @@
   
 /* } */
 
-html, body {
+/* html, body {
     height: 100%;
     margin: 0;
     background-image: url("../split4.png");
     background-repeat: no-repeat;
     background: no-repeat center center cover;
     background-size:100%;
-   /* opacity: 0.5; */
+   
     
+/* } */
+
+#welcome{
+  position: absolute;
+       top: 1px; 
+       bottom: 1px; 
+       width: 100%;
+       background-image: url("../split4.png");
+       background-repeat: no-repeat;
+    background: no-repeat center center cover;
+    background-size:100%;
+}
+
+.sign-up{
+  background-image: url("../split4.png");
 }
 /* #right-column{
     
@@ -70,10 +85,10 @@ html, body {
 /* #image {
   
 } */
-.row, .container-fluid{
+/* .row, .container-fluid{
   margin-right:0;
   margin-left:0;
-}
+} */
 #right-column {
  /* position: absolute;  */
  /* display: flex;
@@ -90,7 +105,7 @@ margin-right:0;
 } 
 
 
-#left-column {
+#welcome-left-column {
   /* margin-top: 500px; */
   /* display: flex; */
   /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
@@ -106,7 +121,52 @@ background-color: transparent;
   padding: 100px;
     
 }
+#business-form{
+  position: absolute;
+       top: 1px; 
+       bottom: 1px; 
+       width: 100%;
+       height: 100%;
+       background-image: url("../vote.jpg");
+       
+    background: no-repeat center center cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    /* background-size:100%; */
+}
+#middle-column {
+  margin-top: 1%;
+  /* display: flex; */
+  /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
+background-color: white;
+ /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
+  /* position: absolute;  */
+     /* top: 10%; */
+    /* float: none; */
+    /* display: table-cell; */
+  /* height: 100%; */
+  color: black;
+  text-align: center;
+  padding: 100px;
+    
+}
 
+#left-column {
+  /* margin-top: 500px; */
+  /* display: flex; */
+  /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
+background-color: transparent;
+ /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
+  /* position: absolute;  */
+     /* top: 0; */
+    /* float: none; */
+    /* display: table-cell; */
+  /* height: 100%; */
+  color: black;
+  text-align: center;
+  padding: 100px;
+    
+}
 /* .row {
     height: 100%;
     display: table-row;
@@ -122,15 +182,15 @@ background-color: transparent;
   
     /* background-size: cover;
 } */
-/* .osd-icon {
-    display: block;
+#osd-icon {
+    /* display: block; */
     margin: 0 auto;
-    width: 100px;
-    height: 100px;
+    width: 49%;
+    height: 50%;
     border: 4px solid white; 
-    border-radius: 50%; 
-    margin-bottom:20px;
-} */
+    border-radius: 100%; 
+    margin-bottom:10px;
+}
 /* .text-center {
     padding: 20px;
     text-align: center;
