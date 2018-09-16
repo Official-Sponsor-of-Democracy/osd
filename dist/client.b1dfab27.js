@@ -22306,7 +22306,8 @@ var Welcome = function (_React$Component) {
             password: "hello",
             employerContact: "Roger",
             address: "1808 Elysian Fields Ave New Orleans, La ",
-            coordinates: { lat: 2020, lng: 2999 }
+            coordinates: { lat: 2020, lng: 2999 },
+            employeeVoterCount: 7
             // console.log("in check user")
           };_this2.renderPage('profile', fromResolve);
         } else {
@@ -22326,15 +22327,16 @@ var Welcome = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log("in welcome");
       return React.createElement(
         'div',
-        { className: 'container-fluid' },
+        { className: 'container-fluid h-100' },
         React.createElement(
           'div',
-          { className: 'row' },
+          { className: 'row h-100' },
           React.createElement(
             'div',
-            { className: 'col-md-6' },
+            { className: 'col-md-6 h-100', id: 'left-column' },
             React.createElement(
               'h3',
               null,
@@ -22377,7 +22379,7 @@ var Welcome = function (_React$Component) {
           ),
           React.createElement(
             'div',
-            { className: 'col-md-6' },
+            { className: 'col-md-6 h-100', id: 'right-column' },
             React.createElement(
               'div',
               { role: 'form' },
@@ -22521,7 +22523,7 @@ var BusinessForm = function (_React$Component) {
           { className: 'row' },
           React.createElement(
             'div',
-            { className: 'col-md-12' },
+            { className: 'col-md-6', id: 'right-column' },
             React.createElement(
               'h3',
               null,
@@ -22536,7 +22538,11 @@ var BusinessForm = function (_React$Component) {
               'p',
               null,
               'After the election we will send you information about your employee-voter turnout, along with an Offical Sponsor of Democracy seal which you can proudly display at the office'
-            ),
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-md-6', id: 'left-column' },
             React.createElement(
               'div',
               { role: 'form' },
@@ -22654,34 +22660,32 @@ var BusinessLogin = function (_React$Component) {
     value: function handlePasswordChange(event) {
       this.setState({ password: event.target.value });
     }
-  }, {
-    key: 'checkUser',
-    value: function checkUser() {
-      var _this2 = this;
 
-      var email = this.state.email;
-      var password = this.state.password;
+    // checkUser() {
+    //   const { email } = this.state;
+    //   const { password } = this.state;
+    //   const userCheck = Utilities.checkUser(email, password);
+    //   userCheck.then((resolve) => {
+    //     if (resolve) {
+    //       const fromResolve = {
+    //         name: "AAA Plumbing",
+    //         email: "jldela@Gmail.com",
+    //         employeeCount: 20,
+    //         referenceNum: 2,
+    //         password: "hello",
+    //         employerContact: "Roger",
+    //         address: "1808 Elysian Fields Ave New Orleans, La ",
+    //         coordinates: {lat: 2020, lng: 2999},
+    //         employeeVoterCount: 7,
+    //       }
+    //       this.renderPage('profile', fromResolve);
+    //     } else {
+    //       alert('User Not Recognized')
+    //       this.renderPage('welcome');
+    //     }
+    //   });  
+    // }
 
-      var userCheck = Utilities.checkUser(email, password);
-      userCheck.then(function (resolve) {
-        if (resolve) {
-          var fromResolve = {
-            name: "AAA Plumbing",
-            email: "jldela@Gmail.com",
-            employeeCount: 20,
-            referenceNum: 2,
-            password: "hello",
-            employerContact: "Roger",
-            address: "1808 Elysian Fields Ave New Orleans, La ",
-            coordinates: { lat: 2020, lng: 2999 }
-            // get id from resolve and put where 20 is
-          };_this2.renderPage('profile', fromResolve);
-        } else {
-          alert('User Not Recognized');
-          _this2.renderPage('welcome');
-        }
-      });
-    }
   }, {
     key: 'renderPage',
     value: function renderPage(page, info) {
@@ -22702,7 +22706,7 @@ var BusinessLogin = function (_React$Component) {
           { className: 'row' },
           React.createElement(
             'div',
-            { className: 'col-md-6' },
+            { className: 'col-md-6', id: 'left-column' },
             React.createElement(
               'h3',
               null,
@@ -22819,7 +22823,7 @@ var Profile = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this, "in profile");
+
       return React.createElement(
         'div',
         { className: 'container-fluid' },
@@ -22828,12 +22832,13 @@ var Profile = function (_React$Component) {
           { className: 'row' },
           React.createElement(
             'div',
-            { className: 'col-sm-8' },
+            { className: 'col-sm-8', id: 'left-column' },
             React.createElement(
               'h3',
               null,
-              'hello'
+              this.props.info.name
             ),
+            React.createElement('img', { alt: 'Bootstrap Image Preview', src: 'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg' }),
             React.createElement(
               'table',
               { className: 'table' },
@@ -22846,22 +22851,7 @@ var Profile = function (_React$Component) {
                   React.createElement(
                     'th',
                     null,
-                    '#'
-                  ),
-                  React.createElement(
-                    'th',
-                    null,
-                    'Product'
-                  ),
-                  React.createElement(
-                    'th',
-                    null,
-                    'Payment Taken'
-                  ),
-                  React.createElement(
-                    'th',
-                    null,
-                    'Status'
+                    'Stats'
                   )
                 )
               ),
@@ -22874,22 +22864,12 @@ var Profile = function (_React$Component) {
                   React.createElement(
                     'td',
                     null,
-                    '1'
+                    'Business ID'
                   ),
                   React.createElement(
                     'td',
                     null,
-                    'TB - Monthly'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    '01/04/2012'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    'Default'
+                    this.props.info.referenceNum
                   )
                 ),
                 React.createElement(
@@ -22898,46 +22878,12 @@ var Profile = function (_React$Component) {
                   React.createElement(
                     'td',
                     null,
-                    '1'
+                    'Business Contact'
                   ),
                   React.createElement(
                     'td',
                     null,
-                    'TB - Monthly'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    '01/04/2012'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    'Approved'
-                  )
-                ),
-                React.createElement(
-                  'tr',
-                  { className: 'table-success' },
-                  React.createElement(
-                    'td',
-                    null,
-                    '2'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    'TB - Monthly'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    '02/04/2012'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    'Declined'
+                    this.props.info.employerContact
                   )
                 ),
                 React.createElement(
@@ -22946,22 +22892,26 @@ var Profile = function (_React$Component) {
                   React.createElement(
                     'td',
                     null,
-                    '3'
+                    'Email'
                   ),
                   React.createElement(
                     'td',
                     null,
-                    'TB - Monthly'
+                    this.props.info.email
+                  )
+                ),
+                React.createElement(
+                  'tr',
+                  { className: 'table-success' },
+                  React.createElement(
+                    'td',
+                    null,
+                    'Address'
                   ),
                   React.createElement(
                     'td',
                     null,
-                    '03/04/2012'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    'Pending'
+                    this.props.info.address
                   )
                 ),
                 React.createElement(
@@ -22970,81 +22920,32 @@ var Profile = function (_React$Component) {
                   React.createElement(
                     'td',
                     null,
-                    '4'
+                    'Total Number of Employees'
                   ),
                   React.createElement(
                     'td',
                     null,
-                    'TB - Monthly'
+                    this.props.info.employeeCount
+                  )
+                ),
+                React.createElement(
+                  'tr',
+                  { className: 'table-active' },
+                  React.createElement(
+                    'td',
+                    null,
+                    'Employee Voters'
                   ),
                   React.createElement(
                     'td',
                     null,
-                    '04/04/2012'
-                  ),
-                  React.createElement(
-                    'td',
-                    null,
-                    'Call in to confirm'
+                    this.props.info.employeeVoterCount
                   )
                 )
               )
             )
           ),
-          React.createElement(
-            'div',
-            { className: 'col-sm-4' },
-            React.createElement('img', { alt: 'Bootstrap Image Preview', src: 'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg' }),
-            React.createElement(
-              'h3',
-              null,
-              'h3. Lorem ipsum dolor sit amet.'
-            ),
-            React.createElement(
-              'ul',
-              null,
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Lorem ipsum dolor sit amet'
-              ),
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Consectetur adipiscing elit'
-              ),
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Integer molestie lorem at massa'
-              ),
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Facilisis in pretium nisl aliquet'
-              ),
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Nulla volutpat aliquam velit'
-              ),
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Faucibus porta lacus fringilla vel'
-              ),
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Aenean sit amet erat nunc'
-              ),
-              React.createElement(
-                'li',
-                { className: 'list-item' },
-                'Eget porttitor lorem'
-              )
-            )
-          )
+          React.createElement('div', { className: 'col-sm-4' })
         )
       );
     }
@@ -23291,7 +23192,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '65160' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55786' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
