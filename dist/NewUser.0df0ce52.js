@@ -3836,25 +3836,17 @@ var NewUser = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'div',
-<<<<<<< HEAD
-        { className: 'container-fluid' },
-=======
         { id: 'welcome', className: 'container-fluid' },
->>>>>>> 2
         React.createElement(
           'div',
           { className: 'row' },
           React.createElement(
             'div',
-<<<<<<< HEAD
-            { className: 'col-md-6' },
-=======
             { id: 'welcome-left-column', className: 'col-md-6' },
->>>>>>> 2
             React.createElement(
               'h3',
               null,
-              'Official Sponsors of NewUser page'
+              'Official Sponsors of Democracy'
             ),
             React.createElement(
               'dl',
@@ -3862,12 +3854,12 @@ var NewUser = function (_React$Component) {
               React.createElement(
                 'dt',
                 null,
-                'Support Your Employees'
+                'Supported'
               ),
               React.createElement(
                 'dd',
                 null,
-                'Bolster employee morale by letting them know that you support their right to vote'
+                'Afraid to ask for more time off? Your boss supports your right to vote'
               ),
               React.createElement(
                 'dt',
@@ -3878,26 +3870,12 @@ var NewUser = function (_React$Component) {
                 'dd',
                 null,
                 'We create a logistical gameplan custom-tailored to each employee voter'
-              ),
-              React.createElement(
-                'dt',
-                null,
-                'No Surprises'
-              ),
-              React.createElement(
-                'dd',
-                null,
-                'Get ahead of election-day scheduling so business goes smoothly'
               )
             )
           ),
           React.createElement(
             'div',
-<<<<<<< HEAD
-            { className: 'col-md-6' },
-=======
             { id: 'right-column', className: 'col-md-6' },
->>>>>>> 2
             React.createElement(
               'div',
               { role: 'form' },
@@ -4000,11 +3978,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61102' + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61612' + '/');
->>>>>>> 2
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62246' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

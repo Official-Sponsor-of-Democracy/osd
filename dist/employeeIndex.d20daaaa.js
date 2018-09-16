@@ -28883,6 +28883,7 @@ var MapPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      alert("Click on a voting location in your area");
       var google = this.props.google;
       // const { center } = this.state;
 
@@ -29032,25 +29033,17 @@ var NewUser = function (_React$Component) {
     value: function render() {
       return React.createElement(
         'div',
-<<<<<<< HEAD
-        { className: 'container-fluid' },
-=======
         { id: 'welcome', className: 'container-fluid' },
->>>>>>> 2
         React.createElement(
           'div',
           { className: 'row' },
           React.createElement(
             'div',
-<<<<<<< HEAD
-            { className: 'col-md-6' },
-=======
             { id: 'welcome-left-column', className: 'col-md-6' },
->>>>>>> 2
             React.createElement(
               'h3',
               null,
-              'Official Sponsors of NewUser page'
+              'Official Sponsors of Democracy'
             ),
             React.createElement(
               'dl',
@@ -29058,12 +29051,12 @@ var NewUser = function (_React$Component) {
               React.createElement(
                 'dt',
                 null,
-                'Support Your Employees'
+                'Supported'
               ),
               React.createElement(
                 'dd',
                 null,
-                'Bolster employee morale by letting them know that you support their right to vote'
+                'Afraid to ask for more time off? Your boss supports your right to vote'
               ),
               React.createElement(
                 'dt',
@@ -29074,26 +29067,12 @@ var NewUser = function (_React$Component) {
                 'dd',
                 null,
                 'We create a logistical gameplan custom-tailored to each employee voter'
-              ),
-              React.createElement(
-                'dt',
-                null,
-                'No Surprises'
-              ),
-              React.createElement(
-                'dd',
-                null,
-                'Get ahead of election-day scheduling so business goes smoothly'
               )
             )
           ),
           React.createElement(
             'div',
-<<<<<<< HEAD
-            { className: 'col-md-6' },
-=======
             { id: 'right-column', className: 'col-md-6' },
->>>>>>> 2
             React.createElement(
               'div',
               { role: 'form' },
@@ -29204,17 +29183,11 @@ var Gameplan = function (_React$Component) {
         React.createElement(
           "div",
           { className: "row" },
-<<<<<<< HEAD
-          React.createElement(
-            "div",
-            { className: "col-md-12" },
-=======
           React.createElement("div", { className: "col-md-3" }),
           React.createElement(
             "div",
             { id: "gameplan-middle-column", className: "col-md-6" },
             React.createElement("img", { id: "osd-icon-gameplan", src: "https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png", onClick: this.printStuff.bind(this, this.props) }),
->>>>>>> 2
             React.createElement(
               "h3",
               { className: "text-center" },
@@ -29251,12 +29224,7 @@ var Gameplan = function (_React$Component) {
               React.createElement(
                 "dd",
                 null,
-                "1808 Elysian Fields Ave"
-              ),
-              React.createElement(
-                "dd",
-                null,
-                "New Orleans, LA 70117"
+                this.props.employeeInfo.chosenlocation.toString()
               ),
               React.createElement(
                 "dt",
@@ -29266,19 +29234,14 @@ var Gameplan = function (_React$Component) {
               React.createElement(
                 "dd",
                 null,
-                "It should take you about two hours to drive to your polling location, vote, and get to work"
+                "It should take you about ",
+                this.props.employeeInfo.drivetime.toString(),
+                " hours to drive to your polling location, vote, and get to work"
               )
             ),
-<<<<<<< HEAD
-            React.createElement("img", { alt: "Bootstrap Preview", src: "https://www.layoutit.com/img/sports-q-c-140-140-3.jpg", onClick: this.printStuff.bind(this, this.props) }),
-            React.createElement(
-              "h3",
-              { className: "text-center text-success" },
-=======
             React.createElement(
               "h3",
               { className: "text-center" },
->>>>>>> 2
               "Looping in your boss"
             ),
             React.createElement(
@@ -29300,12 +29263,8 @@ var Gameplan = function (_React$Component) {
               this.props.employeeInfo.drivetime.toString(),
               " hours to exercise their right to vote on [date]. Talk to each other to sort out the specifics so everything goes smoothly on election day. Thank you for supporting democracy one vote at a time!"
             )
-<<<<<<< HEAD
-          )
-=======
           ),
           React.createElement("div", { className: "col-md-3" })
->>>>>>> 2
         )
       );
     }
@@ -29357,11 +29316,7 @@ var EmployeeApp = function (_React$Component) {
       if (this.state.renderThis === 'welcome') {
         return React.createElement(
           'div',
-<<<<<<< HEAD
-          { id: 'autocomplete', className: 'container-fluid' },
-=======
           { className: 'container-fluid' },
->>>>>>> 2
           React.createElement(NewUser, { changePage: this.changePage.bind(this) })
         );
       }
@@ -29375,11 +29330,7 @@ var EmployeeApp = function (_React$Component) {
       if (this.state.renderThis === 'gameplan') {
         return React.createElement(
           'div',
-<<<<<<< HEAD
-          { className: 'container-fluid' },
-=======
           { id: 'gameplan', className: 'container-fluid' },
->>>>>>> 2
           React.createElement(Gameplan, { changePage: this.changePage.bind(this), employeeInfo: this.state.employeeInfo })
         );
       }
@@ -29436,11 +29387,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61102' + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61612' + '/');
->>>>>>> 2
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62246' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

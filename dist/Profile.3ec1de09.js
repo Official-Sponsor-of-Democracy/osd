@@ -1088,66 +1088,8 @@ if ('development' !== "production") {
         if (Object.freeze) {
           Object.freeze(element.props);
           Object.freeze(element);
-<<<<<<< HEAD
-=======
         }
       }
-
-      return element;
-    };
-
-    /**
-     * Create and return a new ReactElement of the given type.
-     * See https://reactjs.org/docs/react-api.html#createelement
-     */
-    function createElement(type, config, children) {
-      var propName = void 0;
-
-      // Reserved names are extracted
-      var props = {};
-
-      var key = null;
-      var ref = null;
-      var self = null;
-      var source = null;
-
-      if (config != null) {
-        if (hasValidRef(config)) {
-          ref = config.ref;
-        }
-        if (hasValidKey(config)) {
-          key = '' + config.key;
-        }
-
-        self = config.__self === undefined ? null : config.__self;
-        source = config.__source === undefined ? null : config.__source;
-        // Remaining properties are added to a new props object
-        for (propName in config) {
-          if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-            props[propName] = config[propName];
-          }
-        }
-      }
-
-      // Children can be more than one argument, and those are transferred onto
-      // the newly allocated props object.
-      var childrenLength = arguments.length - 2;
-      if (childrenLength === 1) {
-        props.children = children;
-      } else if (childrenLength > 1) {
-        var childArray = Array(childrenLength);
-        for (var i = 0; i < childrenLength; i++) {
-          childArray[i] = arguments[i + 2];
-        }
-        {
-          if (Object.freeze) {
-            Object.freeze(childArray);
-          }
->>>>>>> 2
-        }
-        props.children = childArray;
-      }
-<<<<<<< HEAD
 
       return element;
     };
@@ -1272,78 +1214,6 @@ if ('development' !== "production") {
           key = '' + config.key;
         }
 
-=======
-
-      // Resolve default props
-      if (type && type.defaultProps) {
-        var defaultProps = type.defaultProps;
-        for (propName in defaultProps) {
-          if (props[propName] === undefined) {
-            props[propName] = defaultProps[propName];
-          }
-        }
-      }
-      {
-        if (key || ref) {
-          var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
-          if (key) {
-            defineKeyPropWarningGetter(props, displayName);
-          }
-          if (ref) {
-            defineRefPropWarningGetter(props, displayName);
-          }
-        }
-      }
-      return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
-    }
-
-    /**
-     * Return a function that produces ReactElements of a given type.
-     * See https://reactjs.org/docs/react-api.html#createfactory
-     */
-
-    function cloneAndReplaceKey(oldElement, newKey) {
-      var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
-
-      return newElement;
-    }
-
-    /**
-     * Clone and return a new ReactElement using element as the starting point.
-     * See https://reactjs.org/docs/react-api.html#cloneelement
-     */
-    function cloneElement(element, config, children) {
-      !!(element === null || element === undefined) ? invariant(false, 'React.cloneElement(...): The argument must be a React element, but you passed %s.', element) : void 0;
-
-      var propName = void 0;
-
-      // Original props are copied
-      var props = _assign({}, element.props);
-
-      // Reserved names are extracted
-      var key = element.key;
-      var ref = element.ref;
-      // Self is preserved since the owner is preserved.
-      var self = element._self;
-      // Source is preserved since cloneElement is unlikely to be targeted by a
-      // transpiler, and the original source is probably a better indicator of the
-      // true owner.
-      var source = element._source;
-
-      // Owner will be preserved, unless ref is overridden
-      var owner = element._owner;
-
-      if (config != null) {
-        if (hasValidRef(config)) {
-          // Silently steal the ref from the parent.
-          ref = config.ref;
-          owner = ReactCurrentOwner.current;
-        }
-        if (hasValidKey(config)) {
-          key = '' + config.key;
-        }
-
->>>>>>> 2
         // Remaining properties override existing props
         var defaultProps = void 0;
         if (element.type && element.type.defaultProps) {
@@ -1936,7 +1806,6 @@ if ('development' !== "production") {
           }
         }
       }
-<<<<<<< HEAD
     }
 
     /**
@@ -2032,103 +1901,6 @@ if ('development' !== "production") {
 
       var element = createElement.apply(this, arguments);
 
-=======
-    }
-
-    /**
-     * Given an element, validate that its props follow the propTypes definition,
-     * provided by the type.
-     *
-     * @param {ReactElement} element
-     */
-    function validatePropTypes(element) {
-      var type = element.type;
-      var name = void 0,
-          propTypes = void 0;
-      if (typeof type === 'function') {
-        // Class or functional component
-        name = type.displayName || type.name;
-        propTypes = type.propTypes;
-      } else if (typeof type === 'object' && type !== null && type.$$typeof === REACT_FORWARD_REF_TYPE) {
-        // ForwardRef
-        var functionName = type.render.displayName || type.render.name || '';
-        name = type.displayName || (functionName !== '' ? 'ForwardRef(' + functionName + ')' : 'ForwardRef');
-        propTypes = type.propTypes;
-      } else {
-        return;
-      }
-      if (propTypes) {
-        setCurrentlyValidatingElement(element);
-        checkPropTypes(propTypes, element.props, 'prop', name, ReactDebugCurrentFrame.getStackAddendum);
-        setCurrentlyValidatingElement(null);
-      } else if (type.PropTypes !== undefined && !propTypesMisspellWarningShown) {
-        propTypesMisspellWarningShown = true;
-        warningWithoutStack$1(false, 'Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', name || 'Unknown');
-      }
-      if (typeof type.getDefaultProps === 'function') {
-        !type.getDefaultProps.isReactClassApproved ? warningWithoutStack$1(false, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : void 0;
-      }
-    }
-
-    /**
-     * Given a fragment, validate that it can only be provided with fragment props
-     * @param {ReactElement} fragment
-     */
-    function validateFragmentProps(fragment) {
-      setCurrentlyValidatingElement(fragment);
-
-      var keys = Object.keys(fragment.props);
-      for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        if (key !== 'children' && key !== 'key') {
-          warning$1(false, 'Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.', key);
-          break;
-        }
-      }
-
-      if (fragment.ref !== null) {
-        warning$1(false, 'Invalid attribute `ref` supplied to `React.Fragment`.');
-      }
-
-      setCurrentlyValidatingElement(null);
-    }
-
-    function createElementWithValidation(type, props, children) {
-      var validType = isValidElementType(type);
-
-      // We warn in this case but don't throw. We expect the element creation to
-      // succeed and there will likely be errors in render.
-      if (!validType) {
-        var info = '';
-        if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
-          info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and named imports.";
-        }
-
-        var sourceInfo = getSourceInfoErrorAddendum(props);
-        if (sourceInfo) {
-          info += sourceInfo;
-        } else {
-          info += getDeclarationErrorAddendum();
-        }
-
-        var typeString = void 0;
-        if (type === null) {
-          typeString = 'null';
-        } else if (Array.isArray(type)) {
-          typeString = 'array';
-        } else if (type !== undefined && type.$$typeof === REACT_ELEMENT_TYPE) {
-          typeString = '<' + (getComponentName(type.type) || 'Unknown') + ' />';
-          info = ' Did you accidentally export a JSX literal instead of a component?';
-        } else {
-          typeString = typeof type;
-        }
-
-        warning$1(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', typeString, info);
-      }
-
-      var element = createElement.apply(this, arguments);
-
->>>>>>> 2
       // The result can be nullish if a mock or a custom function is used.
       // TODO: Drop this when these are no longer allowed as the type argument.
       if (element == null) {
@@ -4155,11 +3927,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61110' + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61815' + '/');
->>>>>>> 2
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63896' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
