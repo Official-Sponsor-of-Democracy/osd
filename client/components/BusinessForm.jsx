@@ -61,7 +61,7 @@ class BusinessForm extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-6" id="right-column">
             <h3>
               Becoming a Sponsor
             </h3>
@@ -73,6 +73,9 @@ class BusinessForm extends React.Component {
               along with an Offical Sponsor of Democracy seal
               which you can proudly display at the office
             </p>
+            </div>
+            
+            <div className="col-md-6" id="left-column">
             <div role="form">
               <div className="form-group">
                 <label htmlFor="businessNameInput">
@@ -113,9 +116,9 @@ class BusinessForm extends React.Component {
               <button type="submit" className="btn btn-primary" onClick={this.addBusiness.bind(this)}>
                 Submit
               </button>
+          </div>
             </div>
           </div>
-        </div>
       </div>
     );
   }

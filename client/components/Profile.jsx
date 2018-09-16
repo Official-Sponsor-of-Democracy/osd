@@ -15,136 +15,76 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log(this, "in profile")
+    
       return (
         <div className="container-fluid">
           <div className="row">
-              <div className="col-sm-8">
+            <div className="col-sm-8" id="left-column">
                 <h3>
-                  hello
+                  {this.props.info.name}
 		          	</h3>
+              <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
                 <table className="table">
                   <thead>
                     <tr>
                       <th>
-                        #
+                        Stats
 					           	</th>
-                      <th>
-                        Product
-						          </th>
-                      <th>
-                        Payment Taken
-					           	</th>
-                      <th>
-                        Status
-					          	</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>
-                        1
+                        Business ID
 					           	</td>
                       <td>
-                        TB - Monthly
+                      {this.props.info.referenceNum}
 					          	</td>
-                      <td>
-                        01/04/2012
-					           	</td>
-                      <td>
-                        Default
-						          </td>
                     </tr>
                     <tr className="table-active">
                       <td>
-                        1
+                        Business Contact
 						          </td>
                       <td>
-                        TB - Monthly
-					           	</td>
-                      <td>
-                        01/04/2012
-					           	</td>
-                      <td>
-                        Approved
+                      {this.props.info.employerContact}
 					           	</td>
                     </tr>
-                    <tr className="table-success">
+                  <tr className="table-warning">
                       <td>
-                        2
+                        Email
 						          </td>
                       <td>
-                        TB - Monthly
-						          </td>
-                      <td>
-                        02/04/2012
-						          </td>
-                      <td>
-                        Declined
+                      {this.props.info.email}
 						          </td>
                     </tr>
-                    <tr className="table-warning">
-                      <td>
-                        3
+                  <tr className="table-success">
+                    <td>
+                      Address
 						          </td>
-                      <td>
-                        TB - Monthly
-						          </td>
-                      <td>
-                        03/04/2012
-						          </td>
-                      <td>
-                        Pending
-						          </td>
-                    </tr>
+                    <td>
+                      {this.props.info.address}
+                    </td>
+                  </tr>
                     <tr className="table-danger">
                       <td>
-                        4
+                        Total Number of Employees
 						          </td>
                       <td>
-                        TB - Monthly
-						          </td>
-                      <td>
-                        04/04/2012
-					          	</td>
-                      <td>
-                        Call in to confirm
+                      {this.props.info.employeeCount}
 						          </td>
                     </tr>
+                  <tr className="table-active">
+                    <td>
+                      Employee Voters
+						          </td>
+                    <td>
+                      {this.props.info.employeeVoterCount}
+                    </td>
+                  </tr>
                   </tbody>
                 </table>  
             </div>
             <div className="col-sm-4">
-                  <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
-                  <h3>
-                    h3. Lorem ipsum dolor sit amet.
-			            </h3>
-                  <ul>
-                    <li className="list-item">
-                      Lorem ipsum dolor sit amet
-				            </li>
-                    <li className="list-item">
-                      Consectetur adipiscing elit
-			            	</li>
-                    <li className="list-item">
-                      Integer molestie lorem at massa
-			            	</li>
-                    <li className="list-item">
-                      Facilisis in pretium nisl aliquet
-			            	</li>
-                    <li className="list-item">
-                      Nulla volutpat aliquam velit
-			            	</li>
-                    <li className="list-item">
-                      Faucibus porta lacus fringilla vel
-				            </li>
-                    <li className="list-item">
-                      Aenean sit amet erat nunc
-			            	</li>
-                    <li className="list-item">
-                      Eget porttitor lorem
-			            	</li>
-                  </ul>
                 </div>
               </div>
             </div>
