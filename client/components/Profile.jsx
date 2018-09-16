@@ -88,13 +88,11 @@ class Profile extends React.Component {
                   </tr>
                   </tbody>
                 </table>  
-            </div>
-              <div className="col-sm-3">
-                </div>
               </div>
-            </div>
-          
-      );
+            <div className="col-sm-3"/>
+          </div>
+        </div> 
+    );
   }
 }
 

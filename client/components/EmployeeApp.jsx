@@ -13,9 +13,7 @@ class EmployeeApp extends React.Component {
   }
 
   changePage(pageId, info) {
-    this.setState(() => {
-      return { renderThis: pageId, employeeInfo: info };
-    });
+    this.setState(() => ({ renderThis: pageId, employeeInfo: info }));
   }
 
   render() {
@@ -36,7 +34,9 @@ class EmployeeApp extends React.Component {
     if (this.state.renderThis === 'gameplan') {
       return (
         <div id="gameplan" className="container-fluid">
-          <Gameplan changePage={this.changePage.bind(this)} employeeInfo={this.state.employeeInfo} />
+          <Gameplan changePage={this.changePage.bind(this)} 
+            employeeInfo={this.state.employeeInfo} 
+          />
         </div>
       );
     }

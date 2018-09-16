@@ -19,13 +19,6 @@ class Welcome extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  // checkUser() {
-  //   const { email } = this.state;
-  //   const { password } = this.state;
-  //   Utilities.checkUser(email, password);
-  //   this.renderPage('profile');
-  // }
-
   checkUser() {
     const { email } = this.state;
     const { password } = this.state;
@@ -42,8 +35,7 @@ class Welcome extends React.Component {
           address: "1808 Elysian Fields Ave New Orleans, La ",
           coordinates: { lat: 2020, lng: 2999 },
           employeeVoterCount: 7,
-        }
-        // console.log("in check user")
+        };
         this.renderPage('profile', fromResolve);
       } else {
         alert('User Not Recognized')
@@ -60,9 +52,7 @@ class Welcome extends React.Component {
   }
 
   render() {
-    console.log("in welcome")
     return (
-      
       <div id="welcome" className="container-fluid h-100">
         <div className="row h-100">
           <div className="col-md-6 h-100" id="welcome-left-column">
@@ -74,7 +64,7 @@ class Welcome extends React.Component {
                 Support Your Employees
               </dt>
               <dd>
-            Bolster employee morale by letting them know that you support their right to vote
+                Bolster employee morale by letting them know that you support their right to vote
               </dd>
               <dt>
                 Logistics Made Easy
@@ -93,7 +83,6 @@ class Welcome extends React.Component {
           <div className="col-md-6 h-100" id="right-column">
             <div role="form">
               <div className="form-group">
-
                 <label htmlFor="exampleInputEmail1">
                   Email address
                   <input type="email" className="form-control" id="exampleInputEmail1" email={this.value} onChange={this.handleEmailChange.bind(this)} />
@@ -105,14 +94,13 @@ class Welcome extends React.Component {
                   <input type="password" className="form-control" id="exampleInputPassword1" password={this.value} onChange={this.handlePasswordChange.bind(this)} />
                 </label>
               </div>
-              <button type="submit" className="btn btn-primary" onClick={this.checkUser.bind(this)} >
+              <button type="submit" className="btn btn-primary" onClick={this.checkUser.bind(this)}>
                   Sign In
               </button>
             </div>
-            <div>
-              Not a member?
-              <button type="button" id="notexistingMember" className="btn btn-background" onClick={this.renderPage.bind(this, "businessForm")} >
-                Sign Up Here
+            <div id="signupbtn" className="text-muted">
+              <button type="button" id="notexistingMember" className="btn text-muted" onClick={this.renderPage.bind(this, "businessForm")} >
+                Not a member? Sign up here
               </button>
             </div>
           </div>

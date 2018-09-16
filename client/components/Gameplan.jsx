@@ -6,16 +6,14 @@ class Gameplan extends React.Component {
     this.state = {
     };
   }
-  printStuff(stuff) {
-    console.log(stuff)
-  }
+
   render() {
     return (
-      <div  className="container-fluid">
+      <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3"></div>
+          <div className="col-md-3" />
           <div id="gameplan-middle-column" className="col-md-6">
-            <img id="osd-icon-gameplan" src="https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png" onClick={this.printStuff.bind(this, this.props)} />
+            <img id="osd-icon-gameplan" src="https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png" />
             <h3 className="text-center">
               The Gameplan
             </h3>
@@ -30,7 +28,7 @@ class Gameplan extends React.Component {
                 Election Date
               </dt>
               <dd>
-                11/6/2018
+                Tuesday, November 6th, 2018
               </dd>
               <dt>
                 Voting Location
@@ -42,11 +40,11 @@ class Gameplan extends React.Component {
                 Plan Ahead
               </dt>
               <dd>
-                It should take you about {this.props.employeeInfo.drivetime.toString()} hours to drive to your
+                It should take you about {this.props.employeeInfo.drivetime.toString()} 
+                hours to drive to your
                 polling location, vote, and get to work
               </dd>
             </dl>
-            
             <h3 className="text-center">
               Looping in your boss
             </h3>
@@ -58,13 +56,13 @@ class Gameplan extends React.Component {
               can finalize your plan
             </dd>
             <p className="text-center text-muted">
-              Based on our calculations it should take {this.props.employeeInfo.name.toString()} {this.props.employeeInfo.drivetime.toString()} hours
-              to exercise their right to vote on [date]. Talk to each other to sort
-              out the specifics so everything goes smoothly on election day. Thank
+              Based on our calculations it should take {this.props.employeeInfo.name.toString()} approximately {this.props.employeeInfo.drivetime.toString()} hours to exercise their right to vote on Tuesday, November 6th, 2018.
+              Talk to each other to sort out the specifics
+              so everything goes smoothly on election day. Thank
               you for supporting democracy one vote at a time!
             </p>
           </div>
-          <div className="col-md-3"></div>
+          <div className="col-md-3" />
         </div>
       </div>
     );
