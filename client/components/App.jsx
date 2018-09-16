@@ -62,7 +62,7 @@ class App extends React.Component {
     }
     if (this.state.renderThis === 'profile') {
       return (
-        <div className="container-fluid">
+        <div id="profile" className="container-fluid">
           <Profile info={this.state.businessInfo} changePage={this.changePage.bind(this)} />
         </div>
       );
