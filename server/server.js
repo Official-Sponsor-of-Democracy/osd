@@ -22,7 +22,9 @@ app.post('/createBusiness', (req, res) => {
   saveBusiness(business, (newPartner) => {
     // respond with the saved partner
     console.log(newPartner);
-    res.send(newPartner);
+    // call the email function
+    res.send(201);
+
   });
 });
 
