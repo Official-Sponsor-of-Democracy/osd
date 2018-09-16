@@ -32,8 +32,19 @@ class Welcome extends React.Component {
     const userCheck = Utilities.checkUser(email, password);
     userCheck.then((resolve) => {
       if (resolve) {
-        console.log("in check user")
-        this.renderPage('profile', 20);
+        const fromResolve = {
+          name: "AAA Plumbing",
+          email: "jldela@Gmail.com",
+          employeeCount: 20,
+          referenceNum: 2,
+          password: "hello",
+          employerContact: "Roger",
+          address: "1808 Elysian Fields Ave New Orleans, La ",
+          coordinates: { lat: 2020, lng: 2999 },
+          employeeVoterCount: 7,
+        }
+        // console.log("in check user")
+        this.renderPage('profile', fromResolve);
       } else {
         alert('User Not Recognized')
         this.renderPage('welcome');
@@ -41,19 +52,20 @@ class Welcome extends React.Component {
     });
   }
 
-  renderPage(page, id) {
-    console.log(id)
+  renderPage(page, info) {
     this.state.clicked++;
     if (this.state.clicked > 0) {
-      this.props.changePage(page, id);
+      this.props.changePage(page, info);
     }
   }
 
   render() {
+    console.log("in welcome")
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-6">
+      
+      <div className="container-fluid h-100">
+        <div className="row h-100">
+          <div className="col-md-6 h-100" id="left-column">
             <h3>
               Official Sponsors of Welcom page
             </h3>
@@ -78,7 +90,7 @@ class Welcome extends React.Component {
               </dd>
             </dl>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 h-100" id="right-column">
             <div role="form">
               <div className="form-group">
 
