@@ -3775,30 +3775,28 @@ var Profile = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'row' },
+          React.createElement('div', { className: 'col-sm-3' }),
           React.createElement(
             'div',
-            { className: 'col-sm-8', id: 'left-column' },
+            { className: 'col-sm-6', id: 'middle-column' },
+            React.createElement('img', { id: 'osd-icon-profile', src: 'https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png' }),
             React.createElement(
               'h3',
               null,
               this.props.info.name
             ),
-            React.createElement('img', { alt: 'Bootstrap Image Preview', src: 'https://www.layoutit.com/img/sports-q-c-140-140-3.jpg' }),
             React.createElement(
               'table',
               { className: 'table' },
               React.createElement(
-                'thead',
+                'tr',
                 null,
                 React.createElement(
-                  'tr',
+                  'td',
                   null,
-                  React.createElement(
-                    'th',
-                    null,
-                    'Stats'
-                  )
-                )
+                  'Stats'
+                ),
+                React.createElement('td', null)
               ),
               React.createElement(
                 'tbody',
@@ -3819,7 +3817,7 @@ var Profile = function (_React$Component) {
                 ),
                 React.createElement(
                   'tr',
-                  { className: 'table-active' },
+                  { className: 'table' },
                   React.createElement(
                     'td',
                     null,
@@ -3833,7 +3831,7 @@ var Profile = function (_React$Component) {
                 ),
                 React.createElement(
                   'tr',
-                  { className: 'table-warning' },
+                  { className: 'table' },
                   React.createElement(
                     'td',
                     null,
@@ -3847,7 +3845,7 @@ var Profile = function (_React$Component) {
                 ),
                 React.createElement(
                   'tr',
-                  { className: 'table-success' },
+                  { className: 'table' },
                   React.createElement(
                     'td',
                     null,
@@ -3861,7 +3859,7 @@ var Profile = function (_React$Component) {
                 ),
                 React.createElement(
                   'tr',
-                  { className: 'table-danger' },
+                  { className: 'table' },
                   React.createElement(
                     'td',
                     null,
@@ -3875,7 +3873,7 @@ var Profile = function (_React$Component) {
                 ),
                 React.createElement(
                   'tr',
-                  { className: 'table-active' },
+                  { className: 'table' },
                   React.createElement(
                     'td',
                     null,
@@ -3890,7 +3888,7 @@ var Profile = function (_React$Component) {
               )
             )
           ),
-          React.createElement('div', { className: 'col-sm-4' })
+          React.createElement('div', { className: 'col-sm-3' })
         )
       );
     }
@@ -3929,7 +3927,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61579' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61815' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
