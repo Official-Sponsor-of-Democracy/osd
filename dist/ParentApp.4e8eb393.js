@@ -3645,16 +3645,17 @@ var axios = require('axios');
 var _require = require('./config'),
     googleApi = _require.googleApi;
 
-function addNewUser(email, password) {
-  if (email === undefined && password === undefined) {
-    console.log('made call to server which added to database');
-  } else {
-    axios.post('/createBusiness', { email: email, password: password }).then(function (resolve) {
-      // console.log(resolve);
-    });
-    console.log(email, password);
-  }
-}
+// 
+// function addNewUser(email, password) {
+//   if (email === undefined && password === undefined) {
+//     console.log('made call to server which added to database');
+//   } else {
+//     axios.post('/createBusiness', { email, password }).then((resolve) => {
+//       // console.log(resolve);
+//     });
+//     console.log(email, password);
+//   }
+// }
 
 // function getBusinessInfo(id) {
 //   if (id === undefined) {
@@ -3662,14 +3663,17 @@ function addNewUser(email, password) {
 //   } else {
 //     return axios.get('/loginBusiness', id);
 //   }
-// } 
+// }
+
+// used in Welcome to check if email/password in db
+
 
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
     console.log("in check user");
-    return axios.post('/loginBusiness', { email: email, password: password });
+    return axios.get('https://swapi.co/api/people/1/', { email: email, password: password });
   }
 }
 
@@ -3707,6 +3711,7 @@ function signUserIn(name, email, phonenumber, address, businessid) {
   }
 }
 
+// called in BusinessForm upon submission
 function addNewBusiness(businessName, email, password, employerContact, address, numEmployees) {
   if (businessName === undefined && address === undefined) {
     console.log('made call to server which added to database');
@@ -3726,7 +3731,7 @@ function findVotingLocations(coordinates) {
   }
 }
 
-module.exports.addNewUser = addNewUser;
+// module.exports.addNewUser = addNewUser;
 module.exports.signUserIn = signUserIn;
 module.exports.addNewBusiness = addNewBusiness;
 module.exports.findVotingLocations = findVotingLocations;
@@ -4508,6 +4513,7 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'changePage',
     value: function changePage(pageId, info) {
+      // if 
       if (pageId === 'profile') {
         this.setState(function () {
           return { businessInfo: info, renderThis: pageId };
@@ -30285,7 +30291,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49751' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64320' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
