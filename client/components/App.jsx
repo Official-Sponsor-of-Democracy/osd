@@ -4,7 +4,6 @@ const BusinessForm = require('./BusinessForm.jsx');
 const BusinessLogin = require('./BusinessLogIn.jsx');
 const Profile = require('./Profile.jsx');
 const SignupComplete = require('./SignupComplete.jsx');
-const Utilities = require('../utilities');
 
 class App extends React.Component {
   constructor(props) {
@@ -15,28 +14,13 @@ class App extends React.Component {
     };
   }
 
-
-
   changePage(pageId, info) {
- 
     if (pageId === 'profile') {
-      this.setState(() => {
-        console.log("in change page")
-        return { businessInfo: info, renderThis: pageId };
-      });
+      this.setState(() => ({ businessInfo: info, renderThis: pageId }));
     } else {
-      this.setState(() => {
-        return { renderThis: pageId };
-      });
+      this.setState(() => ({ renderThis: pageId }));
     }
   }
-  // changePage(pageId) {
-  //   console.log(pageId, " in change page")
-   
-  //   this.setState(() => {
-  //     return { renderThis: pageId };
-  //   });
-  // }
 
   render() {
     if (this.state.renderThis === 'welcome') {
@@ -45,7 +29,7 @@ class App extends React.Component {
           <Welcome changePage={this.changePage.bind(this)} />
         </div>
       );
-    }  
+    }
     if (this.state.renderThis === 'businessForm') {
       return (
         <div id="business-form" className="container-fluid">

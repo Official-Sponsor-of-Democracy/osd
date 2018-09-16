@@ -1,63 +1,4 @@
-/* body {
-    background-color: lightblue;
-} */
-/* body{
-   background-image: url("../Vecteezy-16-4200-22.jpg");
-    width: 50%
-} */
 
-/* .container-fluid {
-    min-height: 100%;
-    overflow: hidden;
-} */
-
-/* html,body {
-  height: 100%;
-  
-} */
-
-/* .container-fluid {
-    
-    background-repeat: no-repeat;
-    background-size: 50% 100%;
-    
-} */
-/* html, body
-{
-    height: 100%;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-} */
-
-/* .row, .container-fluid {
-    overflow: hidden; 
-}
-
-.row, .container-fluid  [className*="col-"]{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-} */
-
-/* .home {
-  position: relative; 
-   
-   width: 50%;
-} */
-/* html, body {
-  /* background-position: 10px 50px 10x;  */
-  
-/* } */
-
-/* html, body {
-    height: 100%;
-    margin: 0;
-    background-image: url("../split4.png");
-    background-repeat: no-repeat;
-    background: no-repeat center center cover;
-    background-size:100%;
-   
-    
-/* } */
 
 #welcome{
   position: absolute;
@@ -136,8 +77,6 @@ background-color: transparent;
     /* background-size:100%; */
 }
 
-
-
 .table{
   border-style: solid round;
     border-width: 1px;
@@ -183,43 +122,20 @@ background-color: white;
 
 #middle-column {
   margin-top: 1%;
-background-color: white;
+  background-color: white;
   color: black;
   text-align: center;
   padding: 100px;
 }
 
 #left-column {
-  /* margin-top: 500px; */
-  /* display: flex; */
-  /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
 background-color: transparent;
- /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
-  /* position: absolute;  */
-     /* top: 0; */
-    /* float: none; */
-    /* display: table-cell; */
-  /* height: 100%; */
   color: black;
   text-align: center;
   padding: 100px;
     
 }
-/* .row {
-    height: 100%;
-    display: table-row;
-} */
-/* #left-column {  */
-    /* The image used */
-    /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
 
-    /* Full height */
-    /* height: 100%;  */
-    /* Center and scale the image nicely */
-    /* background-position: center; */
-  
-    /* background-size: cover;
-} */
 #osd-icon {
     /* display: block; */
     margin: 0 auto;
@@ -239,6 +155,7 @@ background-color: transparent;
     border-radius: 100%; 
     margin-bottom:10px;
 }
+
 #osd-icon-profile {
     /* display: block; */
     margin: 0 auto;
@@ -248,58 +165,11 @@ background-color: transparent;
     border-radius: 100%; 
     margin-bottom:10px;
 }
-/* .text-center {
-    padding: 20px;
-    text-align: center;
-} */
 
-/* .row {
-    margin-top: 200px;
-    margin-bottom: 100px;
-    margin-right: 150px;
-    margin-left: 80px;
-} */
+#signupbtn{
+  padding: 15px;
+}
 
-
-/* 
-h2 {
-  text-align: center;
-  padding: 5px;
-} 
-h1 {
-    color: navy;
-    margin-left: 20px;
+#notexistingMember{
+  padding: 2px;
 }
-#common-searches {
-  border: 2px solid white;
-  position: relative;
-  width: 33%;
-  height: 33%;
-  z-index: 100;
-  background: rgb(214, 214, 214);
-  left: 33%;
-}
-#subs {
-  position: relative;
-  width: 33%;
-  height: 50%;
-  z-index: 100;
-  background: rgb(214, 214, 214);
-  left: 33%;
-}
-#center {
-    position:absolute;
-    float: right;
-    transition: .5s ease;
-   
-  z-index: 110;
-  left: 58%;
-}
-.search-field {
-   position:absolute;
-    float: right;
-    transition: .5s ease;
-   
-  z-index: 110;
-  left: 40%;
-} */
