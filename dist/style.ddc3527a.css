@@ -51,7 +51,8 @@
 html, body {
     height: 100%;
     margin: 0;
-    
+    background-image: url("split4.5fab5c6e.png");
+    background-repeat: no-repeat;
    /* opacity: 0.5; */
     
 }
@@ -67,12 +68,16 @@ html, body {
 /* #image {
   
 } */
-
+.row, .container-fluid{
+  margin-right:0;
+  margin-left:0;
+}
 #right-column {
  /* position: absolute;  */
  /* display: flex;
     flex-direction: column; */
-
+margin-right:0;
+  margin-left:0;
  background-color: transparent;
  /* height: auto; */
  /* float: none; */
@@ -94,7 +99,7 @@ background-color: transparent;
     /* float: none; */
     /* display: table-cell; */
   /* height: 100%; */
-  /* color: white; */
+  color: white;
   text-align: center;
   padding: 100px;
     
