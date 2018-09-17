@@ -65,11 +65,12 @@ function getWorkCoordinates(id) {
   }
 }
 
-// function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
+// roger integration 
+// function getDriveTime(votingCoordinates, userEmail) {
 //   if (homeCoordinates === undefined) {
 //     console.log('made call to server which added to database');
 //   } else {
-//     return axios.get(`https://swapi.co/api/people/1/`)
+//     // return axios.post('/driveTime', votingCoordinates, userEmail)
 //   }
 // }
 

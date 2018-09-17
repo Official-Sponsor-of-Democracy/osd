@@ -35,6 +35,7 @@ class NewUser extends React.Component {
     this.setState({ address: event.target.value });
   }
 
+  // working simple
   signUser() {
     const { email } = this.state;
     const { name } = this.state;
@@ -55,6 +56,8 @@ class NewUser extends React.Component {
         });
       });});
     }
+
+  // roger integration
   // signUser() {
   //   const { email } = this.state;
   //   const { name } = this.state;
@@ -63,11 +66,8 @@ class NewUser extends React.Component {
   //   const { phonenumber } = this.state;
   //   const votinglocations = Utilities.signUserIn(name, email, phonenumber, address, businessid);
   //   votinglocations.then((resolve) => {
-  //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: geocoordinates, locationone: { locationlat: 46.3601, lng: -61.0589 }, locationtwo: { lat: 42.3601, lng: -71.0589 }, locationthree: { lat: 45.3601, lng: -74.0589 }, workcoordinates: geoWorkCoordinates });
+  //   this.renderPage('map', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid, coordinates: resolve.userCoordinates, pollingLocations: resolve.locations });
   //   });
-     
- 
-    
   // }
 
   renderPage(page, info) {
