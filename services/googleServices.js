@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { googleApi } = require('../client/config.js');
+const { googleApi } = require('../config.js');
 
 const getCoordinates = ({ address }, callback) => {
   if (address === undefined) {

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const {
   googleApi,
-} = require('./config');
+} = require('../config.js');
 
 // 
 // function addNewUser(email, password) {
