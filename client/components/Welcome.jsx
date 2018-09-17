@@ -58,7 +58,7 @@ class Welcome extends React.Component {
         <div className="row h-100">
           <div className="col-md-6 h-100" id="welcome-left-column">
             <h3>
-              Official Sponsors of Democracy
+              Official Sponsors of Change for git live
             </h3>
             <dl>
               <dt>
