@@ -4,6 +4,7 @@ const path = require('path');
 const { saveBusiness } = require('../db/database.js');
 const { validateBusiness } = require('../db/database.js');
 const { getRefNum } = require('../services/getReferneceNum.js');
+// const { getCoordinates } = require('../services/googleServices.js');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.static(staticFiles));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// 
 app.post('/createBusiness', (req, res) => {
   // get the data given to the req should be name, email, password, contact, address, employee count
   const business = req.body;
@@ -31,11 +33,17 @@ app.post('/createBusiness', (req, res) => {
 app.post('/loginBusiness', (req, res) => {
   // should take business info passed to the req body which will be email and password
   const { email, password } = req.body;
+  console.log(req.body);
   // query the mongo database to see if the user inputs are valid
   validateBusiness(email, password, (partner) => {
     // the database responds with a session with the business information
     res.send(partner);
   });
+});
+
+app.post('/userInfo', (req, res) => {
+  const address = req.body;
+  res.end(getCoordinates(address));
 });
 
 app.post('/sendEmail', (req, res) => {

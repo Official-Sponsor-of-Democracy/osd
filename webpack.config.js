@@ -4,12 +4,9 @@ const CLI_DIR = path.join(__dirname, '/client');
 const DIST_DIR = path.join(__dirname, '/dist');
 
 module.exports = {
-  entry: {
-    businessPage: `${CLI_DIR}/index.jsx`,
-    employeePage: `${CLI_DIR}/employeeIndex.jsx`,
-  },
+  entry: `${CLI_DIR}/index.jsx`,
   output: {
-    filename: '[name].bundle.js',
+    filename: 'bundle.js',
     path: DIST_DIR,
   },
   module: {
