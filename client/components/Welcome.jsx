@@ -14,7 +14,7 @@ class Welcome extends React.Component {
   handleEmailChange(event) {
     this.setState({ email: event.target.value });
   }
-
+// comment
   handlePasswordChange(event) {
     this.setState({ password: event.target.value });
   }
