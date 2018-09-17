@@ -45,14 +45,16 @@ class ParentApp extends React.Component {
               </dl>
             </div>
             <div className="col-md-6 h-100" id="right-column">
-              <div id="signupbtn" className="text-muted">
+              <div id="parentbtn"  className="text-muted">
               Who are you?
+              </div>
+              <div>
                 <button type="submit" className="btn btn-primary" onClick={this.changePage.bind(this, "app")}>
                   Business Partner
               </button>
               </div>
-              <div>
-                <button type="button" id="notexistingMember" className="btn text-muted" onClick={this.changePage.bind(this, "employeeapp")} >
+              <div id="parentbtn">
+                <button type="submit" className="btn btn-primary" onClick={this.changePage.bind(this, "employeeapp")} >
                   Employee Voter
               </button>
               </div>
@@ -63,16 +65,12 @@ class ParentApp extends React.Component {
     }
     if (this.state.renderThis === 'app') {
       return (
-        <div className="container-fluid">
           <App changePage={this.changePage.bind(this)} />
-        </div>
       );
     }
     if (this.state.renderThis === 'employeeapp') {
       return (
-        <div id="business-form" className="container-fluid">
           <EmployeeApp changePage={this.changePage.bind(this)} />
-        </div>
       );
     }
   }

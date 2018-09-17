@@ -9,7 +9,7 @@ html, body {
        top: 0px;
        bottom: 0px; 
        width: 100%;
-       background-image: url("../split4.png");
+       background-image: url("split4.5fab5c6e.png");
        background-repeat: no-repeat;
     background: no-repeat center center cover;
     background-size:100%;
@@ -17,7 +17,7 @@ html, body {
 }
 
 .sign-up{
-  background-image: url("../split4.png");
+  background-image: url("split4.5fab5c6e.png");
 }
 
 #right-column {
@@ -44,7 +44,7 @@ background-color: transparent;
        bottom: 1px; 
        width: 100%;
        height: 100%;
-       background-image: url("../Vecteezy-16-4200-22.jpg"); 
+       background-image: url("Vecteezy-16-4200-22.ed73c601.jpg"); 
     background: no-repeat center center cover;
     background-repeat: no-repeat;
     background-attachment: inherit;
@@ -60,7 +60,7 @@ background-color: transparent;
   position: absolute;
        width: 100%;
        height: 100%;
-       background-image: url("../Vecteezy-16-4200-22.jpg");
+       background-image: url("Vecteezy-16-4200-22.ed73c601.jpg");
     background: no-repeat center center cover;
     background-repeat: no-repeat;
     background-attachment: inherit;
@@ -74,7 +74,7 @@ background-color: transparent;
        bottom: 0px; 
        width: 100%;
        height: 100%;
-       background-image: url("../vote.jpg");
+       background-image: url("vote.4587eda0.jpg");
     background: no-repeat center center cover;
     background-repeat: no-repeat;
     background-attachment: inherit;

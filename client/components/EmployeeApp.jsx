@@ -19,25 +19,25 @@ class EmployeeApp extends React.Component {
   render() {
     if (this.state.renderThis === 'welcome') {
       return (
-        <div className="container-fluid">
+        
           <NewUser changePage={this.changePage.bind(this)} />
-        </div>
+  
       );
     }
     if (this.state.renderThis === 'map') {
       return (
-        <div className="container-fluid">
+        
           <Map changePage={this.changePage.bind(this)} employeeInfo={this.state.employeeInfo}/>
-        </div>
+     
       );
     }
     if (this.state.renderThis === 'gameplan') {
       return (
-        <div id="gameplan" className="container-fluid">
+    
           <Gameplan changePage={this.changePage.bind(this)} 
             employeeInfo={this.state.employeeInfo} 
           />
-        </div>
+     
       );
     }
   }
