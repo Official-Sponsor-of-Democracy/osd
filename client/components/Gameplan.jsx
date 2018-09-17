@@ -1,11 +1,29 @@
 const React = require('react');
+const Utilities = require('../utilities');
 
 class Gameplan extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      clicked: 0,
     };
   }
+
+  makeEmail(propsObj) {
+    console.log(propsObj.employeeInfo);
+    // const { businessName } = propsObj.employeeInfo;
+    // const { employerContact } = propsObj.employeeInfo;
+    // const { address } = propsObj.employeeInfo;
+    // const { numEmployees } = propsObj.employeeInfo;
+    // const { email } = propsObj.employeeInfo;
+    // Utilities.createEmail(employerContact, businessId, businessEmail, userName, userEmail, driveTime)
+    // .then(()=>{
+    //   alert(`Thanks ${userName}, your email has been sent`)
+    // })
+   
+  }
+
+  
 
   render() {
     return (
@@ -61,6 +79,9 @@ class Gameplan extends React.Component {
               so everything goes smoothly on election day. Thank
               you for supporting democracy one vote at a time!
             </p>
+            <button type="submit" className="btn btn-primary" onClick={this.makeEmail.bind(this, this.props)}>
+              Approve
+              </button>
           </div>
           <div className="col-md-3" />
         </div>

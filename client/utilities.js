@@ -23,6 +23,20 @@ const {
 //   }
 // }
 
+// create email template using employerContact, business email, user name, user email, driveTime, pollingAddress
+function createEmail(employerContact, businessId, businessEmail, userName, userEmail, driveTime){
+  return axios.post('/sendEmail', {
+    userEmail: userEmail,
+    businessEmail: businessEmail, 
+    body: `${employerContact} and ${userName},
+
+    Based on our calculations it should take ${userName} approximately ${(driveTime + 45) / 60} hours to exercise their right to vote on Tuesday, November 6th, 2018.
+              Talk to each other to sort out the specifics
+              so everything goes smoothly on election day. Thank
+              you for supporting democracy one vote at a time!`
+  })
+}
+
 // used in Welcome to check if email/password in db
 function checkUser(email, password) {
   if (email === undefined && password === undefined) {
@@ -32,7 +46,7 @@ function checkUser(email, password) {
     return axios.post('/loginBusiness', { email, password });
   }
 }
-//
+// working simple
 function getCoordinates(address) {
   if (address === undefined) {
     console.log('made call to server which added to database');
@@ -42,6 +56,7 @@ function getCoordinates(address) {
   }
 }
 
+// working simple
 function getWorkCoordinates(id) {
   if (id === undefined) {
     console.log('made call to server which added to database');
@@ -50,14 +65,26 @@ function getWorkCoordinates(id) {
   }
 }
 
-function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
+// function getDriveTime(homeCoordinates, votingCoordinates, workCoordinates) {
+//   if (homeCoordinates === undefined) {
+//     console.log('made call to server which added to database');
+//   } else {
+//     return axios.get(`https://swapi.co/api/people/1/`)
+//   }
+// }
+
+//working simple
+function getDriveTime(homeCoordinates, votingCoordinates) {
   if (homeCoordinates === undefined) {
     console.log('made call to server which added to database');
   } else {
     return axios.get(`https://swapi.co/api/people/1/`)
+    // return axios.post('/driveTime')
   }
 }
 
+
+// working simple
 function signUserIn(name, email, phonenumber, address, businessid) {
   if (email === undefined && name === undefined) {
     console.log('made call to server which added to database');
@@ -67,6 +94,15 @@ function signUserIn(name, email, phonenumber, address, businessid) {
     console.log(name, email, phonenumber, address, businessid);
   }
 }
+
+// with roger integration
+// function signUserIn(name, email, phonenumber, address, businessid) {
+//   if (email === undefined && name === undefined) {
+//     console.log('made call to server which added to database');
+//   } else {
+//     return axios.post('/userInfo')
+//   }
+// }
 
 function addNewBusiness(businessName, email, password, employerContact, address, employeeCount) {
   if (businessName === undefined && address === undefined) {
@@ -85,6 +121,7 @@ function findVotingLocations(coordinates) {
   if (coordinates === undefined) {
     console.log('made call to server which added to database');
   } else {
+
     return axios.get(`https://swapi.co/api/people/1/`);
   }
 }
@@ -97,4 +134,4 @@ module.exports.getCoordinates = getCoordinates;
 module.exports.checkUser = checkUser;
 module.exports.getDriveTime = getDriveTime;
 module.exports.getWorkCoordinates = getWorkCoordinates;
-// module.exports.getBusinessInfo = getBusinessInfo;
+module.exports.createEmail = createEmail;
