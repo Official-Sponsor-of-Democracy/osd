@@ -19,19 +19,24 @@ class Profile extends React.Component {
       return (
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-8" id="left-column">
+            <div className="col-sm-3"></div>
+            <div className="col-sm-6" id="middle-column">
+              <img id="osd-icon-profile" src="https://preview.ibb.co/cTMFwe/Screen_Shot_2018_09_13_at_12_39_03_PM.png" />
                 <h3>
                   {this.props.info.name}
 		          	</h3>
-              <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+              
                 <table className="table">
-                  <thead>
+                
                     <tr>
-                      <th>
+                      <td>
                         Stats
-					           	</th>
+					           	</td>
+                  <td>
+                    
+					           	</td>
                     </tr>
-                  </thead>
+                 
                   <tbody>
                     <tr>
                       <td>
@@ -41,7 +46,7 @@ class Profile extends React.Component {
                       {this.props.info.referenceNum}
 					          	</td>
                     </tr>
-                    <tr className="table-active">
+                    <tr className="table">
                       <td>
                         Business Contact
 						          </td>
@@ -49,7 +54,7 @@ class Profile extends React.Component {
                       {this.props.info.employerContact}
 					           	</td>
                     </tr>
-                  <tr className="table-warning">
+                  <tr className="table">
                       <td>
                         Email
 						          </td>
@@ -57,7 +62,7 @@ class Profile extends React.Component {
                       {this.props.info.email}
 						          </td>
                     </tr>
-                  <tr className="table-success">
+                  <tr className="table">
                     <td>
                       Address
 						          </td>
@@ -65,7 +70,7 @@ class Profile extends React.Component {
                       {this.props.info.address}
                     </td>
                   </tr>
-                    <tr className="table-danger">
+                    <tr className="table">
                       <td>
                         Total Number of Employees
 						          </td>
@@ -73,7 +78,7 @@ class Profile extends React.Component {
                       {this.props.info.employeeCount}
 						          </td>
                     </tr>
-                  <tr className="table-active">
+                  <tr className="table">
                     <td>
                       Employee Voters
 						          </td>
@@ -83,13 +88,11 @@ class Profile extends React.Component {
                   </tr>
                   </tbody>
                 </table>  
-            </div>
-            <div className="col-sm-4">
-                </div>
               </div>
-            </div>
-          
-      );
+            <div className="col-sm-3"/>
+          </div>
+        </div> 
+    );
   }
 }
 

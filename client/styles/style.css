@@ -1,60 +1,18 @@
-/* body {
-    background-color: lightblue;
-} */
-/* body{
-   background-image: url("../Vecteezy-16-4200-22.jpg");
-    width: 50%
-} */
 
-/* .container-fluid {
-    min-height: 100%;
-    overflow: hidden;
-} */
 
-/* html,body {
-  height: 100%;
-  
-} */
-
-/* .container-fluid {
-    
-    background-repeat: no-repeat;
-    background-size: 50% 100%;
-    
-} */
-/* html, body
-{
-    height: 100%;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-} */
-
-/* .row, .container-fluid {
-    overflow: hidden; 
+#welcome{
+  position: absolute;
+       top: 1px; 
+       bottom: 1px; 
+       width: 100%;
+       background-image: url("../split4.png");
+       background-repeat: no-repeat;
+    background: no-repeat center center cover;
+    background-size:100%;
 }
 
-.row, .container-fluid  [className*="col-"]{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-} */
-
-/* .home {
-  position: relative; 
-   
-   width: 50%;
-} */
-/* html, body {
-  /* background-position: 10px 50px 10x;  */
-  
-/* } */
-
-html, body {
-    height: 100%;
-    margin: 0;
-    background-image: url("../split4.png");
-    background-repeat: no-repeat;
-   /* opacity: 0.5; */
-    
+.sign-up{
+  background-image: url("../split4.png");
 }
 /* #right-column{
     
@@ -68,10 +26,10 @@ html, body {
 /* #image {
   
 } */
-.row, .container-fluid{
+/* .row, .container-fluid{
   margin-right:0;
   margin-left:0;
-}
+} */
 #right-column {
  /* position: absolute;  */
  /* display: flex;
@@ -88,7 +46,7 @@ margin-right:0;
 } 
 
 
-#left-column {
+#welcome-left-column {
   /* margin-top: 500px; */
   /* display: flex; */
   /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
@@ -105,82 +63,113 @@ background-color: transparent;
     
 }
 
-/* .row {
-    height: 100%;
-    display: table-row;
-} */
-/* #left-column {  */
-    /* The image used */
-    /* background-image: url("../Vecteezy-16-4200-22.jpg"); */
+#gameplan{
+  position: absolute;
+       top: 1px; 
+       bottom: 1px; 
+       width: 100%;
+       height: 100%;
+       background-image: url("../Vecteezy-16-4200-22.jpg");
+       
+    background: no-repeat center center cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    /* background-size:100%; */
+}
 
-    /* Full height */
-    /* height: 100%;  */
-    /* Center and scale the image nicely */
-    /* background-position: center; */
-  
-    /* background-size: cover;
-} */
-/* .osd-icon {
-    display: block;
-    margin: 0 auto;
-    width: 100px;
-    height: 100px;
-    border: 4px solid white; 
-    border-radius: 50%; 
-    margin-bottom:20px;
-} */
-/* .text-center {
-    padding: 20px;
-    text-align: center;
-} */
+.table{
+  border-style: solid round;
+    border-width: 1px;
+}
 
-/* .row {
-    margin-top: 200px;
-    margin-bottom: 100px;
-    margin-right: 150px;
-    margin-left: 80px;
-} */
+#profile{
+  box-shadow: 222;
+  position: absolute;
+      
+     
+       width: 100%;
+       height: 100%;
+       background-image: url("../Vecteezy-16-4200-22.jpg");
+       
+    background: no-repeat center center cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    /* padding: 100px; */
+    /* background-size:100%; */
+}
 
+#business-form{
+  position: absolute;
+       top: 1px; 
+       bottom: 1px; 
+       width: 100%;
+       height: 100%;
+       background-image: url("../vote.jpg");
+       
+    background: no-repeat center center cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    /* background-size:100%; */
+}
 
-/* 
-h2 {
+#gameplan-middle-column {
+  margin-top: 2%;
+background-color: white;
+  color: black;
   text-align: center;
-  padding: 5px;
-} 
-h1 {
-    color: navy;
-    margin-left: 20px;
+  padding: 3%;
 }
-#common-searches {
-  border: 2px solid white;
-  position: relative;
-  width: 33%;
-  height: 33%;
-  z-index: 100;
-  background: rgb(214, 214, 214);
-  left: 33%;
+
+#middle-column {
+  margin-top: 1%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 100px;
 }
-#subs {
-  position: relative;
-  width: 33%;
-  height: 50%;
-  z-index: 100;
-  background: rgb(214, 214, 214);
-  left: 33%;
+
+#left-column {
+background-color: transparent;
+  color: black;
+  text-align: center;
+  padding: 100px;
+    
 }
-#center {
-    position:absolute;
-    float: right;
-    transition: .5s ease;
-   
-  z-index: 110;
-  left: 58%;
+
+#osd-icon {
+    /* display: block; */
+    margin: 0 auto;
+    width: 49%;
+    height: 50%;
+    border: 4px solid white; 
+    border-radius: 100%; 
+    margin-bottom:10px;
 }
-.search-field {
-   position:absolute;
-    float: right;
-    transition: .5s ease;
-   
-  z-index: 110;
-  left: 40%;
-} */
+
+#osd-icon-gameplan {
+    /* display: block; */
+    margin: 0 auto;
+    width: 30%;
+    height: 25%;
+    border: 4px solid white; 
+    border-radius: 100%; 
+    margin-bottom:10px;
+}
+
+#osd-icon-profile {
+    /* display: block; */
+    margin: 0 auto;
+    width: 32%;
+    height: 25%;
+    border: 4px solid white; 
+    border-radius: 100%; 
+    margin-bottom:10px;
+}
+
+#signupbtn{
+  padding: 15px;
+}
+
+#notexistingMember{
+  padding: 2px;
+}
