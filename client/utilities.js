@@ -31,7 +31,7 @@ function checkUser(email, password) {
     return axios.post('/loginBusiness', { email, password });
   }
 }
-
+//
 function getCoordinates(address) {
   if (address === undefined) {
     console.log('made call to server which added to database');
