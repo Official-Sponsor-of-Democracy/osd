@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/osd');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -18,6 +18,7 @@ const businessSchema = mongoose.Schema({
   employerContact: String,
   address: String,
   coordinates: String,
+  employeeVoterCount: Number,
 });
 
 
@@ -27,23 +28,16 @@ const businessSchema = mongoose.Schema({
 //   bisReferenceNum: Number,
 // });
 
-const Business = mongoose.model(businessSchema);
+const Business = mongoose.model('Business', businessSchema);
 // const Employee = mongoose.model(employeeSchema);
 
-const saveBusiness = (
-  {
-    name, email, employeeCount, referenceNum, password, employerContact, address,
-  }, callback,
-) => {
-  const partner = new Business(
-    {
-      name, email, employeeCount, referenceNum, password, employerContact, address,
-    },
-  );
+const saveBusiness = (business, callback) => {
+  const partner = new Business(business);
   partner.save((err, newPartner) => {
     if (err) {
       console.error('database error line 39: ', err);
     } else {
+      console.log(partner)
       callback(newPartner);
     }
   });
@@ -60,4 +54,16 @@ const saveBusiness = (
    */
 };
 
+// a function that checks the database for a user with the provided information
+const validateBusiness = (email, password, callback) => {
+  // take the email and password and query the Business model with the data
+  Business.findOne({
+    email,
+    password,
+  })
+    .then(partner => callback(partner))
+    .catch(err => console.error(err));
+};
+
 module.exports.saveBusiness = saveBusiness;
+module.exports.validateBusiness = validateBusiness;
