@@ -76,7 +76,7 @@ app.post('/userInfo', (req, res) => {
 
 // take the coordinates of polling location, email
 app.post('/driveTime', (req, res) => {
-
+  console.log(req)
 });
 // find user in database and get their home coordinates & the business id
 // find business with id in database & get there coordinates and get there employerContact and their email

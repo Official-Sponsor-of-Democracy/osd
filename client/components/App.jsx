@@ -15,6 +15,7 @@ class App extends React.Component {
   }
 
   changePage(pageId, info) {
+    // if 
     if (pageId === 'profile') {
       this.setState(() => ({ businessInfo: info, renderThis: pageId }));
     } else {
