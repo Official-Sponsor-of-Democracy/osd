@@ -72,6 +72,13 @@ class MapPage extends React.Component {
           zoom={13}
         >
           <Marker
+           
+           
+            icon={{
+              url: ('http://maps.google.com/mapfiles/ms/icons/blue-dot.png'),
+           
+            }}
+       
             onClick={this.onMarkerClick.bind(this, google.maps.event)}
           />
           <Marker
