@@ -74,7 +74,7 @@ class MapPage extends React.Component {
       this.props.employeeInfo.employerContact = resolve.data.employerContact || "John";
       resolve.data.time = "30 minutes";
       this.props.employeeInfo.drivetime = this.calculateTime(resolve.data.time) || this.calculateTime("30 minutes");
-      this.props.employeeInfo.drivetime = this.addDriveToWork(this.props.employeeInfo.drivetime, )
+      // this.props.employeeInfo.drivetime = this.addDriveToWork(this.props.employeeInfo.drivetime, )
       this.renderPage('gameplan', this.props.employeeInfo);
     });
   }
