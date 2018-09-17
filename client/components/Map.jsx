@@ -5,7 +5,7 @@ const {
 } = require('google-maps-react');
 const {
   googleApi,
-} = require('../config');
+} = require('../../config.js');
 const Utilities = require('../utilities');
 
 class MapPage extends React.Component {
