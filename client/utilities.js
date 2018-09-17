@@ -28,8 +28,8 @@ function checkUser(email, password) {
   if (email === undefined && password === undefined) {
     console.log('made call to server which added to database');
   } else {
-    console.log("in check user")
-    return axios.get(`https://swapi.co/api/people/1/`, {email, password});
+    console.log("in check user");
+    return axios.post('/loginBusiness', { email, password });
   }
 }
 
@@ -68,15 +68,16 @@ function signUserIn(name, email, phonenumber, address, businessid) {
   }
 }
 
-// called in BusinessForm upon submission
-function addNewBusiness(businessName, email, password, employerContact, address, numEmployees) {
+function addNewBusiness(businessName, email, password, employerContact, address, employeeCount) {
   if (businessName === undefined && address === undefined) {
     console.log('made call to server which added to database');
   } else {
-    axios.get('https://swapi.co/api/people/1/').then((resolve) => {
+    axios.post('/createBusiness', {
+      businessName, email, password, employerContact, address, employeeCount,
+    }).then((resolve) => {
       console.log(resolve);
     });
-    console.log(businessName, email, password, employerContact, address, numEmployees);
+    // console.log(businessName, email, password, employerContact, address, numEmployees);
   }
 }
 

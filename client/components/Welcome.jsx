@@ -24,19 +24,20 @@ class Welcome extends React.Component {
     const { password } = this.state;
     const userCheck = Utilities.checkUser(email, password);
     userCheck.then((resolve) => {
-      if (resolve) {
-        const fromResolve = {
-          name: "AAA Plumbing",
-          email: "jldela@Gmail.com",
-          employeeCount: 20,
-          referenceNum: 2,
-          password: "hello",
-          employerContact: "Roger",
-          address: "1808 Elysian Fields Ave New Orleans, La ",
-          coordinates: { lat: 2020, lng: 2999 },
-          employeeVoterCount: 7,
-        };
-        this.renderPage('profile', fromResolve);
+      if (typeof resolve.data === 'object') {
+      //   const fromResolve = {
+      //     name: "AAA Plumbing",
+      //     email: "jldela@Gmail.com",
+      //     employeeCount: 20,
+      //     referenceNum: 2,
+      //     password: "hello",
+      //     employerContact: "Roger",
+      //     address: "1808 Elysian Fields Ave New Orleans, La ",
+      //     coordinates: { lat: 2020, lng: 2999 },
+      //     employeeVoterCount: 7,
+        // };
+        console.log(resolve);
+        this.renderPage('profile', resolve.data);
       } else {
         alert('User Not Recognized')
         this.renderPage('welcome');
