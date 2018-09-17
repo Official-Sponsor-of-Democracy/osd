@@ -17,7 +17,7 @@ class MapPage extends React.Component {
   }
 
   onMarkerClick() {
-    alert("Please select a polling location")
+    alert("Please select a polling location.")
   }
 
   onMarkerOneClick() {
