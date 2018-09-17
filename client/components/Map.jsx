@@ -20,13 +20,61 @@ class MapPage extends React.Component {
     alert("Please select a polling location.")
   }
 
+  calculateTime(duration) {
+  let timeArray = duration.split(" ");
+  if (timeArray.length === 2) {
+    let withVoting = parseInt(timeArray[0]) + 45;
+    if (withVoting < 60){
+      return `${withVoting} minutes`;
+    } else {
+      let withVoting = parseInt(timeArray[0]) + 45;
+      let minutes = withVoting % 60;
+      let hours = (withVoting - minutes) / 60;
+      return `${hours} hour(s) and ${minutes} minutes`
+    }
+  } else {
+    let withVoting = (parseInt(timeArray[0]) * 60) + timeArray[3] + 45;
+    let minutes = withVoting % 60;
+    let hours = (withVoting - minutes) / 60;
+    return `${hours} hour(s) and ${minutes} minutes`
+  }
+}
+  // addDriveToWork(duration1, duration2){
+  //   let timeArray1 = duration1.split(" ");
+  //   let time1minutes;
+  //   let time1hours = 0;
+  //   let timeArray2 = duration2.split(" ");
+  //   if (timeArray1.length === 2){
+  //     time1minutes = timeArray1[0];
+  //   } else {
+  //     time1hours = timeArray1[0]
+  //     time1minutes = timeArray1[3]
+  //   } 
+  //   if (timeArray2.length === 2){
+  //     time1minutes += timeArray2[0];
+  //   } else {
+  //     time1minutes += timeArray2[3]
+  //   }
+  //   if (time1minutes > 60) {
+  //     let time1minutesRemainder = time1minutes % 60;
+  //     time1hours += (time1minutes - time1minutesRemainder);
+  //   } 
+  //   if (time1hours > 0){
+  //     return `${time1hours} hour(s) and ${time1minutes} minutes`
+  //   } else {
+  //     return `${time1minutes} minutes`
+  //   }
+  // }
+
   onMarkerOneClick() {
     this.props.employeeInfo.chosenlocation = this.props.employeeInfo.pollingLocations[0];
     const drivetime = Utilities.getDriveTime(this.props.employeeInfo.pollingLocations[0].coordinates, this.props.employeeInfo.email)
     drivetime.then((resolve) => {
       this.props.employeeInfo.employerEmail = resolve.data.employerEmail || "jldela@gmail.com";
       this.props.employeeInfo.employerContact = resolve.data.employerContact || "John";
-      this.props.employeeInfo.drivetime = resolve.data.time || 30;
+      resolve.data.time = "30 minutes";
+      this.props.employeeInfo.drivetime = this.calculateTime(resolve.data.time) || this.calculateTime("30 minutes");
+      this.props.employeeInfo.drivetime = this.addDriveToWork(this.props.employeeInfo.drivetime, )
       this.renderPage('gameplan', this.props.employeeInfo);
     });
   }
@@ -37,7 +85,8 @@ class MapPage extends React.Component {
     drivetime.then((resolve) => {
       this.props.employeeInfo.employerEmail = resolve.data.employerEmail || "jldela@gmail.com";
       this.props.employeeInfo.employerContact = resolve.data.employerContact || "John";
-      this.props.employeeInfo.drivetime = resolve.data.time || 30;
+      resolve.data.time = "30 minutes";
+      this.props.employeeInfo.drivetime = this.calculateTime(resolve.data.time) || this.calculateTime("30 minutes");
       this.renderPage('gameplan', this.props.employeeInfo);
     });
   }
@@ -48,7 +97,8 @@ class MapPage extends React.Component {
     drivetime.then((resolve) => {
       this.props.employeeInfo.employerEmail = resolve.data.employerEmail || "jldela@gmail.com";
       this.props.employeeInfo.employerContact = resolve.data.employerContact || "John";
-      this.props.employeeInfo.drivetime = resolve.data.time || 30;
+      resolve.data.time = "30 minutes";
+      this.props.employeeInfo.drivetime = this.calculateTime(resolve.data.time) || this.calculateTime("30 minutes");
       this.renderPage('gameplan', this.props.employeeInfo);
     });
   }

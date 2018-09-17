@@ -30,7 +30,7 @@ function createEmail(employeeInfo){
     businessEmail: employeeInfo.employerEmail, 
     body: `${employeeInfo.employerContact} and ${employeeInfo.name},
 
-    Based on our calculations it should take ${employeeInfo.name} approximately ${(employeeInfo.driveTime + 45) / 60} hours to drive from their home, vote at the ${employeeInfo.chosenlocation.name}, and make it back to work on Tuesday, November 6th, 2018.
+    Based on our calculations it should take ${employeeInfo.name} approximately ${(employeeInfo.driveTime.toString())} to drive from their home, vote at the ${employeeInfo.chosenlocation.name}, and make it back to work on Tuesday, November 6th, 2018.
               Talk to each other to sort out the specifics
               so everything goes smoothly on election day. Thank
               you for supporting democracy one vote at a time!`
