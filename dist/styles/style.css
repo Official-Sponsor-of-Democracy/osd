@@ -1,0 +1,146 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+#welcome{
+  
+  position: absolute;
+       top: 0px;
+       bottom: 0px; 
+       width: 100%;
+       background-image: url("../split4.png");
+       background-repeat: no-repeat;
+    background: no-repeat center center cover;
+    background-size:100%;
+    background-attachment: inherit;
+}
+
+.sign-up{
+  background-image: url("../split4.png");
+}
+
+#right-column {
+margin-right:0;
+  margin-left:0;
+ background-color: transparent;
+  text-align: center;
+  padding: 100px;
+} 
+
+#welcome-left-column {
+  margin-right:0;
+  margin-left:0;
+background-color: transparent;
+  color: white;
+  text-align: center;
+  padding: 100px;
+    
+}
+
+#gameplan{
+  position: absolute;
+       top: 1px; 
+       bottom: 1px; 
+       width: 100%;
+       height: 100%;
+       background-image: url("../Vecteezy-16-4200-22.jpg"); 
+    background: no-repeat center center cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+}
+
+.table{
+  border-style: solid round;
+    border-width: 1px;
+}
+
+#profile{
+  box-shadow: 222;
+  position: absolute;
+       width: 100%;
+       height: 100%;
+       background-image: url("../Vecteezy-16-4200-22.jpg");
+    background: no-repeat center center cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+}
+
+#business-form{
+  margin-right:0;
+  margin-left:0;
+  position: absolute;
+       top: 0px;
+       bottom: 0px; 
+       width: 100%;
+       height: 100%;
+       background-image: url("../vote.jpg");
+    background: no-repeat center center cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+}
+
+#gameplan-middle-column {
+  margin-top: 2%;
+background-color: white;
+  color: black;
+  text-align: center;
+  padding: 3%;
+}
+
+#middle-column {
+  margin-top: 1%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 100px;
+}
+
+#left-column {
+  margin-right:0;
+  margin-left:0;
+background-color: transparent;
+  color: black;
+  text-align: center;
+  padding: 100px;
+    
+}
+
+#osd-icon {
+    margin: 0 auto;
+    width: 49%;
+    height: 50%;
+    border: 4px solid white; 
+    border-radius: 100%; 
+    margin-bottom:10px;
+}
+
+#osd-icon-gameplan {
+    margin: 0 auto;
+    width: 30%;
+    height: 25%;
+    border: 4px solid white; 
+    border-radius: 100%; 
+    margin-bottom:10px;
+}
+
+#osd-icon-profile {
+    margin: 0 auto;
+    width: 32%;
+    height: 28%;
+    border: 4px solid white; 
+    border-radius: 100%; 
+    margin-bottom:10px;
+}
+
+#parentbtn{
+  padding: 15px;
+}
+
+#signupbtn{
+  padding: 15px;
+}
+
+#notexistingMember{
+  padding: 2px;
+}
