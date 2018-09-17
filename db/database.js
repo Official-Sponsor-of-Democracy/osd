@@ -22,14 +22,14 @@ const businessSchema = mongoose.Schema({
 });
 
 
-// const employeeSchema = mongoose.Schema({
-//   address: String,
-//   name: String,
-//   bisReferenceNum: Number,
-// });
+const employeeSchema = mongoose.Schema({
+  address: String,
+  name: String,
+  bisReferenceNum: Number,
+});
 
 const Business = mongoose.model('Business', businessSchema);
-// const Employee = mongoose.model(employeeSchema);
+const Employee = mongoose.model('Employee', employeeSchema);
 
 const saveBusiness = (business, callback) => {
   const partner = new Business(business);
@@ -54,6 +54,18 @@ const saveBusiness = (business, callback) => {
    */
 };
 
+const saveEmployee = (userInfo, callback) => {
+  const employee = new Employee(userInfo);
+  employee.save((err, newPartner) => {
+    if (err) {
+      console.error('database error line 39: ', err);
+    } else {
+      console.log(employee);
+      callback(newPartner);
+    }
+  });
+};
+
 // a function that checks the database for a user with the provided information
 const validateBusiness = (email, password, callback) => {
   // take the email and password and query the Business model with the data
@@ -67,3 +79,4 @@ const validateBusiness = (email, password, callback) => {
 
 module.exports.saveBusiness = saveBusiness;
 module.exports.validateBusiness = validateBusiness;
+module.exports.saveEmployee = saveEmployee;
