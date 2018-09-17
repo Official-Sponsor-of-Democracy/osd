@@ -24,13 +24,13 @@ const {
 // }
 
 // create email template using employerContact, business email, user name, user email, driveTime, pollingAddress
-function createEmail(employerContact, businessId, businessEmail, userName, userEmail, driveTime){
+function createEmail(employeeInfo){
   return axios.post('/sendEmail', {
-    userEmail: userEmail,
-    businessEmail: businessEmail, 
-    body: `${employerContact} and ${userName},
+    userEmail: employeeInfo.email,
+    businessEmail: employeeInfo.employerEmail, 
+    body: `${employeeInfo.employerContact} and ${employeeInfo.name},
 
-    Based on our calculations it should take ${userName} approximately ${(driveTime + 45) / 60} hours to exercise their right to vote on Tuesday, November 6th, 2018.
+    Based on our calculations it should take ${employeeInfo.name} approximately ${(employeeInfo.driveTime + 45) / 60} hours to drive from their home, vote at the ${employeeInfo.chosenlocation.name}, and make it back to work on Tuesday, November 6th, 2018.
               Talk to each other to sort out the specifics
               so everything goes smoothly on election day. Thank
               you for supporting democracy one vote at a time!`
@@ -70,7 +70,7 @@ function getWorkCoordinates(id) {
 //   if (homeCoordinates === undefined) {
 //     console.log('made call to server which added to database');
 //   } else {
-//     // return axios.post('/driveTime', votingCoordinates, userEmail)
+//     // return axios.post('/driveTime', {votingCoordinates: votingCoordinates , userEmail: userEmail})
 //   }
 // }
 
@@ -86,24 +86,24 @@ function getDriveTime(homeCoordinates, votingCoordinates) {
 
 
 // working simple
-function signUserIn(name, email, phonenumber, address, businessid) {
-  if (email === undefined && name === undefined) {
-    console.log('made call to server which added to database');
-  } else {
-    axios.get('/home').then((resolve) => { 
-    });
-    console.log(name, email, phonenumber, address, businessid);
-  }
-}
-
-// with roger integration
 // function signUserIn(name, email, phonenumber, address, businessid) {
 //   if (email === undefined && name === undefined) {
 //     console.log('made call to server which added to database');
 //   } else {
-//     return axios.post('/userInfo')
+//     axios.get('/home').then((resolve) => { 
+//     });
+//     console.log(name, email, phonenumber, address, businessid);
 //   }
 // }
+
+// with roger integration
+function signUserIn(name, email, phonenumber, address, businessid) {
+  if (email === undefined && name === undefined) {
+    console.log('made call to server which added to database');
+  } else {
+    return axios.post('/userInfo', { name: name, email: email, phonenumber: phonenumber, address: address, businessid: businessid})
+  }
+}
 
 function addNewBusiness(businessName, email, password, employerContact, address, employeeCount) {
   if (businessName === undefined && address === undefined) {
