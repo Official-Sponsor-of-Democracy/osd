@@ -67,7 +67,7 @@ class Gameplan extends React.Component {
                 Plan Ahead
               </dt>
               <dd>
-                It should take you about {this.props.employeeInfo.drivetime.toString()} hours to drive to your
+                It should take you about {this.props.employeeInfo.drivetime.toString()} to drive to your
                 polling location, vote, and get to work
               </dd>
             </dl>
@@ -85,7 +85,7 @@ class Gameplan extends React.Component {
               {this.props.employeeInfo.employerContact.toString()} and {this.props.employeeInfo.name.toString()},
             </p>
             <p className="text-center text-muted">
-              Based on our calculations it should take {this.props.employeeInfo.name.toString()} approximately {this.props.employeeInfo.drivetime.toString()} hours to drive from their home, vote at the {this.props.employeeInfo.chosenlocation.name.toString()}, and make it back to work on Tuesday, November 6th, 2018.
+              Based on our calculations it should take {this.props.employeeInfo.name.toString()} approximately {this.props.employeeInfo.drivetime.toString()} to drive from their home, vote at the {this.props.employeeInfo.chosenlocation.name.toString()}, and make it back to work on Tuesday, November 6th, 2018.
                         Talk to each other to sort out the specifics
                         so everything goes smoothly on election day. Thank
                         you for supporting democracy one vote at a time!
