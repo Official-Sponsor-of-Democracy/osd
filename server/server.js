@@ -19,7 +19,7 @@ app.use(express.static(staticFiles));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// 
+
 app.post('/createBusiness', (req, res) => {
   // get the data given to the req should be name, email, password, contact, address, employee count
   const business = req.body;

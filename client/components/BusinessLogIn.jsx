@@ -1,5 +1,4 @@
 const React = require('react');
-const Utilities = require('../utilities');
 
 class BusinessLogin extends React.Component {
   constructor(props) {
