@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { mlab_password } = require('../config.js')
 mongoose.connect(`mongodb://osd-user:${mlab_password}@ds251622.mlab.com:51622/osd`);
-// mongoose.connect('mongodb://localhost/osd');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

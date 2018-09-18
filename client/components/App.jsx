@@ -28,23 +28,17 @@ class App extends React.Component {
   render() {
     if (this.state.renderThis === 'welcome') {
       return (
-      
           <Welcome changePage={this.changePage.bind(this)} />
-      
       );
     }
     if (this.state.renderThis === 'businessForm') {
       return (
-       
           <BusinessForm changePage={this.changePage.bind(this)} />
-       
       );
     }
     if (this.state.renderThis === 'login') {
       return (
-      
           <BusinessLogin changePage={this.changePage.bind(this)} />
-     
       );
     }
     if (this.state.renderThis === 'profile') {
